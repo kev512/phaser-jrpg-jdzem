@@ -1,4 +1,4 @@
-import { INITIAL_CASH } from './worker.consts';
+import { INITIAL_CASH } from './consts/resources.consts';
 
 export class Resources {
   private cash: number = INITIAL_CASH;
