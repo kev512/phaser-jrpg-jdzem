@@ -18,3 +18,9 @@ npm install
 ```
 npm run dev
 ```
+
+### Format code
+
+```
+npm run format
+```
