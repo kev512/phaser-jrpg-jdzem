@@ -1,91 +1,53 @@
+import { EffectInput } from './effect-input';
+
 export class Effect {
-  private hunger: number;
-  private thirst: number;
-  private urine: number;
-  private poop: number;
-  private stress: number;
-  private fatigue: number;
-  private cash: number;
-  private reputation: number;
-  private speed: number;
-  private diapers: number;
-  private beers: number;
-  private smokes: number;
-
-  // TODO pass in consumables attributes
-
-  constructor(input: {
-    hunger?: number;
-    thirst?: number;
-    urine?: number;
-    poop?: number;
-    stress?: number;
-    fatigue?: number;
-    reputation?: number;
-  }) {
-    this.hunger = input.hunger || 0;
-    this.thirst = input.thirst || 0;
-    this.urine = input.urine || 0;
-    this.poop = input.poop || 0;
-    this.stress = input.stress || 0;
-    this.fatigue = input.fatigue || 0;
-  }
+  constructor(private input: EffectInput) {}
 
   getEffectHunger(): number {
-    return this.hunger;
+    return this.input?.hunger || 0;
   }
 
   getEffectThirst(): number {
-    return this.thirst;
+    return this.input?.thirst || 0;
   }
 
   getEffectUrine(): number {
-    return this.urine;
+    return this.input?.urine || 0;
   }
 
   getEffectPoop(): number {
-    return this.poop;
+    return this.input?.poop || 0;
   }
 
   getEffectStress(): number {
-    return this.stress;
+    return this.input?.stress || 0;
   }
 
   getEffectFatigue(): number {
-    return this.fatigue;
+    return this.input?.fatigue || 0;
   }
 
   getEffectSpeed(): number {
-    return this.speed;
+    return this.input?.speed || 0;
   }
 
   getCash(): number {
-    return this.cash;
+    return this.input?.cash || 0;
   }
 
   getReputation(): number {
-    return this.reputation;
+    return this.input?.reputation || 0;
   }
 
   getDiapers(): number {
-    return this.diapers;
+    return this.input?.diapers || 0;
   }
 
   getBeers(): number {
-    return this.beers;
+    return this.input?.beers || 0;
   }
 
   getSmokes(): number {
-    return this.smokes;
-  }
-
-  resetEffect() {
-    this.hunger = 0;
-    this.thirst = 0;
-    this.urine = 0;
-    this.poop = 0;
-    this.stress = 0;
-    this.fatigue = 0;
-    this.speed = 0;
+    return this.input?.smokes || 0;
   }
 }
