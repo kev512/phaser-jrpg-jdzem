@@ -7,9 +7,9 @@ import {
   MAX_STRESS,
   MAX_THIRST,
   MAX_URINE,
-} from './consts/worker.consts';
-import { Effect } from './effects';
-import { Resources } from './resources/resources';
+} from './worker.consts';
+import { Effect } from '../effects';
+import { Resources } from '../resources/resources';
 
 export class Worker {
   private hunger: number = 0;
