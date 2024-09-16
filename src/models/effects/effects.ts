@@ -11,7 +11,8 @@ export class Effect {
   private diapers: number;
   private beers: number;
   private smokes: number;
-  // pass in consumables attributes
+
+  // TODO pass in consumables attributes
 
   constructor(input: {
     hunger?: number;
@@ -20,6 +21,7 @@ export class Effect {
     poop?: number;
     stress?: number;
     fatigue?: number;
+    reputation?: number;
   }) {
     this.hunger = input.hunger || 0;
     this.thirst = input.thirst || 0;
