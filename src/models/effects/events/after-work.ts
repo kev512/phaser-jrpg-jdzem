@@ -7,15 +7,15 @@ export class AfterWork extends Event {
   constructor() {
     super(
       id,
-      'After work',
-      'You survived till the pauza.',
+      'Popracowałeś',
+      'Przetrwałeś do pauzy.',
       new Effect({
-        hunger: 10,
-        thirst: 10,
-        urine: 10,
-        poop: 10,
-        stress: 10,
-        fatigue: 10,
+        hunger: 30,
+        thirst: 35,
+        urine: 40,
+        poop: 20,
+        stress: 15,
+        fatigue: 30,
       }),
     );
   }
