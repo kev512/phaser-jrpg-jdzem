@@ -9,7 +9,7 @@ import {
   MAX_URINE,
 } from './consts/worker.consts';
 import { Effect } from './effects';
-import { Resources } from './resources';
+import { Resources } from './resources/resources';
 
 export class Worker {
   private hunger: number = 0;
