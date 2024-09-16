@@ -11,12 +11,12 @@ export class Effect {
   // pass in consumables attributes
 
   constructor(input: {
-    hunger?: number,
-    thirst?: number,
-    urine?: number,
-    poop?: number,
-    stress?: number,
-    fatigue?: number,
+    hunger?: number;
+    thirst?: number;
+    urine?: number;
+    poop?: number;
+    stress?: number;
+    fatigue?: number;
   }) {
     this.hunger = input.hunger || 0;
     this.thirst = input.thirst || 0;

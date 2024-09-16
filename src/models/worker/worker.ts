@@ -8,7 +8,7 @@ import {
   MAX_THIRST,
   MAX_URINE,
 } from './worker.consts';
-import { Effect } from '../events/effects';
+import { Effect } from '../effects/effects';
 import { Resources } from '../resources/resources';
 
 export class Worker {

@@ -1,6 +1,6 @@
-import { Effect } from './effects';
+import { Effect } from '../effects';
 
-export abstract class Event {
+export abstract class Item {
   constructor(
     private id: string,
     private name: string,

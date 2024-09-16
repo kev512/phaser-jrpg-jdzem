@@ -1,4 +1,4 @@
-import { Effect } from './effects';
+import { Effect } from '../effects';
 import { Event } from './event';
 
 export const id = 'AFTER_WORK';
