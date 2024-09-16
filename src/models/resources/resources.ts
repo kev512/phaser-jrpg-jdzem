@@ -1,3 +1,4 @@
+import { Effect } from '../effects/effects';
 import { INITIAL_CASH } from './resources.consts';
 
 export class Resources {
@@ -27,19 +28,8 @@ export class Resources {
     return this.smokes;
   }
 
-  addCash(paycheck: number) {
-    if (paycheck < 0) {
-      throw Error('Negative paycheck');
-    }
-
-    this.cash += paycheck;
-  }
-
-  subtractCash(price: number) {
-    if (price < 0) {
-      throw Error('Negative price');
-    }
-
-    this.cash -= price;
+  applyEffect(effect: Effect) {
+    this.cash += effect.getCash();
+    this.reputation += effect.getReputation();
   }
 }
