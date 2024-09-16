@@ -8,6 +8,9 @@ export class Effect {
   private cash: number;
   private reputation: number;
   private speed: number;
+  private diapers: number;
+  private beers: number;
+  private smokes: number;
   // pass in consumables attributes
 
   constructor(input: {
@@ -60,6 +63,18 @@ export class Effect {
 
   getReputation(): number {
     return this.reputation;
+  }
+
+  getDiapers(): number {
+    return this.diapers;
+  }
+
+  getBeers(): number {
+    return this.beers;
+  }
+
+  getSmokes(): number {
+    return this.smokes;
   }
 
   resetEffect() {

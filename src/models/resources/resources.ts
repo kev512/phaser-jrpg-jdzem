@@ -31,5 +31,8 @@ export class Resources {
   applyEffect(effect: Effect) {
     this.cash += effect.getCash();
     this.reputation += effect.getReputation();
+    this.diapers += effect.getDiapers();
+    this.beers += effect.getBeers();
+    this.smokes += effect.getSmokes();
   }
 }
