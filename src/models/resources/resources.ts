@@ -3,6 +3,9 @@ import { INITIAL_CASH } from './resources.consts';
 export class Resources {
   private cash: number = INITIAL_CASH;
   private reputation: number = 0;
+  private diapers: number = 0;
+  private beers: number = 0;
+  private smokes: number = 0;
 
   getCash(): number {
     return this.cash;
@@ -10,6 +13,18 @@ export class Resources {
 
   getReputation(): number {
     return this.reputation;
+  }
+
+  getDiapers(): number {
+    return this.diapers;
+  }
+
+  getBeers(): number {
+    return this.beers;
+  }
+
+  getSmokes(): number {
+    return this.smokes;
   }
 
   addCash(paycheck: number) {
