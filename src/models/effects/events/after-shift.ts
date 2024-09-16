@@ -1,9 +1,9 @@
-import { Effect } from '../../effects';
-import { Event } from '../event';
+import { Effect } from '../effects';
+import { Event } from './event';
 
-export const id = 'AFTER_WORK';
+export const id = 'AFTER_SHIFT';
 
-export class AfterWork extends Event {
+export class AfterShift extends Event {
   constructor() {
     super(
       id,
