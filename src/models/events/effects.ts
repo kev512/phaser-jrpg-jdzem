@@ -10,20 +10,20 @@ export class Effect {
   private speed: number;
   // pass in consumables attributes
 
-  constructor(
-    hunger: number,
-    thirst: number,
-    urine: number,
-    poop: number,
-    stress: number,
-    fatigue: number,
-  ) {
-    this.hunger = hunger;
-    this.thirst = thirst;
-    this.urine = urine;
-    this.poop = poop;
-    this.stress = stress;
-    this.fatigue = fatigue;
+  constructor(input: {
+    hunger?: number,
+    thirst?: number,
+    urine?: number,
+    poop?: number,
+    stress?: number,
+    fatigue?: number,
+  }) {
+    this.hunger = input.hunger || 0;
+    this.thirst = input.thirst || 0;
+    this.urine = input.urine || 0;
+    this.poop = input.poop || 0;
+    this.stress = input.stress || 0;
+    this.fatigue = input.fatigue || 0;
   }
 
   getEffectHuger(): number {
@@ -37,15 +37,19 @@ export class Effect {
   getEffectUrine(): number {
     return this.urine;
   }
+
   getEffectPoop(): number {
     return this.poop;
   }
+
   getEffectStress(): number {
     return this.stress;
   }
+
   getEffectFatigue(): number {
     return this.fatigue;
   }
+
   getEffectSpeed(): number {
     return this.speed;
   }
