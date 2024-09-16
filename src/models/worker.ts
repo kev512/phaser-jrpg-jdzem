@@ -1,6 +1,5 @@
-import { Food } from './food';
+import { Effect } from './effects';
 import { Resources } from './resources';
-import { Restroom } from './restroom';
 
 export class Worker {
   private hunger: number = 0;
@@ -14,101 +13,13 @@ export class Worker {
 
   constructor() {}
 
-  consume(food: Food) {
-    this.hunger = Math.max(0, this.hunger - food.getNutrition());
-    this.thirst = Math.max(0, this.thirst - food.getHydration());
-  }
-
-  // TODO Obsłużyć przypadek kiedy nie ma pieniędzy
-
-  buyFood(food: Food) {
-    this.resources.subtractCash(food.getPrice());
-  }
-
-  // TODO buyItem
-
-  relieve(restroom: Restroom) {
-    this.urine = Math.max(0, this.urine - restroom.getUrinationValue());
-    this.poop = Math.max(0, this.poop - restroom.getExcrementValue());
-  }
-
-  increaseHunger(value: number) {
-    if (value < 0) {
-      throw Error('Negative hunger value');
-    }
-
-    this.hunger += value;
-  }
-
-  increaseThirst(value: number) {
-    if (value < 0) {
-      throw Error('Negative thirst value');
-    }
-
-    this.thirst += value;
-  }
-
-  increaseUrine(value: number) {
-    if (value < 0) {
-      throw Error('Negative urine value');
-    }
-
-    this.urine += value;
-  }
-
-  decreaseUrine(value: number) {
-    if (value < 0) {
-      throw Error('Negative urine value');
-    }
-
-    this.urine -= value;
-  }
-
-  increasePoop(value: number) {
-    if (value < 0) {
-      throw Error('Negative poop value');
-    }
-
-    this.poop += value;
-  }
-
-  decreasePoop(value: number) {
-    if (value < 0) {
-      throw Error('Negative poop value');
-    }
-
-    this.poop -= value;
-  }
-
-  increaseStress(value: number) {
-    if (value < 0) {
-      throw Error('Negative stress value');
-    }
-
-    this.stress += value;
-  }
-
-  decreaseStress(value: number) {
-    if (value < 0) {
-      throw Error('Negative stress value');
-    }
-
-    this.stress -= value;
-  }
-
-  increaseFatigue(value: number) {
-    if (value < 0) {
-      throw Error('Negative fatigue value');
-    }
-
-    this.fatigue += value;
-  }
-
-  decreaseFatigue(value: number) {
-    if (value < 0) {
-      throw Error('Negative fatigue value');
-    }
-
-    this.fatigue -= value;
+  applyEffect(effect: Effect) {
+    this.hunger = Math.max(0, this.hunger - effect.getEffectHuger());
+    this.thirst = Math.max(0, this.thirst - effect.getEffectThirst());
+    this.urine = Math.max(0, this.urine - effect.getEffectUrine());
+    this.poop = Math.max(0, this.poop - effect.getEffectPoop());
+    this.stress = Math.max(0, this.stress - effect.getEffectStress());
+    this.fatigue = Math.max(0, this.fatigue - effect.getEffectFatigue());
+    this.fatigue = Math.max(0, this.fatigue - effect.getEffectFatigue());
   }
 }
