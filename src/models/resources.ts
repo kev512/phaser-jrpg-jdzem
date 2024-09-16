@@ -14,7 +14,7 @@ export class Resources {
 
   addCash(paycheck: number) {
     if (paycheck < 0) {
-        throw Error('Negative paycheck');
+      throw Error('Negative paycheck');
     }
 
     this.cash += paycheck;
@@ -22,7 +22,7 @@ export class Resources {
 
   subtractCash(price: number) {
     if (price < 0) {
-        throw Error('Negative price');
+      throw Error('Negative price');
     }
 
     this.cash -= price;
