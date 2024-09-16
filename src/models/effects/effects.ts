@@ -26,7 +26,7 @@ export class Effect {
     this.fatigue = input.fatigue || 0;
   }
 
-  getEffectHuger(): number {
+  getEffectHunger(): number {
     return this.hunger;
   }
 
@@ -52,6 +52,14 @@ export class Effect {
 
   getEffectSpeed(): number {
     return this.speed;
+  }
+
+  getCash(): number {
+    return this.cash;
+  }
+
+  getReputation(): number {
+    return this.reputation;
   }
 
   resetEffect() {
