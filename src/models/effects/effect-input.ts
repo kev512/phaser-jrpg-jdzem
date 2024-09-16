@@ -11,4 +11,5 @@ export type EffectInput = {
   diapers?: number;
   beers?: number;
   smokes?: number;
+  drunkness?: number;
 };

@@ -50,4 +50,8 @@ export class Effect {
   getSmokes(): number {
     return this.input?.smokes || 0;
   }
+
+  getDrunkness(): number {
+    return this.input?.drunkness || 0;
+  }
 }

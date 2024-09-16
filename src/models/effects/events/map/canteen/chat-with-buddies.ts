@@ -1,5 +1,5 @@
-import { Effect } from '../effects';
-import { Event } from './event';
+import { Effect } from '../../../effects';
+import { Event } from '../../event';
 
 export const id = 'CHAT_WITH_BUDDIES';
 

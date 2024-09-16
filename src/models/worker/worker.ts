@@ -1,5 +1,8 @@
+import { Effect } from '../effects/effects';
+import { Resources } from '../resources/resources';
 import {
   INITIAL_SPEED,
+  MAX_DRUNKNESS,
   MAX_FATIGUE,
   MAX_HUNGER,
   MAX_POOP,
@@ -8,8 +11,6 @@ import {
   MAX_THIRST,
   MAX_URINE,
 } from './worker.consts';
-import { Effect } from '../effects/effects';
-import { Resources } from '../resources/resources';
 
 export class Worker {
   private hunger: number = 0;
@@ -19,6 +20,7 @@ export class Worker {
   private stress: number = 0;
   private fatigue: number = 0;
   private speed: number = INITIAL_SPEED;
+  private drunkness: number = 0;
 
   private resources: Resources;
 
@@ -52,6 +54,10 @@ export class Worker {
     this.speed = Math.min(
       MAX_SPEED,
       Math.max(0, this.speed + effect.getEffectSpeed()),
+    );
+    this.drunkness = Math.min(
+      MAX_DRUNKNESS,
+      Math.max(0, this.drunkness + effect.getDrunkness()),
     );
 
     this.resources.applyEffect(effect);
