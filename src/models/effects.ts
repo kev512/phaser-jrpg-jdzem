@@ -7,7 +7,7 @@ export class Effect {
   private fatigue: number;
   private cash: number;
   private reputation: number;
-  // private speed: number;
+  private speed: number;
   // pass in consumables attributes
 
   constructor(hunger: number,
@@ -44,6 +44,9 @@ export class Effect {
     getEffectFatigue(): number {
         return this.fatigue;
     };
+    getEffectSpeed(): number {
+        return this.speed;
+    }
 
     resetEffect() {
         this.hunger = 0;
@@ -52,5 +55,6 @@ export class Effect {
         this.poop = 0; 
         this.stress = 0;
         this.fatigue = 0;
+        this.speed = 0;
     }
 };
