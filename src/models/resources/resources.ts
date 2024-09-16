@@ -1,5 +1,5 @@
 import { Effect } from '../effects/effects';
-import { INITIAL_CASH } from './resources.consts';
+import { INITIAL_CASH, MAX_REPUTATION } from './resources.consts';
 
 export class Resources {
   private cash: number = INITIAL_CASH;
@@ -30,7 +30,10 @@ export class Resources {
 
   applyEffect(effect: Effect) {
     this.cash += effect.getCash();
-    this.reputation += effect.getReputation();
+    this.reputation = Math.max(
+      0,
+      Math.min(MAX_REPUTATION, this.reputation + effect.getReputation()),
+    );
     this.diapers += effect.getDiapers();
     this.beers += effect.getBeers();
     this.smokes += effect.getSmokes();
