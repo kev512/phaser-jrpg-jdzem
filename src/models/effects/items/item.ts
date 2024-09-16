@@ -6,6 +6,7 @@ export abstract class Item {
     private name: string,
     private description: string,
     private effect: Effect,
+    private price: number,
   ) {}
 
   getId() {
@@ -18,6 +19,10 @@ export abstract class Item {
 
   getDescription() {
     return this.description;
+  }
+
+  getPrice() {
+    return this.price;
   }
 
   getEffect() {
