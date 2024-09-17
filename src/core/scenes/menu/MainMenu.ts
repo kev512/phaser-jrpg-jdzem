@@ -4,6 +4,8 @@ export class MainMenu extends Scene {
   background: GameObjects.Image;
   logo: GameObjects.Image;
   title: GameObjects.Text;
+  newGameButton: GameObjects.Text;
+  scoreboardButton: GameObjects.Text;
 
   constructor() {
     super('MainMenu');
@@ -25,8 +27,30 @@ export class MainMenu extends Scene {
       })
       .setOrigin(0.5);
 
-    this.input.once('pointerdown', () => {
+    this.newGameButton = this.add
+      .text(512, 520, 'Nowa Gra', {
+        fontFamily: 'Arial',
+        fontSize: 32,
+        color: '#000000',
+      })
+      .setOrigin(0.5)
+      .setInteractive();
+
+    this.newGameButton.on('pointerdown', () => {
       this.scene.start('Game');
+    });
+
+    this.scoreboardButton = this.add
+      .text(512, 580, 'Tablica wyników', {
+        fontFamily: 'Arial',
+        fontSize: 32,
+        color: '#000000',
+      })
+      .setOrigin(0.5)
+      .setInteractive();
+
+    this.scoreboardButton.on('pointerdown', () => {
+      this.scene.start('Scoreboard');
     });
   }
 }
