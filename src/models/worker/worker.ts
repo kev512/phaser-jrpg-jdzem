@@ -62,4 +62,8 @@ export class Worker {
 
     this.resources.applyEffect(effect);
   }
+
+  getSpeed(): number {
+    return this.speed;
+  }
 }

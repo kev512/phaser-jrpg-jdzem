@@ -1,4 +1,12 @@
-import { MAX_DRUNKNESS, MAX_FATIGUE, MAX_HUNGER, MAX_POOP, MAX_THIRST, MAX_URINE, WAGE } from '../../worker/worker.consts';
+import {
+  MAX_DRUNKNESS,
+  MAX_FATIGUE,
+  MAX_HUNGER,
+  MAX_POOP,
+  MAX_THIRST,
+  MAX_URINE,
+  WAGE,
+} from '../../worker/worker.consts';
 import { Effect } from '../effects';
 import { Event } from './event';
 
