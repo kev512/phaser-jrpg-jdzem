@@ -17,12 +17,12 @@ export class Canteen extends Scene {
 
   create() {
     this.camera = this.cameras.main;
-    this.camera.setBackgroundColor(0x00ff00);
+    this.camera.setBackgroundColor(0xffff00);
 
     this.background = this.add.image(512, 384, 'background');
     this.background.setAlpha(0.5);
 
-    this.worker = this.add.image(512, 384, 'worker');
+    this.worker = this.add.image(100, 100, 'worker');
 
     this.input.once('pointerdown', () => {
       this.scene.start('GameOver');
