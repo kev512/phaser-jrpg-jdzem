@@ -1,7 +1,7 @@
 import { Game as PhaserGame } from 'phaser';
 import { Boot } from './scenes/Boot';
-import { Game as MainGame } from './scenes/Game';
 import { GameOver } from './scenes/GameOver';
+import { Canteen } from './scenes/map/Canteen';
 import { MainMenu } from './scenes/menu/MainMenu';
 import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Preloader } from './scenes/Preloader';
@@ -18,7 +18,7 @@ export class Game {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
-      scene: [Boot, Preloader, MainMenu, MainGame, GameOver, Scoreboard],
+      scene: [Boot, Preloader, MainMenu, Canteen, GameOver, Scoreboard],
     });
   }
 }
