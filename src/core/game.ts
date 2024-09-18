@@ -1,4 +1,5 @@
 import { Game as PhaserGame } from 'phaser';
+import { HEIGHT, WIDTH } from './consts';
 import { Boot } from './scenes/Boot';
 import { GameOver } from './scenes/GameOver';
 import { Canteen } from './scenes/map/Canteen';
@@ -10,13 +11,20 @@ export class Game {
   constructor() {
     new PhaserGame({
       type: Phaser.AUTO,
-      width: 1024,
-      height: 768,
+      width: WIDTH,
+      height: HEIGHT,
       parent: 'game-container',
-      backgroundColor: '#028af8',
+      backgroundColor: '#000000',
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
+      },
+      pixelArt: true,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { x: 0, y: 0 },
+        },
       },
       scene: [Boot, Preloader, MainMenu, Canteen, GameOver, Scoreboard],
     });
