@@ -1,60 +1,60 @@
-import { Scene } from 'phaser';
-import { model } from '../../../main';
-
-export class Canteen extends Scene {
-  camera: Phaser.Cameras.Scene2D.Camera;
-
-  msg_text: Phaser.GameObjects.Text;
-
-  worker: Phaser.GameObjects.Image;
-  background: Phaser.GameObjects.Image;
-
-  cursors: Phaser.Types.Input.Keyboard.CursorKeys;
+export class Canteen extends Phaser.Scene {
+  map: Phaser.Tilemaps.Tilemap;
+  tileset: any;
 
   constructor() {
     super('Canteen');
   }
 
   create() {
-    this.camera = this.cameras.main;
-    this.camera.setBackgroundColor(0xffff00);
+    this.map = this.make.tilemap({
+      key: 'map',
+      tileWidth: 32,
+      tileHeight: 32,
+    });
+    this.map.addTilesetImage('tiles', 'tiles', 32, 32, 1, 2);
 
-    this.background = this.add.image(512, 384, 'background');
-    this.background.setAlpha(0.5);
+    const layer = this.map.createLayer(0, 'tiles', 0, 0);
+    const player = this.add.image(32 + 16, 32 + 16, 'worker');
 
-    this.worker = this.add.image(100, 100, 'worker');
+    this.input?.keyboard?.on('keydown-A', () => {
+      const tile = layer?.getTileAtWorldXY(player.x - 32, player.y, true);
 
-    this.input.once('pointerdown', () => {
-      this.scene.start('GameOver');
+      if (tile?.index === 2) {
+      } else {
+        player.x -= 32;
+        player.angle = 180;
+      }
     });
 
-    if (this.input.keyboard === null) {
-      alert('Gra wymaga klawiatury');
-      return;
-    }
+    this.input?.keyboard?.on('keydown-D', () => {
+      const tile = layer?.getTileAtWorldXY(player.x + 32, player.y, true);
 
-    this.cursors = this.input.keyboard.createCursorKeys();
-  }
+      if (tile?.index === 2) {
+      } else {
+        player.x += 32;
+        player.angle = 0;
+      }
+    });
 
-  update() {
-    const speed = model.worker.getSpeed();
-    const keyboard = this.input.keyboard;
+    this.input?.keyboard?.on('keydown-W', () => {
+      const tile = layer?.getTileAtWorldXY(player.x, player.y - 32, true);
 
-    if (keyboard === null) {
-      alert('Gra wymaga klawiatury');
-      return;
-    }
+      if (tile?.index === 2) {
+      } else {
+        player.y -= 32;
+        player.angle = -90;
+      }
+    });
 
-    if (keyboard.checkDown(this.cursors.left, speed)) {
-      this.worker.x -= 2;
-    } else if (keyboard.checkDown(this.cursors.right, speed)) {
-      this.worker.x += 2;
-    }
+    this.input?.keyboard?.on('keydown-S', () => {
+      const tile = layer?.getTileAtWorldXY(player.x, player.y + 32, true);
 
-    if (keyboard.checkDown(this.cursors.up, speed)) {
-      this.worker.y -= 2;
-    } else if (keyboard.checkDown(this.cursors.down, speed)) {
-      this.worker.y += 2;
-    }
+      if (tile?.index === 2) {
+      } else {
+        player.y += 32;
+        player.angle = 90;
+      }
+    });
   }
 }
