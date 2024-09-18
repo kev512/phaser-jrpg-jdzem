@@ -1,7 +1,8 @@
 import { Game as PhaserGame } from 'phaser';
+import { HEIGHT, WIDTH } from './consts';
 import { Boot } from './scenes/Boot';
-import { Game as MainGame } from './scenes/Game';
 import { GameOver } from './scenes/GameOver';
+import { Canteen } from './scenes/map/Canteen';
 import { MainMenu } from './scenes/menu/MainMenu';
 import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Preloader } from './scenes/Preloader';
@@ -10,15 +11,22 @@ export class Game {
   constructor() {
     new PhaserGame({
       type: Phaser.AUTO,
-      width: 1024,
-      height: 768,
+      width: WIDTH,
+      height: HEIGHT,
       parent: 'game-container',
-      backgroundColor: '#028af8',
+      backgroundColor: '#000000',
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
-      scene: [Boot, Preloader, MainMenu, MainGame, GameOver, Scoreboard],
+      pixelArt: true,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { x: 0, y: 0 },
+        },
+      },
+      scene: [Boot, Preloader, MainMenu, Canteen, GameOver, Scoreboard],
     });
   }
 }

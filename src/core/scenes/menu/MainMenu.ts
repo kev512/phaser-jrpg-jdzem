@@ -11,7 +11,6 @@ export class MainMenu extends Scene {
     super('MainMenu');
   }
 
-
   create() {
     this.cameras.main.setBackgroundColor('#000000');
     this.background = this.add.image(512, 384, 'background');
@@ -30,7 +29,6 @@ export class MainMenu extends Scene {
       })
       .setOrigin(0.5);
 
-
     this.newGameButton = this.add
       .text(512, 500, 'Nowa Gra', {
         fontFamily: 'Pixelify Sans',
@@ -43,7 +41,7 @@ export class MainMenu extends Scene {
       .setInteractive();
 
     this.newGameButton.on('pointerdown', () => {
-      this.scene.start('Game');
+      this.scene.start('Canteen');
     });
 
     this.scoreboardButton = this.add
