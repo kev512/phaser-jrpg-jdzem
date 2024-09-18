@@ -13,7 +13,7 @@ export class Boot extends Scene {
     this.load.image('background', 'path_to_background.png');
     this.load.spritesheet('buttonBorder', 'path_to_your_spritesheet.png', {
       frameWidth: 64,
-      frameHeight: 64 
+      frameHeight: 64,
     });
   }
 
