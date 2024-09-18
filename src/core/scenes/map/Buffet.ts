@@ -2,8 +2,9 @@ import { isNull } from 'lodash';
 import { MAP_BOUNDARY, TILE_SIZE } from '../../consts';
 import { model } from '../../../main';
 
-export class Canteen extends Phaser.Scene {
+export class Buffet extends Phaser.Scene {
   map: Phaser.Tilemaps.Tilemap;
+  tileset: any;
   player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   debugGraphics: Phaser.GameObjects.Graphics;
   showDebug: boolean;
@@ -12,7 +13,7 @@ export class Canteen extends Phaser.Scene {
   layer: Phaser.Tilemaps.TilemapLayer | null;
 
   constructor() {
-    super('Canteen');
+    super('Buffet');
   }
 
   create() {
@@ -82,16 +83,16 @@ export class Canteen extends Phaser.Scene {
       this.player.anims.stop();
     }
 
-    if (this.player.y <= 97) {
+    if (this.player.y >= 927) {
       if (this.player.x >= 736 && this.player.x <= 800) {
-        this.startBufferScene();
+        this.starCanteenScene();
       }
     }
   }
 
   private createMap() {
     this.map = this.make.tilemap({
-      key: 'canteen',
+      key: 'buffet',
       tileWidth: TILE_SIZE,
       tileHeight: TILE_SIZE,
     });
@@ -112,13 +113,8 @@ export class Canteen extends Phaser.Scene {
   }
 
   private createPlayer() {
-    let playerX = 832;
-    let playerY = 333;
-
-    if (model.previousScene === 'Buffet') {
-      playerX = 768;
-      playerY = 99;
-    }
+    const playerX = 768;
+    const playerY = 925;
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 1);
   }
@@ -176,8 +172,8 @@ export class Canteen extends Phaser.Scene {
     return `Arrow keys to move.\nPress "C" to toggle debug visuals: ${this.showDebug ? 'on' : 'off'}`;
   }
 
-  private startBufferScene() {
-    this.scene.start('Buffet');
-    model.setScene('Buffet');
+  private starCanteenScene() {
+    this.scene.start('Canteen');
+    model.setScene('Canteen');
   }
 }
