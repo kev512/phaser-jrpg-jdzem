@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import { TILE_SIZE } from '../consts';
 
 export class Boot extends Scene {
   constructor() {
@@ -8,8 +9,8 @@ export class Boot extends Scene {
   preload() {
     this.load.image('background', 'assets/bg-main-menu-example.png');
     this.load.image('tiles', 'assets/tileset.png');
-    this.load.image('worker', 'assets/worker.png');
-    this.load.tilemapCSV('map', 'assets/grid.csv');
+    this.load.spritesheet('worker', 'assets/worker.png', { frameWidth: TILE_SIZE, frameHeight: TILE_SIZE });
+    this.load.tilemapCSV('map', 'assets/canteen.csv');
   }
 
   create() {
