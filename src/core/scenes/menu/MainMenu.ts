@@ -41,7 +41,7 @@ export class MainMenu extends Scene {
       .setInteractive();
 
     this.newGameButton.on('pointerdown', () => {
-      this.scene.start('Canteen');
+      this.scene.start('Buffet');
     });
 
     this.scoreboardButton = this.add

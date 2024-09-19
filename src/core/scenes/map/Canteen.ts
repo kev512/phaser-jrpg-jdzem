@@ -10,7 +10,7 @@ export class Canteen extends Phaser.Scene {
   showDebug: boolean;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   helpText: Phaser.GameObjects.Text;
-  layer: Phaser.Tilemaps.TilemapLayer | null;
+  wallsLayer: Phaser.Tilemaps.TilemapLayer;
 
   constructor() {
     super('Canteen');
@@ -91,10 +91,15 @@ export class Canteen extends Phaser.Scene {
   }
 
   private createMap() {
-    this.map = MapLoader.createMap('canteen-map', this);
+    const result = MapLoader.createMap('canteen-map', this);
 
-    //  TODO
-    this.map.setCollisionBetween(54, 83);
+    this.map = result.map;
+
+    if (isNull(result.wallsLayer)) {
+      throw new Error('Walls layer is null');
+    }
+
+    this.wallsLayer = result.wallsLayer;
   }
 
   private createPlayer() {
@@ -110,11 +115,9 @@ export class Canteen extends Phaser.Scene {
   }
 
   private addCollision() {
-    if (isNull(this.layer)) {
-      throw new Error('Layer is null');
-    }
+    this.map.setCollisionBetween(0, 11);
 
-    this.physics.add.collider(this.player, this.layer);
+    this.physics.add.collider(this.player, this.wallsLayer);
   }
 
   private createAnimations() {
