@@ -232,8 +232,35 @@
   "tileheight": 48,
   "tilesets": [
     {
+      "columns": 17,
+      "firstgid": 1,
+      "image": "../../asets/essential-pack/Modern tiles_Free/Interiors_free/32x32/walls.png",
+      "imageheight": 736,
+      "imagewidth": 544,
+      "margin": 0,
+      "name": "walls",
+      "spacing": 0,
+      "tilecount": 391,
+      "tileheight": 32,
+      "tilewidth": 32
+    },
+    {
+      "columns": 16,
+      "firstgid": 392,
+      "image": "../../asets/essential-pack/Modern tiles_Free/Interiors_free/32x32/interiors.png",
+      "imageheight": 2848,
+      "imagewidth": 512,
+      "margin": 0,
+      "name": "interiors",
+      "spacing": 0,
+      "tilecount": 1424,
+      "tileheight": 32,
+      "tilewidth": 32
+    },
+    {
       "columns": 16,
       "firstgid": 1816,
+      "image": "../../asets/essential-pack/Modern tiles_Free/Interiors_free/48x48/interiors.png",
       "imageheight": 4272,
       "imagewidth": 768,
       "margin": 0,
@@ -246,6 +273,7 @@
     {
       "columns": 17,
       "firstgid": 3240,
+      "image": "../../asets/essential-pack/Modern tiles_Free/Interiors_free/48x48/walls.png",
       "imageheight": 1104,
       "imagewidth": 816,
       "margin": 0,
@@ -258,6 +286,7 @@
     {
       "columns": 2,
       "firstgid": 3631,
+      "image": "../collision.png",
       "imageheight": 48,
       "imagewidth": 96,
       "margin": 0,
