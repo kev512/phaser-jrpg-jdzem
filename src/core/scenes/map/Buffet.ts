@@ -11,7 +11,7 @@ export class Buffet extends Phaser.Scene {
   showDebug: boolean;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   helpText: Phaser.GameObjects.Text;
-  wallsLayer: Phaser.Tilemaps.TilemapLayer;
+  collisionLayer: Phaser.Tilemaps.TilemapLayer;
 
   constructor() {
     super('Buffet');
@@ -95,12 +95,7 @@ export class Buffet extends Phaser.Scene {
     const result = MapLoader.createMap('buffet-map', this);
 
     this.map = result.map;
-
-    if (isNull(result.wallsLayer)) {
-      throw new Error('Walls layer is null');
-    }
-
-    this.wallsLayer = result.wallsLayer;
+    this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
@@ -111,10 +106,7 @@ export class Buffet extends Phaser.Scene {
   }
 
   private addCollision() {
-    // TODO
-    this.map.setCollisionBetween(0, 10);
-
-    this.physics.add.collider(this.player, this.wallsLayer);
+    this.physics.add.collider(this.player, this.collisionLayer);
   }
 
   private createAnimations() {

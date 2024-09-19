@@ -6,11 +6,8 @@ import { MapLoader } from '../../map-loader';
 export class Canteen extends Phaser.Scene {
   map: Phaser.Tilemaps.Tilemap;
   player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
-  debugGraphics: Phaser.GameObjects.Graphics;
-  showDebug: boolean;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-  helpText: Phaser.GameObjects.Text;
-  wallsLayer: Phaser.Tilemaps.TilemapLayer;
+  collisionLayer: Phaser.Tilemaps.TilemapLayer;
 
   constructor() {
     super('Canteen');
@@ -32,25 +29,11 @@ export class Canteen extends Phaser.Scene {
       MAP_BOUNDARY.height,
     );
 
-    this.debugGraphics = this.add.graphics();
-
     if (isNull(this.input.keyboard)) {
       throw new Error('Keyboard is null');
     }
 
-    this.input.keyboard.on('keydown-C', () => {
-      this.showDebug = !this.showDebug;
-      this.drawDebug();
-    });
-
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    this.helpText = this.add.text(16, 16, this.getHelpMessage(), {
-      fontSize: '18px',
-      stroke: '#ffffff',
-    });
-
-    this.helpText.setScrollFactor(0);
   }
 
   update() {
@@ -94,12 +77,7 @@ export class Canteen extends Phaser.Scene {
     const result = MapLoader.createMap('canteen-map', this);
 
     this.map = result.map;
-
-    if (isNull(result.wallsLayer)) {
-      throw new Error('Walls layer is null');
-    }
-
-    this.wallsLayer = result.wallsLayer;
+    this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
@@ -115,9 +93,7 @@ export class Canteen extends Phaser.Scene {
   }
 
   private addCollision() {
-    this.map.setCollisionBetween(0, 11);
-
-    this.physics.add.collider(this.player, this.wallsLayer);
+    this.physics.add.collider(this.player, this.collisionLayer);
   }
 
   private createAnimations() {
@@ -145,24 +121,6 @@ export class Canteen extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-  }
-
-  private drawDebug() {
-    this.debugGraphics.clear();
-
-    if (this.showDebug) {
-      this.map.renderDebug(this.debugGraphics, {
-        tileColor: null, // Non-colliding tiles
-        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Colliding tiles
-        faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Colliding face edges
-      });
-    }
-
-    this.helpText.setText(this.getHelpMessage());
-  }
-
-  private getHelpMessage() {
-    return `Arrow keys to move.\nPress "C" to toggle debug visuals: ${this.showDebug ? 'on' : 'off'}`;
   }
 
   private startBufferScene() {
