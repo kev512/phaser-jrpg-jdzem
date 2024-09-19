@@ -1,5 +1,11 @@
 import { isNull } from 'lodash';
 
+const WALLS_LAYER_NUMBER = 0;
+const FLOOR_LAYER_NUMBER = 1;
+const INTERIOR_LAYER_NUMBER = 2;
+const OBJECTS_LAYER_NUMBER = 3;
+const CEILING_LAYER_NUMBER = 4;
+
 export class MapLoader {
   constructor() {}
 
@@ -10,18 +16,18 @@ export class MapLoader {
     const interiorTilesetImage = map.addTilesetImage('interiors-tileset');
 
     if (isNull(wallsTilesetImage)) {
-      throw new Error("Walls tileset is null");
+      throw new Error('Walls tileset is null');
     }
 
     if (isNull(interiorTilesetImage)) {
-      throw new Error("Interior tileset is null");
+      throw new Error('Interior tileset is null');
     }
 
-    const walls = map.createLayer(0, wallsTilesetImage, 0, 0);
-    const floor = map.createLayer(1, wallsTilesetImage, 0, 0);
-    const interior = map.createLayer(2, wallsTilesetImage, 0, 0);
-    const objects = map.createLayer(3, wallsTilesetImage, 0, 0);
-    const ceiling = map.createLayer(4, wallsTilesetImage, 0, 0);
+    map.createLayer(WALLS_LAYER_NUMBER, wallsTilesetImage, 0, 0);
+    map.createLayer(FLOOR_LAYER_NUMBER, interiorTilesetImage, 0, 0);
+    map.createLayer(INTERIOR_LAYER_NUMBER, interiorTilesetImage, 0, 0);
+    map.createLayer(OBJECTS_LAYER_NUMBER, interiorTilesetImage, 0, 0);
+    map.createLayer(CEILING_LAYER_NUMBER, wallsTilesetImage, 0, 0);
 
     return map;
   }
