@@ -1,6 +1,7 @@
 import { isNull } from 'lodash';
-import { MAP_BOUNDARY, TILE_SIZE } from '../../consts';
 import { model } from '../../../main';
+import { MAP_BOUNDARY } from '../../consts';
+import { MapLoader } from '../../map-loader';
 
 export class Buffet extends Phaser.Scene {
   map: Phaser.Tilemaps.Tilemap;
@@ -91,22 +92,7 @@ export class Buffet extends Phaser.Scene {
   }
 
   private createMap() {
-    this.map = this.make.tilemap({
-      key: 'buffet',
-      tileWidth: TILE_SIZE,
-      tileHeight: TILE_SIZE,
-    });
-    const tileset = this.map.addTilesetImage('tiles');
-
-    if (isNull(tileset)) {
-      throw 'Tileset is null';
-    }
-
-    this.layer = this.map.createLayer(0, tileset, 0, 0);
-
-    if (isNull(this.layer)) {
-      throw 'Layer is null';
-    }
+    this.map = MapLoader.createMap('buffet-map', this);
 
     //  TODO
     this.map.setCollisionBetween(54, 83);

@@ -1,38 +1,27 @@
 import { isNull } from 'lodash';
-import canteenJson from '../../public/assets/canteen.json';
 
 export class MapLoader {
   constructor() {}
 
-  static createMap(scene: Phaser.Scene, name: 'Canteen') {
-    let json: TiledJson;
+  static createMap(mapKey: 'canteen-map' | 'buffet-map', scene: Phaser.Scene) {
+    const map = scene.make.tilemap({ key: mapKey });
 
-    if (name === 'Canteen') {
-      json = canteenJson;
-    } else {
-      throw new Error('Incorrect name');
+    const wallsTilesetImage = map.addTilesetImage('walls-tileset');
+    const interiorTilesetImage = map.addTilesetImage('interiors-tileset');
+
+    if (isNull(wallsTilesetImage)) {
+      throw new Error("Walls tileset is null");
     }
 
-    return this._createMap(scene, json);
-  }
+    if (isNull(interiorTilesetImage)) {
+      throw new Error("Interior tileset is null");
+    }
 
-  private static _createMap(scene: Phaser.Scene, json: TiledJson) {
-    const map = scene.make.tilemap({
-      data: json.layers.map((layer) => layer.data),
-      tileWidth: 16,
-      tileHeight: 16,
-    });
-
-    json.layers.forEach((item, index) => {
-      const name = item.name;
-      const tiles = map.addTilesetImage(name);
-
-      if (isNull(tiles)) {
-        throw new Error(`Tileset ${name} is null`);
-      }
-
-      map.createLayer(index, tiles, 0, 0);
-    });
+    const walls = map.createLayer(0, wallsTilesetImage, 0, 0);
+    const floor = map.createLayer(1, wallsTilesetImage, 0, 0);
+    const interior = map.createLayer(2, wallsTilesetImage, 0, 0);
+    const objects = map.createLayer(3, wallsTilesetImage, 0, 0);
+    const ceiling = map.createLayer(4, wallsTilesetImage, 0, 0);
 
     return map;
   }
