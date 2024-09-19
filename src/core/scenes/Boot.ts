@@ -7,14 +7,19 @@ export class Boot extends Scene {
   }
 
   preload() {
-    this.load.image('background', 'assets/bg-main-menu-example.png');
-    this.load.image('tiles', 'assets/tileset.png');
+    this.load.tilemapTiledJSON('canteen-map', 'assets/canteen.json');
+    this.load.tilemapTiledJSON('buffet-map', 'assets/buffet.json');
+
+    this.load.image('background', 'assets/background.png');
+
+    this.load.image('collision-tileset', 'assets/collision.png');
+    this.load.image('walls-tileset', 'assets/tileset.png');
+    this.load.image('interiors-tileset', 'assets/interiors.png');
+
     this.load.spritesheet('worker', 'assets/worker.png', {
       frameWidth: TILE_SIZE,
       frameHeight: TILE_SIZE,
     });
-    this.load.tilemapCSV('canteen', 'assets/canteen.csv');
-    this.load.tilemapCSV('buffet', 'assets/buffet.csv');
   }
 
   create() {

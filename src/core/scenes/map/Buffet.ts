@@ -1,6 +1,7 @@
 import { isNull } from 'lodash';
-import { MAP_BOUNDARY, TILE_SIZE } from '../../consts';
 import { model } from '../../../main';
+import { MAP_BOUNDARY } from '../../consts';
+import { MapLoader } from '../../map-loader';
 
 export class Buffet extends Phaser.Scene {
   map: Phaser.Tilemaps.Tilemap;
@@ -10,7 +11,7 @@ export class Buffet extends Phaser.Scene {
   showDebug: boolean;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   helpText: Phaser.GameObjects.Text;
-  layer: Phaser.Tilemaps.TilemapLayer | null;
+  collisionLayer: Phaser.Tilemaps.TilemapLayer;
 
   constructor() {
     super('Buffet');
@@ -91,25 +92,10 @@ export class Buffet extends Phaser.Scene {
   }
 
   private createMap() {
-    this.map = this.make.tilemap({
-      key: 'buffet',
-      tileWidth: TILE_SIZE,
-      tileHeight: TILE_SIZE,
-    });
-    const tileset = this.map.addTilesetImage('tiles');
+    const result = MapLoader.createMap('buffet-map', this);
 
-    if (isNull(tileset)) {
-      throw 'Tileset is null';
-    }
-
-    this.layer = this.map.createLayer(0, tileset, 0, 0);
-
-    if (isNull(this.layer)) {
-      throw 'Layer is null';
-    }
-
-    //  TODO
-    this.map.setCollisionBetween(54, 83);
+    this.map = result.map;
+    this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
@@ -120,11 +106,7 @@ export class Buffet extends Phaser.Scene {
   }
 
   private addCollision() {
-    if (isNull(this.layer)) {
-      throw new Error('Layer is null');
-    }
-
-    this.physics.add.collider(this.player, this.layer);
+    this.physics.add.collider(this.player, this.collisionLayer);
   }
 
   private createAnimations() {
