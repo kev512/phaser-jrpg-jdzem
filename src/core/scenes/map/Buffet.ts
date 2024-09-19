@@ -26,6 +26,8 @@ export class Buffet extends Phaser.Scene {
 
     this.addCollision();
 
+    this.add.rectangle(1062, 0, 316, 1800, 0x212121);
+
     this.cameras.main.setBounds(
       MAP_BOUNDARY.x,
       MAP_BOUNDARY.y,
@@ -84,8 +86,8 @@ export class Buffet extends Phaser.Scene {
       this.player.anims.stop();
     }
 
-    if (this.player.y >= 927) {
-      if (this.player.x >= 736 && this.player.x <= 800) {
+    if (this.player.y >= 982) {
+      if (this.player.x >= 552 && this.player.x <= 984) {
         this.starCanteenScene();
       }
     }
@@ -99,8 +101,8 @@ export class Buffet extends Phaser.Scene {
   }
 
   private createPlayer() {
-    const playerX = 768;
-    const playerY = 925;
+    const playerX = 579;
+    const playerY = 851;
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 1);
   }
