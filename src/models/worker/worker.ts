@@ -22,7 +22,7 @@ export class Worker {
   private speed: number = INITIAL_SPEED;
   private drunkness: number = 0;
 
-  private resources: Resources;
+  private resources: Resources = new Resources();
 
   constructor() {}
 
@@ -61,6 +61,10 @@ export class Worker {
     );
 
     this.resources.applyEffect(effect);
+  }
+
+  getHunger(): number {
+    return this.hunger;
   }
 
   getSpeed(): number {
