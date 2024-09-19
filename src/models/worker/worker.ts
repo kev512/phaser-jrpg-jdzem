@@ -63,6 +63,14 @@ export class Worker {
     this.resources.applyEffect(effect);
   }
 
+  getHunger(): number {
+    return this.hunger;
+  }
+
+  getThirst(): number {
+    return this.thirst;
+  }
+
   getSpeed(): number {
     return this.speed;
   }
