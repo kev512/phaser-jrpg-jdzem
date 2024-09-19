@@ -22,6 +22,8 @@ export class Canteen extends Phaser.Scene {
 
     this.addCollision();
 
+    this.add.rectangle(1062, 0, 316, 1800, 0x212121);
+
     this.cameras.main.setBounds(
       MAP_BOUNDARY.x,
       MAP_BOUNDARY.y,
@@ -66,8 +68,8 @@ export class Canteen extends Phaser.Scene {
       this.player.anims.stop();
     }
 
-    if (this.player.y <= 97) {
-      if (this.player.x >= 736 && this.player.x <= 800) {
+    if (this.player.y <= 73) {
+      if (this.player.x >= 552 && this.player.x <= 600) {
         this.startBufferScene();
       }
     }
@@ -81,12 +83,12 @@ export class Canteen extends Phaser.Scene {
   }
 
   private createPlayer() {
-    let playerX = 832;
-    let playerY = 333;
+    let playerX = 862;
+    let playerY = 569;
 
     if (model.previousScene === 'Buffet') {
-      playerX = 768;
-      playerY = 99;
+      playerX = 584;
+      playerY = 84;
     }
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 1);
