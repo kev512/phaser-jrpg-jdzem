@@ -1,6 +1,7 @@
 import { isNull } from 'lodash';
-import { MAP_BOUNDARY, TILE_SIZE } from '../../consts';
 import { model } from '../../../main';
+import { MAP_BOUNDARY } from '../../consts';
+import { MapLoader } from '../../map-loader';
 
 export class Buffet extends Phaser.Scene {
   map: Phaser.Tilemaps.Tilemap;
@@ -10,7 +11,7 @@ export class Buffet extends Phaser.Scene {
   showDebug: boolean;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   helpText: Phaser.GameObjects.Text;
-  layer: Phaser.Tilemaps.TilemapLayer | null;
+  collisionLayer: Phaser.Tilemaps.TilemapLayer;
 
   constructor() {
     super('Buffet');
@@ -24,6 +25,8 @@ export class Buffet extends Phaser.Scene {
     this.createPlayer();
 
     this.addCollision();
+
+    this.add.rectangle(1062, 0, 316, 1800, 0x212121);
 
     this.cameras.main.setBounds(
       MAP_BOUNDARY.x,
@@ -83,48 +86,29 @@ export class Buffet extends Phaser.Scene {
       this.player.anims.stop();
     }
 
-    if (this.player.y >= 927) {
-      if (this.player.x >= 736 && this.player.x <= 800) {
+    if (this.player.y >= 982) {
+      if (this.player.x >= 552 && this.player.x <= 984) {
         this.starCanteenScene();
       }
     }
   }
 
   private createMap() {
-    this.map = this.make.tilemap({
-      key: 'buffet',
-      tileWidth: TILE_SIZE,
-      tileHeight: TILE_SIZE,
-    });
-    const tileset = this.map.addTilesetImage('tiles');
+    const result = MapLoader.createMap('buffet-map', this);
 
-    if (isNull(tileset)) {
-      throw 'Tileset is null';
-    }
-
-    this.layer = this.map.createLayer(0, tileset, 0, 0);
-
-    if (isNull(this.layer)) {
-      throw 'Layer is null';
-    }
-
-    //  TODO
-    this.map.setCollisionBetween(54, 83);
+    this.map = result.map;
+    this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
-    const playerX = 768;
-    const playerY = 925;
+    const playerX = 579;
+    const playerY = 851;
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 1);
   }
 
   private addCollision() {
-    if (isNull(this.layer)) {
-      throw new Error('Layer is null');
-    }
-
-    this.physics.add.collider(this.player, this.layer);
+    this.physics.add.collider(this.player, this.collisionLayer);
   }
 
   private createAnimations() {

@@ -1,15 +1,13 @@
 import { isNull } from 'lodash';
-import { MAP_BOUNDARY, TILE_SIZE } from '../../consts';
 import { model } from '../../../main';
+import { MAP_BOUNDARY } from '../../consts';
+import { MapLoader } from '../../map-loader';
 
 export class Canteen extends Phaser.Scene {
   map: Phaser.Tilemaps.Tilemap;
   player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
-  debugGraphics: Phaser.GameObjects.Graphics;
-  showDebug: boolean;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-  helpText: Phaser.GameObjects.Text;
-  layer: Phaser.Tilemaps.TilemapLayer | null;
+  collisionLayer: Phaser.Tilemaps.TilemapLayer;
 
   constructor() {
     super('Canteen');
@@ -24,6 +22,8 @@ export class Canteen extends Phaser.Scene {
 
     this.addCollision();
 
+    this.add.rectangle(1062, 0, 316, 1800, 0x212121);
+
     this.cameras.main.setBounds(
       MAP_BOUNDARY.x,
       MAP_BOUNDARY.y,
@@ -31,25 +31,11 @@ export class Canteen extends Phaser.Scene {
       MAP_BOUNDARY.height,
     );
 
-    this.debugGraphics = this.add.graphics();
-
     if (isNull(this.input.keyboard)) {
       throw new Error('Keyboard is null');
     }
 
-    this.input.keyboard.on('keydown-C', () => {
-      this.showDebug = !this.showDebug;
-      this.drawDebug();
-    });
-
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    this.helpText = this.add.text(16, 16, this.getHelpMessage(), {
-      fontSize: '18px',
-      stroke: '#ffffff',
-    });
-
-    this.helpText.setScrollFactor(0);
   }
 
   update() {
@@ -82,53 +68,34 @@ export class Canteen extends Phaser.Scene {
       this.player.anims.stop();
     }
 
-    if (this.player.y <= 97) {
-      if (this.player.x >= 736 && this.player.x <= 800) {
+    if (this.player.y <= 73) {
+      if (this.player.x >= 552 && this.player.x <= 600) {
         this.startBufferScene();
       }
     }
   }
 
   private createMap() {
-    this.map = this.make.tilemap({
-      key: 'canteen',
-      tileWidth: TILE_SIZE,
-      tileHeight: TILE_SIZE,
-    });
-    const tileset = this.map.addTilesetImage('tiles');
+    const result = MapLoader.createMap('canteen-map', this);
 
-    if (isNull(tileset)) {
-      throw 'Tileset is null';
-    }
-
-    this.layer = this.map.createLayer(0, tileset, 0, 0);
-
-    if (isNull(this.layer)) {
-      throw 'Layer is null';
-    }
-
-    //  TODO
-    this.map.setCollisionBetween(54, 83);
+    this.map = result.map;
+    this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
-    let playerX = 832;
-    let playerY = 333;
+    let playerX = 862;
+    let playerY = 569;
 
     if (model.previousScene === 'Buffet') {
-      playerX = 768;
-      playerY = 99;
+      playerX = 584;
+      playerY = 84;
     }
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 1);
   }
 
   private addCollision() {
-    if (isNull(this.layer)) {
-      throw new Error('Layer is null');
-    }
-
-    this.physics.add.collider(this.player, this.layer);
+    this.physics.add.collider(this.player, this.collisionLayer);
   }
 
   private createAnimations() {
@@ -156,24 +123,6 @@ export class Canteen extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-  }
-
-  private drawDebug() {
-    this.debugGraphics.clear();
-
-    if (this.showDebug) {
-      this.map.renderDebug(this.debugGraphics, {
-        tileColor: null, // Non-colliding tiles
-        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Colliding tiles
-        faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Colliding face edges
-      });
-    }
-
-    this.helpText.setText(this.getHelpMessage());
-  }
-
-  private getHelpMessage() {
-    return `Arrow keys to move.\nPress "C" to toggle debug visuals: ${this.showDebug ? 'on' : 'off'}`;
   }
 
   private startBufferScene() {

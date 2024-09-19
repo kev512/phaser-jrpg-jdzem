@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/kev512/phaser-jrpg-jdzem#readme",
   "scripts": {
-    "format": "prettier --write \"src/**/*.ts\" \"**/*.js\" \"src/**/*.spec.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"**/*.js\" \"src/**/*.spec.ts\" \"public/**/*.json\"",
     "dev": "node log.js dev & vite --config vite/config.dev.mjs",
     "build": "node log.js build & vite build --config vite/config.prod.mjs",
     "dev-nolog": "vite --config vite/config.dev.mjs",

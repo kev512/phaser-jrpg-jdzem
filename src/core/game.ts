@@ -15,7 +15,7 @@ export class Game {
       width: WIDTH,
       height: HEIGHT,
       parent: 'game-container',
-      backgroundColor: '#000000',
+      backgroundColor: '#212121',
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
