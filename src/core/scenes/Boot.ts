@@ -10,7 +10,7 @@ export class Boot extends Scene {
     this.load.tilemapTiledJSON('canteen-map', 'assets/canteen.json'); // TODO Kev ma dosłać
     this.load.tilemapTiledJSON('buffet-map', 'assets/buffet.json'); // TODO Kev ma dosłać
 
-    this.load.image('background', 'assets/bg-main-menu-example.png');
+    this.load.image('background', 'assets/background.png');
 
     this.load.image('walls-tileset', 'assets/tileset.png');
     this.load.image('interiors-tileset', 'assets/interiors.png');
