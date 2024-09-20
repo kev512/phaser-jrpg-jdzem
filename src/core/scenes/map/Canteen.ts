@@ -145,13 +145,13 @@ export class Canteen extends BaseScene {
   }
 
   private createLockerPopup() {
-    const popupX = TILE_SIZE * 15.5;
+    const popupX = TILE_SIZE * 12.5;
     const popupY = TILE_SIZE * 1.75;
 
     this.lockerPopup = this.add.image(popupX, popupY, 'popup');
     this.lockerPopup.setScrollFactor(0);
     this.lockerText = this.add.text(
-      popupX - 235,
+      popupX - 86,
       popupY - 10,
       'Otwórz szafkę [E]',
       {
