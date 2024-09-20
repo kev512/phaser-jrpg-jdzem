@@ -8,7 +8,7 @@ export class Lunch extends FoodItem {
     super(
       id,
       'Lunch',
-      'Kupiony lunchbox',
+      'Zjadłeś lunchboxa',
       new Effect({
         hunger: -25,
         thirst: -20,
