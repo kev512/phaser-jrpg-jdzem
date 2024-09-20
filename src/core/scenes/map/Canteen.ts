@@ -20,6 +20,10 @@ export class Canteen extends BaseScene {
   vendingMachineText: Phaser.GameObjects.Text;
   isNearVendingMachine: boolean = false;
 
+  computerPopup: Phaser.GameObjects.Image;
+  computerText: Phaser.GameObjects.Text;
+  isNearComputer: boolean = false;
+
   constructor() {
     super('Canteen');
   }
@@ -54,6 +58,7 @@ export class Canteen extends BaseScene {
     this.createLockerPopup();
     this.createRestZonePopup();
     this.createVendingMachinePopup();
+    this.createComputerPopup();
   }
 
   update(time: number, deltaTime: number) {
@@ -98,6 +103,10 @@ export class Canteen extends BaseScene {
     this.updateVendingMachinePopup(
       this.isNearVendingMachine && !model.window.visible,
     );
+
+    this.isNearComputer =
+      this.player.y === 744 && this.player.x >= 736 && this.player.x <= 752;
+    this.updateComputerPopup(this.isNearComputer && !model.window.visible);
 
     console.log(this.player.x, this.player.y);
   }
@@ -275,5 +284,43 @@ export class Canteen extends BaseScene {
   private updateVendingMachinePopup(visible: boolean) {
     this.vendingMachinePopup.setVisible(visible);
     this.vendingMachineText.setVisible(visible);
+  }
+
+  private createComputerPopup() {
+    const popupX = TILE_SIZE * 15;
+    const popupY = TILE_SIZE * 11;
+
+    this.computerPopup = this.add.image(popupX, popupY, 'popup');
+    this.computerPopup.setScrollFactor(0);
+    this.computerText = this.add.text(popupX - 86, popupY - 10, 'Zagraj [E]', {
+      fontFamily: 'Pixelify Sans',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
+    this.computerText.setScrollFactor(0);
+
+    this.computerPopup.setVisible(false);
+    this.computerText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearComputer) {
+        model.window.visible = true;
+        model.window.title = 'Kantynowy PeCet';
+        model.window.description =
+          'Dobry moment na granie?\n\n' +
+          '1. Szybkie duo w LoLa [1]\n' +
+          '2. Klanówka w CSa [2]\n' +
+          '3. Rundka w Tekkena [3]\n' +
+          '4. Nie graj w nic [ESC]';
+        model.window.options = [new Snack(), new Soda()]; // TODO
+      }
+    });
+  }
+
+  private updateComputerPopup(visible: boolean) {
+    this.computerPopup.setVisible(visible);
+    this.computerText.setVisible(visible);
   }
 }
