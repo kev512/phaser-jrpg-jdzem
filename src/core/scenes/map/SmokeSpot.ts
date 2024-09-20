@@ -4,9 +4,9 @@ import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
-export class Canteen extends BaseScene {
+export class SmokeSpot extends BaseScene {
   constructor() {
-    super('Canteen');
+    super('SmokeSpot');
   }
 
   create() {
@@ -33,7 +33,7 @@ export class Canteen extends BaseScene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.createLabels();
+    super.createLabels();
   }
 
   update() {
@@ -66,50 +66,23 @@ export class Canteen extends BaseScene {
       this.player.anims.stop();
     }
 
-    if (this.player.y <= 73) {
-      if (this.player.x >= 552 && this.player.x <= 600) {
-        this.startBuffetScene();
-      }
+    if (this.player.y <= 86) {
+        this.startCanteenScene();
     }
-
-    if (this.player.y <= 216) {
-      if (this.player.x >= 160 && this.player.x <= 193) {
-        this.startRestroomScene();
-      }
-    }
-
-    if (this.player.y >= 872) {
-      if (this.player.x >= 447 && this.player.x <= 513) {
-        this.startSmokeSpotScene();
-      }
-    }
-
-    console.log(this.player.x, this.player.y);
 
     this.updateLabels();
   }
 
   private createMap() {
-    const result = MapLoader.createMap('canteen-map', this);
+    const result = MapLoader.createMap('smoke-spot-map', this);
 
     this.map = result.map;
     this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
-    let playerX = 862;
-    let playerY = 569;
-
-    if (model.previousScene === 'Buffet') {
-      playerX = 584;
-      playerY = 84;
-    } else if (model.previousScene === 'Restroom') {
-      playerX = 165;
-      playerY = 218;
-    } else if (model.previousScene === 'SmokeSpot') {
-      playerX = 500;
-      playerY = 865;
-    }
+    const playerX = 460;
+    const playerY = 143;
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 19);
     this.player.setScale(WORKER_SIZE_SCALE);
@@ -146,18 +119,8 @@ export class Canteen extends BaseScene {
     });
   }
 
-  private startBuffetScene() {
-    this.scene.start('Buffet');
-    model.setScene('Buffet');
-  }
-
-  private startRestroomScene() {
-    this.scene.start('Restroom');
-    model.setScene('Restroom');
-  }
-
-  private startSmokeSpotScene() {
-    this.scene.start('SmokeSpot');
-    model.setScene('SmokeSpot');
+  private startCanteenScene() {
+    this.scene.start('Canteen');
+    model.setScene('Canteen');
   }
 }

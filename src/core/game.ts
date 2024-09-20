@@ -8,6 +8,7 @@ import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Preloader } from './scenes/Preloader';
 import { Buffet } from './scenes/map/Buffet';
 import { Restroom } from './scenes/map/Restroom';
+import { SmokeSpot } from './scenes/map/SmokeSpot';
 
 export class Game {
   constructor() {
@@ -35,6 +36,7 @@ export class Game {
         Canteen,
         Buffet,
         Restroom,
+        SmokeSpot,
         GameOver,
         Scoreboard,
       ],

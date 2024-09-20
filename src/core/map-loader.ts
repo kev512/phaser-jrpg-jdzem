@@ -11,7 +11,7 @@ export class MapLoader {
   constructor() {}
 
   static createMap(
-    mapKey: 'canteen-map' | 'buffet-map' | 'restroom-map',
+    mapKey: 'canteen-map' | 'buffet-map' | 'restroom-map' | 'smoke-spot-map',
     scene: Phaser.Scene,
   ) {
     const map = scene.make.tilemap({ key: mapKey });
