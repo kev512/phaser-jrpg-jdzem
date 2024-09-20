@@ -1,11 +1,12 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
+import { Rest } from '../../../models/effects/events/map/canteen/rest';
+import { Snack } from '../../../models/effects/events/map/canteen/snack';
+import { Soda } from '../../../models/effects/events/map/canteen/soda';
+import { Lunch } from '../../../models/effects/items/lunch';
 import { MAP_BOUNDARY, TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
-import { Lunch } from '../../../models/effects/items/lunch';
-import { Snack } from '../../../models/effects/events/map/canteen/snack';
-import { Soda } from '../../../models/effects/events/map/canteen/soda';
 
 export class Canteen extends BaseScene {
   lockerPopup: Phaser.GameObjects.Image;
@@ -184,15 +185,19 @@ export class Canteen extends BaseScene {
         model.window.visible = true;
         model.window.title = 'Szafka';
 
-        let description =
-          'Tutaj trzymasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
+        const lunch = new Lunch();
 
-        if (model.worker.hasItem(new Lunch().getId())) {
-          description =
-            'W środku trzymasz lunchbox.\n\n1. Zjedz kupiony lunch [1]\n2. Wyjście [ESC]';
+        if (model.worker.hasItem(lunch.getId())) {
+          model.window.description =
+            'W środku trzymasz lunchbox.\n\n' +
+            '1. Zjedz kupiony lunch [1]\n' +
+            '2. Wyjście [ESC]';
+          model.window.options = [lunch.getEatEvent()];
+          model.worker.removeItem(lunch);
+        } else {
+          model.window.description =
+            'Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
         }
-
-        model.window.description = description;
       }
     });
   }
@@ -234,7 +239,7 @@ export class Canteen extends BaseScene {
           'Weź trochę wycziluj.\n\n' +
           '1. Odpocznij [1]\n' +
           '2. Wyjście [ESC]';
-        model.window.options = [];
+        model.window.options = [new Rest()];
       }
     });
   }
