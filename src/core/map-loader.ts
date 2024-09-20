@@ -29,7 +29,12 @@ export class MapLoader {
       throw new Error('Interior tileset is null');
     }
 
-    const collisionLayer = map.createLayer(COLLISION_LAYER_NUMBER, collisionTilesetImage, 0, 0);
+    const collisionLayer = map.createLayer(
+      COLLISION_LAYER_NUMBER,
+      collisionTilesetImage,
+      0,
+      0,
+    );
 
     if (isNull(collisionLayer)) {
       throw new Error('Collision layer is null');
