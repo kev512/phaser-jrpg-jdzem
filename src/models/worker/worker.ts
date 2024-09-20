@@ -79,7 +79,19 @@ export class Worker {
     return this.poop;
   }
 
+  getStress(): number {
+    return this.stress;
+  }
+
+  getFatigue(): number {
+    return this.fatigue;
+  }
+
   getSpeed(): number {
     return this.speed;
+  }
+
+  getDrunkness(): number {
+    return this.fatigue;
   }
 }
