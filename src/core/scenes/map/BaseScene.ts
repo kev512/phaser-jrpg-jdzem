@@ -103,6 +103,10 @@ export abstract class BaseScene extends Phaser.Scene {
 
     this.player.body.setVelocity(0);
 
+    if (model.window.visible) {
+      return;
+    }
+
     if (this.cursors.left.isDown) {
       this.player.body.setVelocityX(-speed);
     } else if (this.cursors.right.isDown) {

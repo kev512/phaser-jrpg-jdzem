@@ -68,7 +68,7 @@ export class Canteen extends BaseScene {
 
     this.isNearLocker =
       this.player.y === 264 && this.player.x >= 720 && this.player.x <= 800;
-    this.updateLockerPopup(this.isNearLocker);
+    this.updateLockerPopup(this.isNearLocker && !model.window.visible);
 
     console.log(this.player.x, this.player.y);
   }
@@ -146,12 +146,12 @@ export class Canteen extends BaseScene {
         model.window.visible = true;
         model.window.title = 'Szafka';
 
-        let description = 'Tutaj trzymasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
-
-        // Tutaj trzymasz swoje rzeczy i obiad który możesz kupić po pracy;
+        let description =
+          'Tutaj trzymasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
 
         if (model.worker.hasItem(new Lunch().getId())) {
-          description = 'W środku trzymasz lunchbox.\n\n1. Zjedz kupiony lunch [1]\n2. Wyjście [ESC]';
+          description =
+            'W środku trzymasz lunchbox.\n\n1. Zjedz kupiony lunch [1]\n2. Wyjście [ESC]';
         }
 
         model.window.description = description;
