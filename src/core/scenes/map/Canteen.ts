@@ -4,6 +4,8 @@ import { MAP_BOUNDARY, TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 import { Lunch } from '../../../models/effects/items/lunch';
+import { Snack } from '../../../models/effects/events/map/canteen/snack';
+import { Soda } from '../../../models/effects/events/map/canteen/soda';
 
 export class Canteen extends BaseScene {
   lockerPopup: Phaser.GameObjects.Image;
@@ -13,6 +15,10 @@ export class Canteen extends BaseScene {
   restZonePopup: Phaser.GameObjects.Image;
   restZoneText: Phaser.GameObjects.Text;
   isNearRestZone: boolean = false;
+
+  vendingMachinePopup: Phaser.GameObjects.Image;
+  vendingMachineText: Phaser.GameObjects.Text;
+  isNearVendingMachine: boolean = false;
 
   constructor() {
     super('Canteen');
@@ -47,6 +53,7 @@ export class Canteen extends BaseScene {
 
     this.createLockerPopup();
     this.createRestZonePopup();
+    this.createVendingMachinePopup();
   }
 
   update(time: number, deltaTime: number) {
@@ -85,6 +92,12 @@ export class Canteen extends BaseScene {
       this.player.x >= 112 &&
       this.player.x <= 272;
     this.updateRestZonePopup(this.isNearRestZone && !model.window.visible);
+
+    this.isNearVendingMachine =
+      this.player.y === 216 && this.player.x >= 343 && this.player.x <= 433;
+    this.updateVendingMachinePopup(
+      this.isNearVendingMachine && !model.window.visible,
+    );
 
     console.log(this.player.x, this.player.y);
   }
@@ -207,9 +220,12 @@ export class Canteen extends BaseScene {
       if (this.isNearRestZone) {
         model.window.visible = true;
         model.window.title = 'Strefa czilałtu';
-
         model.window.description =
-          'Za dużo stresu podczas pracy?\nWeź trochę wycziluj.\n\n1. Odpocznij [1]\n2. Wyjście [ESC]';
+          'Za dużo stresu podczas pracy?\n' +
+          'Weź trochę wycziluj.\n\n' +
+          '1. Odpocznij [1]\n' +
+          '2. Wyjście [ESC]';
+        model.window.options = [];
       }
     });
   }
@@ -217,5 +233,47 @@ export class Canteen extends BaseScene {
   private updateRestZonePopup(visible: boolean) {
     this.restZonePopup.setVisible(visible);
     this.restZoneText.setVisible(visible);
+  }
+
+  private createVendingMachinePopup() {
+    const popupX = TILE_SIZE * 5.5;
+    const popupY = TILE_SIZE * 1;
+
+    this.vendingMachinePopup = this.add.image(popupX, popupY, 'popup');
+    this.vendingMachinePopup.setScrollFactor(0);
+    this.vendingMachineText = this.add.text(
+      popupX - 86,
+      popupY - 10,
+      'Kup przekąskę [E]',
+      {
+        fontFamily: 'Pixelify Sans',
+        fontSize: 20,
+        color: '#000000',
+        stroke: '#dddddd',
+        strokeThickness: 2,
+      },
+    );
+    this.vendingMachineText.setScrollFactor(0);
+
+    this.vendingMachinePopup.setVisible(false);
+    this.vendingMachineText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearVendingMachine) {
+        model.window.visible = true;
+        model.window.title = 'Automat z przekąskami';
+        model.window.description =
+          'Nie stać cię na prawdziwy obiad?\nKup sobie przekąskę.\n\n' +
+          '1. Kup i zjedz batonika [1]\n' +
+          '2. Kup i wypij napój [2]\n' +
+          '3. Wyjście [ESC]';
+        model.window.options = [new Snack(), new Soda()];
+      }
+    });
+  }
+
+  private updateVendingMachinePopup(visible: boolean) {
+    this.vendingMachinePopup.setVisible(visible);
+    this.vendingMachineText.setVisible(visible);
   }
 }
