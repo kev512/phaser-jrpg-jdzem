@@ -71,6 +71,14 @@ export class Worker {
     return this.thirst;
   }
 
+  getUrine(): number {
+    return this.urine;
+  }
+
+  getPoop(): number {
+    return this.poop;
+  }
+
   getSpeed(): number {
     return this.speed;
   }
