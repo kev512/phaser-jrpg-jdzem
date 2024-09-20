@@ -76,7 +76,7 @@ export class Worker {
 
   removeItem(item: Item) {
     const index = this.items.findIndex((i) => i.getId() === item.getId());
-    this.items = this.items.filter((_, i) => i === index);
+    this.items = this.items.filter((_, i) => i !== index);
   }
 
   hasItem(id: string) {
