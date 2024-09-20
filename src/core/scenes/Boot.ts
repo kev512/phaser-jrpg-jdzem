@@ -13,6 +13,7 @@ export class Boot extends Scene {
 
     this.load.image('background', 'assets/background.png');
     this.load.image('window', 'assets/window.png');
+    this.load.image('popup', 'assets/popup.png');
 
     this.load.image('collision-tileset', 'assets/collision.png');
     this.load.image('walls-tileset', 'assets/tileset.png');

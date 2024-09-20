@@ -39,34 +39,7 @@ export class Restroom extends BaseScene {
   update(time: number, deltaTime: number) {
     super.update(time, deltaTime);
     
-    const { worker } = model;
-    const speed = worker.getSpeed();
-
-    this.player.body.setVelocity(0);
-
-    if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-speed);
-    } else if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(speed);
-    }
-
-    if (this.cursors.up.isDown) {
-      this.player.body.setVelocityY(-speed);
-    } else if (this.cursors.down.isDown) {
-      this.player.body.setVelocityY(speed);
-    }
-
-    if (this.cursors.left.isDown) {
-      this.player.anims.play('left', true);
-    } else if (this.cursors.right.isDown) {
-      this.player.anims.play('right', true);
-    } else if (this.cursors.up.isDown) {
-      this.player.anims.play('up', true);
-    } else if (this.cursors.down.isDown) {
-      this.player.anims.play('down', true);
-    } else {
-      this.player.anims.stop();
-    }
+    this.updatePlayer();
 
     if (this.player.y >= 876) {
       if (this.player.x >= 160 && this.player.x <= 176) {

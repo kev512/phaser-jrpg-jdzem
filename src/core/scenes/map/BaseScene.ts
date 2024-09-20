@@ -32,6 +32,12 @@ export abstract class BaseScene extends Phaser.Scene {
     super(name);
   }
 
+  preload() {
+    this.input.keyboard?.on('keydown-ESC', () => {
+      model.window.visible = false;
+    });
+  }
+
   create() {
     this.timerObject = model.timerObject; 
   }
@@ -76,7 +82,14 @@ export abstract class BaseScene extends Phaser.Scene {
 
     this.windowTitle = this.createLabel(270, 256);
     this.windowTitle.setToTop();
-    this.windowDescription = this.createLabel(270, 256 + 64);
+    this.windowDescription = this.add.text(270, 256 + 32, '', {
+      fontFamily: 'Pixelify Sans',
+      fontSize: 20,
+      color: '#dddddd',
+      stroke: '#333333',
+      strokeThickness: 2,
+    });
+    this.windowDescription.setScrollFactor(0);
     this.windowDescription.setToTop();
   }
 
@@ -86,12 +99,14 @@ export abstract class BaseScene extends Phaser.Scene {
     console.log('Formatted time:', this.timerObject.getFormattedTime());
 
     this.hunger.setText('Głód: ' + model.worker.getHunger() + ' / 100');
-    this.thirst.setText('Pragnienie: ' + model.worker.getThirst()+ ' / 100');
-    this.urine.setText('Pęcherz: ' + model.worker.getUrine()+ ' / 100');
-    this.poop.setText('Dówjeczka: ' + model.worker.getPoop()+ ' / 100');
-    this.stress.setText('Stres: ' + model.worker.getStress()+ ' / 100');
-    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue()+ ' / 100');
-    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness()+ ' / 100');
+    this.thirst.setText('Pragnienie: ' + model.worker.getThirst() + ' / 100');
+    this.urine.setText('Pęcherz: ' + model.worker.getUrine() + ' / 100');
+    this.poop.setText('Dówjeczka: ' + model.worker.getPoop() + ' / 100');
+    this.stress.setText('Stres: ' + model.worker.getStress() + ' / 100');
+    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue() + ' / 100');
+    this.drunkness.setText(
+      'Upojenie: ' + model.worker.getDrunkness() + ' / 100',
+    );
 
     this.cash.setText('Kasa: ' + model.worker.getStress());
     this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
@@ -108,6 +123,41 @@ export abstract class BaseScene extends Phaser.Scene {
       this.window.setPosition(432, 345, 400, 238);
       this.windowTitle.setText(model.window.title);
       this.windowDescription.setText(model.window.description);
+    }
+  }
+
+  updatePlayer() {
+    const { worker } = model;
+    const speed = worker.getSpeed();
+
+    this.player.body.setVelocity(0);
+
+    if (model.window.visible) {
+      return;
+    }
+
+    if (this.cursors.left.isDown) {
+      this.player.body.setVelocityX(-speed);
+    } else if (this.cursors.right.isDown) {
+      this.player.body.setVelocityX(speed);
+    }
+
+    if (this.cursors.up.isDown) {
+      this.player.body.setVelocityY(-speed);
+    } else if (this.cursors.down.isDown) {
+      this.player.body.setVelocityY(speed);
+    }
+
+    if (this.cursors.left.isDown) {
+      this.player.anims.play('left', true);
+    } else if (this.cursors.right.isDown) {
+      this.player.anims.play('right', true);
+    } else if (this.cursors.up.isDown) {
+      this.player.anims.play('up', true);
+    } else if (this.cursors.down.isDown) {
+      this.player.anims.play('down', true);
+    } else {
+      this.player.anims.stop();
     }
   }
 

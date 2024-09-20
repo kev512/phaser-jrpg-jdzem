@@ -1,10 +1,15 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
+import { MAP_BOUNDARY, TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
+import { Lunch } from '../../../models/effects/items/lunch';
 
 export class Canteen extends BaseScene {
+  lockerPopup: Phaser.GameObjects.Image;
+  lockerText: Phaser.GameObjects.Text;
+  isNearLocker: boolean = false;
+
   constructor() {
     super('Canteen');
   }
@@ -35,39 +40,14 @@ export class Canteen extends BaseScene {
 
     this.createLabels();
     this.createWindow();
+
+    this.createLockerPopup();
   }
 
   update(time: number, deltaTime: number) {
     super.update(time, deltaTime);
     
-    const { worker } = model;
-    const speed = worker.getSpeed();
-
-    this.player.body.setVelocity(0);
-
-    if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-speed);
-    } else if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(speed);
-    }
-
-    if (this.cursors.up.isDown) {
-      this.player.body.setVelocityY(-speed);
-    } else if (this.cursors.down.isDown) {
-      this.player.body.setVelocityY(speed);
-    }
-
-    if (this.cursors.left.isDown) {
-      this.player.anims.play('left', true);
-    } else if (this.cursors.right.isDown) {
-      this.player.anims.play('right', true);
-    } else if (this.cursors.up.isDown) {
-      this.player.anims.play('up', true);
-    } else if (this.cursors.down.isDown) {
-      this.player.anims.play('down', true);
-    } else {
-      this.player.anims.stop();
-    }
+    this.updatePlayer();
 
     if (this.player.y <= 73) {
       if (this.player.x >= 552 && this.player.x <= 600) {
@@ -89,6 +69,12 @@ export class Canteen extends BaseScene {
 
     this.updateLabels();
     this.updateWindow();
+
+    this.isNearLocker =
+      this.player.y === 264 && this.player.x >= 720 && this.player.x <= 800;
+    this.updateLockerPopup(this.isNearLocker && !model.window.visible);
+
+    console.log(this.player.x, this.player.y);
   }
 
   private createMap() {
@@ -134,5 +120,51 @@ export class Canteen extends BaseScene {
   private startSmokeSpotScene() {
     this.scene.start('SmokeSpot');
     model.setScene('SmokeSpot');
+  }
+
+  private createLockerPopup() {
+    const popupX = TILE_SIZE * 12.5;
+    const popupY = TILE_SIZE * 1.75;
+
+    this.lockerPopup = this.add.image(popupX, popupY, 'popup');
+    this.lockerPopup.setScrollFactor(0);
+    this.lockerText = this.add.text(
+      popupX - 86,
+      popupY - 10,
+      'Otwórz szafkę [E]',
+      {
+        fontFamily: 'Pixelify Sans',
+        fontSize: 20,
+        color: '#000000',
+        stroke: '#dddddd',
+        strokeThickness: 2,
+      },
+    );
+    this.lockerText.setScrollFactor(0);
+
+    this.lockerPopup.setVisible(false);
+    this.lockerText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearLocker) {
+        model.window.visible = true;
+        model.window.title = 'Szafka';
+
+        let description =
+          'Tutaj trzymasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
+
+        if (model.worker.hasItem(new Lunch().getId())) {
+          description =
+            'W środku trzymasz lunchbox.\n\n1. Zjedz kupiony lunch [1]\n2. Wyjście [ESC]';
+        }
+
+        model.window.description = description;
+      }
+    });
+  }
+
+  private updateLockerPopup(visible: boolean) {
+    this.lockerPopup.setVisible(visible);
+    this.lockerText.setVisible(visible);
   }
 }
