@@ -2,21 +2,15 @@ import { isNull } from 'lodash';
 import { model } from '../../../main';
 import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
+import { BaseScene } from './BaseScene';
 
-export class Canteen extends Phaser.Scene {
-  map: Phaser.Tilemaps.Tilemap;
-  player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
-  cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-  collisionLayer: Phaser.Tilemaps.TilemapLayer;
-
+export class Canteen extends BaseScene {
   constructor() {
     super('Canteen');
   }
 
   create() {
     this.createMap();
-
-    this.createAnimations();
 
     this.createPlayer();
 
@@ -36,6 +30,9 @@ export class Canteen extends Phaser.Scene {
     }
 
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.createLabels();
+    this.createWindow();
   }
 
   update() {
@@ -70,9 +67,24 @@ export class Canteen extends Phaser.Scene {
 
     if (this.player.y <= 73) {
       if (this.player.x >= 552 && this.player.x <= 600) {
-        this.startBufferScene();
+        this.startBuffetScene();
       }
     }
+
+    if (this.player.y <= 216) {
+      if (this.player.x >= 160 && this.player.x <= 193) {
+        this.startRestroomScene();
+      }
+    }
+
+    if (this.player.y >= 872) {
+      if (this.player.x >= 447 && this.player.x <= 513) {
+        this.startSmokeSpotScene();
+      }
+    }
+
+    this.updateLabels();
+    this.updateWindow();
   }
 
   private createMap() {
@@ -89,6 +101,12 @@ export class Canteen extends Phaser.Scene {
     if (model.previousScene === 'Buffet') {
       playerX = 584;
       playerY = 84;
+    } else if (model.previousScene === 'Restroom') {
+      playerX = 165;
+      playerY = 218;
+    } else if (model.previousScene === 'SmokeSpot') {
+      playerX = 500;
+      playerY = 865;
     }
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 19);
@@ -99,35 +117,18 @@ export class Canteen extends Phaser.Scene {
     this.physics.add.collider(this.player, this.collisionLayer);
   }
 
-  private createAnimations() {
-    this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('worker', { start: 12, end: 17 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'right',
-      frames: this.anims.generateFrameNumbers('worker', { start: 0, end: 5 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'up',
-      frames: this.anims.generateFrameNumbers('worker', { start: 6, end: 11 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'down',
-      frames: this.anims.generateFrameNumbers('worker', { start: 18, end: 23 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-  }
-
-  private startBufferScene() {
+  private startBuffetScene() {
     this.scene.start('Buffet');
     model.setScene('Buffet');
+  }
+
+  private startRestroomScene() {
+    this.scene.start('Restroom');
+    model.setScene('Restroom');
+  }
+
+  private startSmokeSpotScene() {
+    this.scene.start('SmokeSpot');
+    model.setScene('SmokeSpot');
   }
 }

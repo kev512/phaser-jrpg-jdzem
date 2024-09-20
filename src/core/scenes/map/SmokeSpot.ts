@@ -4,9 +4,9 @@ import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
-export class Buffet extends BaseScene {
+export class SmokeSpot extends BaseScene {
   constructor() {
-    super('Buffet');
+    super('SmokeSpot');
   }
 
   create() {
@@ -28,6 +28,7 @@ export class Buffet extends BaseScene {
     if (isNull(this.input.keyboard)) {
       throw new Error('Keyboard is null');
     }
+
     this.cursors = this.input.keyboard.createCursorKeys();
 
     super.createLabels();
@@ -63,25 +64,23 @@ export class Buffet extends BaseScene {
       this.player.anims.stop();
     }
 
-    if (this.player.y >= 982) {
-      if (this.player.x >= 552 && this.player.x <= 984) {
-        this.starCanteenScene();
-      }
+    if (this.player.y <= 86) {
+      this.startCanteenScene();
     }
 
     this.updateLabels();
   }
 
   private createMap() {
-    const result = MapLoader.createMap('buffet-map', this);
+    const result = MapLoader.createMap('smoke-spot-map', this);
 
     this.map = result.map;
     this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
-    const playerX = 579;
-    const playerY = 851;
+    const playerX = 460;
+    const playerY = 143;
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 19);
     this.player.setScale(WORKER_SIZE_SCALE);
@@ -91,7 +90,7 @@ export class Buffet extends BaseScene {
     this.physics.add.collider(this.player, this.collisionLayer);
   }
 
-  private starCanteenScene() {
+  private startCanteenScene() {
     this.scene.start('Canteen');
     model.setScene('Canteen');
   }

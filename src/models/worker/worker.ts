@@ -67,7 +67,43 @@ export class Worker {
     return this.hunger;
   }
 
+  getThirst(): number {
+    return this.thirst;
+  }
+
+  getUrine(): number {
+    return this.urine;
+  }
+
+  getPoop(): number {
+    return this.poop;
+  }
+
+  getStress(): number {
+    return this.stress;
+  }
+
+  getFatigue(): number {
+    return this.fatigue;
+  }
+
   getSpeed(): number {
     return this.speed;
+  }
+
+  getDrunkness(): number {
+    return this.fatigue;
+  }
+
+  getCash(): number {
+    return this.resources.getCash();
+  }
+
+  getDiapers(): number {
+    return this.resources.getDiapers();
+  }
+
+  getSmokes(): number {
+    return this.resources.getSmokes();
   }
 }

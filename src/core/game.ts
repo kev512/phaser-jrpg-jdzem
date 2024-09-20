@@ -7,6 +7,8 @@ import { MainMenu } from './scenes/menu/MainMenu';
 import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Preloader } from './scenes/Preloader';
 import { Buffet } from './scenes/map/Buffet';
+import { Restroom } from './scenes/map/Restroom';
+import { SmokeSpot } from './scenes/map/SmokeSpot';
 
 export class Game {
   constructor() {
@@ -27,7 +29,17 @@ export class Game {
           gravity: { x: 0, y: 0 },
         },
       },
-      scene: [Boot, Preloader, MainMenu, Canteen, Buffet, GameOver, Scoreboard],
+      scene: [
+        Boot,
+        Preloader,
+        MainMenu,
+        Canteen,
+        Buffet,
+        Restroom,
+        SmokeSpot,
+        GameOver,
+        Scoreboard,
+      ],
     });
   }
 }

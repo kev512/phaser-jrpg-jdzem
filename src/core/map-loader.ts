@@ -10,7 +10,10 @@ export const CEILING_LAYER_NUMBER = 5;
 export class MapLoader {
   constructor() {}
 
-  static createMap(mapKey: 'canteen-map' | 'buffet-map', scene: Phaser.Scene) {
+  static createMap(
+    mapKey: 'canteen-map' | 'buffet-map' | 'restroom-map' | 'smoke-spot-map',
+    scene: Phaser.Scene,
+  ) {
     const map = scene.make.tilemap({ key: mapKey });
 
     const collisionTilesetImage = map.addTilesetImage('collision-tileset');
@@ -29,13 +32,18 @@ export class MapLoader {
       throw new Error('Interior tileset is null');
     }
 
-    const collisionLayer = map.createLayer(COLLISION_LAYER_NUMBER, collisionTilesetImage, 0, 0);
+    const collisionLayer = map.createLayer(
+      COLLISION_LAYER_NUMBER,
+      collisionTilesetImage,
+      0,
+      0,
+    );
 
     if (isNull(collisionLayer)) {
       throw new Error('Collision layer is null');
     }
 
-    collisionLayer.setCollision(3632); // TODO
+    collisionLayer.setCollision([3632, 1817]); // TODO
 
     map.createLayer(WALLS_LAYER_NUMBER, wallsTilesetImage, 0, 0);
 
