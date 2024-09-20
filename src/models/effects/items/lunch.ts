@@ -1,9 +1,9 @@
 import { Effect } from '../effects';
-import { Item } from './item';
+import { FoodItem } from './food-item';
 
 const id = 'LUNCH_ITEM';
 
-export class Lunch extends Item {
+export class Lunch extends FoodItem {
   constructor() {
     super(
       id,
