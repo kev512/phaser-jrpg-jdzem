@@ -14,18 +14,31 @@ export abstract class BaseScene extends Phaser.Scene {
   protected fatigue: Phaser.GameObjects.Text;
   protected drunkness: Phaser.GameObjects.Text;
 
+  protected cash: Phaser.GameObjects.Text;
+  protected diapers: Phaser.GameObjects.Text;
+  protected beers: Phaser.GameObjects.Text;
+  protected smokes: Phaser.GameObjects.Text;
+
   constructor(name: string) {
     super(name);
   }
 
   createLabels() {
-    this.hunger = this.createLabel(916, 32);
-    this.thirst = this.createLabel(916, 32 * 2);
-    this.urine = this.createLabel(916, 32 * 3);
-    this.poop = this.createLabel(916, 32 * 4);
-    this.stress = this.createLabel(916, 32 * 5);
-    this.fatigue = this.createLabel(916, 32 * 6);
-    this.drunkness = this.createLabel(916, 32 * 7);
+    const x = 932;
+    const y = 32;
+
+    this.hunger = this.createLabel(x, y);
+    this.thirst = this.createLabel(x, y * 2);
+    this.urine = this.createLabel(x, y * 3);
+    this.poop = this.createLabel(x, y * 4);
+    this.stress = this.createLabel(x, y * 5);
+    this.fatigue = this.createLabel(x, y * 6);
+    this.drunkness = this.createLabel(x, y * 7);
+
+    this.cash = this.createLabel(x, y * 9);
+    this.diapers = this.createLabel(x, y * 10);
+    this.beers = this.createLabel(x, y * 11);
+    this.smokes = this.createLabel(x, y * 12);
   }
 
   updateLabels() {
@@ -36,6 +49,11 @@ export abstract class BaseScene extends Phaser.Scene {
     this.stress.setText('Stres: ' + model.worker.getStress());
     this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue());
     this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness());
+
+    this.cash.setText('Kasa: ' + model.worker.getStress());
+    this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
+    this.beers.setText('Bronksy: ' + model.worker.getDrunkness());
+    this.smokes.setText('Fajki: ' + model.worker.getSmokes());
   }
 
   private createLabel(x: number, y: number) {
@@ -43,7 +61,7 @@ export abstract class BaseScene extends Phaser.Scene {
       fontFamily: 'Pixelify Sans',
       fontSize: 28,
       color: '#ffffff',
-      stroke: '#000000',
+      stroke: '#333333',
       strokeThickness: 2,
     });
 
