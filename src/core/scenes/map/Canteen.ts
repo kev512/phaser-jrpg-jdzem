@@ -32,6 +32,7 @@ export class Canteen extends BaseScene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.createLabels();
+    this.createWindow();
   }
 
   update() {
@@ -83,6 +84,7 @@ export class Canteen extends BaseScene {
     }
 
     this.updateLabels();
+    this.updateWindow();
   }
 
   private createMap() {

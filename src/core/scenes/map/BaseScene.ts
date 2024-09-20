@@ -18,6 +18,10 @@ export abstract class BaseScene extends Phaser.Scene {
   protected diapers: Phaser.GameObjects.Text;
   protected beers: Phaser.GameObjects.Text;
   protected smokes: Phaser.GameObjects.Text;
+  
+  protected window: Phaser.GameObjects.Image;
+  protected windowTitle: Phaser.GameObjects.Text;
+  protected windowDescription: Phaser.GameObjects.Text;
 
   constructor(name: string) {
     super(name);
@@ -41,6 +45,16 @@ export abstract class BaseScene extends Phaser.Scene {
     this.smokes = this.createLabel(x, y * 12);
   }
 
+  createWindow() {
+    this.window = this.add.image(-1000, 0, 'window');
+    this.window.setScrollFactor(0);
+
+    this.windowTitle = this.createLabel(270, 256);
+    this.windowTitle.setToTop();
+    this.windowDescription = this.createLabel(270, 256 + 64);
+    this.windowDescription.setToTop();
+  }
+
   updateLabels() {
     this.hunger.setText('Głód: ' + model.worker.getHunger());
     this.thirst.setText('Pragnienie: ' + model.worker.getThirst());
@@ -54,6 +68,18 @@ export abstract class BaseScene extends Phaser.Scene {
     this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
     this.beers.setText('Bronksy: ' + model.worker.getDrunkness());
     this.smokes.setText('Fajki: ' + model.worker.getSmokes());
+  }
+
+  updateWindow() {
+    if (!model.window.visible) {
+      this.window.setPosition(-1000, 0, 0, 0);
+      this.windowTitle.setText('')
+      this.windowDescription.setText('')
+    } else {
+      this.window.setPosition(432, 345, 400, 238);
+      this.windowTitle.setText(model.window.title)
+      this.windowDescription.setText(model.window.description)
+    }
   }
 
   private createLabel(x: number, y: number) {
