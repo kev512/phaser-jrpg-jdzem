@@ -10,7 +10,7 @@ export class Buffet extends BaseScene {
   }
 
   create() {
-    super.create(); 
+    super.create();
 
     this.createMap();
 

@@ -19,8 +19,8 @@ export class Canteen extends BaseScene {
   }
 
   create() {
-    super.create(); 
-    
+    super.create();
+
     this.createMap();
 
     this.createPlayer();
@@ -51,7 +51,7 @@ export class Canteen extends BaseScene {
 
   update(time: number, deltaTime: number) {
     super.update(time, deltaTime);
-    
+
     this.updatePlayer();
 
     if (this.player.y <= 73) {

@@ -38,7 +38,7 @@ export class Restroom extends BaseScene {
 
   update(time: number, deltaTime: number) {
     super.update(time, deltaTime);
-    
+
     this.updatePlayer();
 
     if (this.player.y >= 876) {

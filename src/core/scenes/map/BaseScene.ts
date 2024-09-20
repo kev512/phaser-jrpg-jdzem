@@ -39,7 +39,7 @@ export abstract class BaseScene extends Phaser.Scene {
   }
 
   create() {
-    this.timerObject = model.timerObject; 
+    this.timerObject = model.timerObject;
   }
 
   update(time: number, delta: number) {

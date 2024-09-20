@@ -11,7 +11,7 @@ export class SmokeSpot extends BaseScene {
 
   create() {
     super.create();
-    
+
     this.createMap();
 
     this.createPlayer();
