@@ -1,10 +1,14 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
+import { MAP_BOUNDARY, TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
 export class Canteen extends BaseScene {
+  lockerPopup: Phaser.GameObjects.Image;
+  lockerText: Phaser.GameObjects.Text;
+  isNearLocker: boolean = false;
+
   constructor() {
     super('Canteen');
   }
@@ -33,6 +37,8 @@ export class Canteen extends BaseScene {
 
     this.createLabels();
     this.createWindow();
+
+    this.createLockerPopup();
   }
 
   update() {
@@ -85,6 +91,12 @@ export class Canteen extends BaseScene {
 
     this.updateLabels();
     this.updateWindow();
+
+    this.isNearLocker =
+      this.player.y === 264 && this.player.x >= 720 && this.player.x <= 800;
+    this.updateLockerPopup(this.isNearLocker);
+
+    console.log(this.player.x, this.player.y);
   }
 
   private createMap() {
@@ -130,5 +142,40 @@ export class Canteen extends BaseScene {
   private startSmokeSpotScene() {
     this.scene.start('SmokeSpot');
     model.setScene('SmokeSpot');
+  }
+
+  private createLockerPopup() {
+    const popupX = TILE_SIZE * 15.5;
+    const popupY = TILE_SIZE * 1.75;
+
+    this.lockerPopup = this.add.image(popupX, popupY, 'popup');
+    this.lockerPopup.setScrollFactor(0);
+    this.lockerText = this.add.text(
+      popupX - 235,
+      popupY - 10,
+      'Otwórz szafkę [E]',
+      {
+        fontFamily: 'Pixelify Sans',
+        fontSize: 20,
+        color: '#000000',
+        stroke: '#dddddd',
+        strokeThickness: 2,
+      },
+    );
+    this.lockerText.setScrollFactor(0);
+
+    this.lockerPopup.setVisible(false);
+    this.lockerText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearLocker) {
+        alert("Test");
+      }
+    })
+  }
+
+  private updateLockerPopup(visible: boolean) {
+    this.lockerPopup.setVisible(visible);
+    this.lockerText.setVisible(visible);
   }
 }
