@@ -2,13 +2,9 @@ import { isNull } from 'lodash';
 import { model } from '../../../main';
 import { MAP_BOUNDARY } from '../../consts';
 import { MapLoader } from '../../map-loader';
+import { BaseScene } from './BaseScene';
 
-export class Canteen extends Phaser.Scene {
-  map: Phaser.Tilemaps.Tilemap;
-  player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
-  cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-  collisionLayer: Phaser.Tilemaps.TilemapLayer;
-
+export class Canteen extends BaseScene {
   constructor() {
     super('Canteen');
   }
@@ -36,6 +32,8 @@ export class Canteen extends Phaser.Scene {
     }
 
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.createLabels();
   }
 
   update() {
@@ -73,6 +71,8 @@ export class Canteen extends Phaser.Scene {
         this.startBufferScene();
       }
     }
+
+    this.updateLabels();
   }
 
   private createMap() {

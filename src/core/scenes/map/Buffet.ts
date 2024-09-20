@@ -2,16 +2,13 @@ import { isNull } from 'lodash';
 import { model } from '../../../main';
 import { MAP_BOUNDARY } from '../../consts';
 import { MapLoader } from '../../map-loader';
+import { BaseScene } from './BaseScene';
 
-export class Buffet extends Phaser.Scene {
-  map: Phaser.Tilemaps.Tilemap;
+export class Buffet extends BaseScene {
   tileset: any;
-  player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   debugGraphics: Phaser.GameObjects.Graphics;
   showDebug: boolean;
-  cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   helpText: Phaser.GameObjects.Text;
-  collisionLayer: Phaser.Tilemaps.TilemapLayer;
 
   constructor() {
     super('Buffet');
@@ -54,6 +51,8 @@ export class Buffet extends Phaser.Scene {
     });
 
     this.helpText.setScrollFactor(0);
+
+    super.createLabels();
   }
 
   update() {
@@ -91,6 +90,8 @@ export class Buffet extends Phaser.Scene {
         this.starCanteenScene();
       }
     }
+
+    this.updateLabels();
   }
 
   private createMap() {
