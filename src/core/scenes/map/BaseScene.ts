@@ -18,7 +18,7 @@ export abstract class BaseScene extends Phaser.Scene {
   protected diapers: Phaser.GameObjects.Text;
   protected beers: Phaser.GameObjects.Text;
   protected smokes: Phaser.GameObjects.Text;
-  
+
   protected window: Phaser.GameObjects.Image;
   protected windowTitle: Phaser.GameObjects.Text;
   protected windowDescription: Phaser.GameObjects.Text;
@@ -73,12 +73,12 @@ export abstract class BaseScene extends Phaser.Scene {
   updateWindow() {
     if (!model.window.visible) {
       this.window.setPosition(-1000, 0, 0, 0);
-      this.windowTitle.setText('')
-      this.windowDescription.setText('')
+      this.windowTitle.setText('');
+      this.windowDescription.setText('');
     } else {
       this.window.setPosition(432, 345, 400, 238);
-      this.windowTitle.setText(model.window.title)
-      this.windowDescription.setText(model.window.description)
+      this.windowTitle.setText(model.window.title);
+      this.windowDescription.setText(model.window.description);
     }
   }
 

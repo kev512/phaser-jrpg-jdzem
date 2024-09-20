@@ -34,7 +34,7 @@ export class Model {
     return worker;
   }
 
-  get window()  {
+  get window() {
     return window;
   }
 

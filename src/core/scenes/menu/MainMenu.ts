@@ -29,7 +29,7 @@ export class MainMenu extends Scene {
       .text(512, 410, 'Nowa Gra', {
         fontFamily: 'Pixelify Sans',
         fontSize: 28,
-        color: '#000000'
+        color: '#000000',
       })
       .setOrigin(0.5)
       .setInteractive();
@@ -46,7 +46,7 @@ export class MainMenu extends Scene {
       .text(512, 485, 'Wyniki', {
         fontFamily: 'Pixelify Sans',
         fontSize: 28,
-        color: '#000000'
+        color: '#000000',
       })
       .setOrigin(0.5)
       .setInteractive();
@@ -63,12 +63,12 @@ export class MainMenu extends Scene {
       .text(512, 560, 'Autorzy', {
         fontFamily: 'Pixelify Sans',
         fontSize: 28,
-        color: '#000000'
+        color: '#000000',
       })
       .setOrigin(0.5)
       .setInteractive();
 
-      this.infoButton = this.add
+    this.infoButton = this.add
       .image(972, 100, 'info')
       .setScale(0.5)
       .setOrigin(0.5)
