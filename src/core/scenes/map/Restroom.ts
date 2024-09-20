@@ -4,9 +4,9 @@ import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
-export class Canteen extends BaseScene {
+export class Restroom extends BaseScene {
   constructor() {
-    super('Canteen');
+    super('Restroom');
   }
 
   create() {
@@ -33,7 +33,7 @@ export class Canteen extends BaseScene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.createLabels();
+    super.createLabels();
   }
 
   update() {
@@ -66,41 +66,25 @@ export class Canteen extends BaseScene {
       this.player.anims.stop();
     }
 
-    if (this.player.y <= 73) {
-      if (this.player.x >= 552 && this.player.x <= 600) {
-        this.startBuffetScene();
+    if (this.player.y >= 876) {
+      if (this.player.x >= 160 && this.player.x <= 176) {
+        this.startCanteenScene();
       }
     }
-
-    if (this.player.y <= 216) {
-      if (this.player.x >= 160 && this.player.x <= 193) {
-        this.startRestroomScene();
-      }
-    }
-
-    console.log(this.player.x, this.player.y);
 
     this.updateLabels();
   }
 
   private createMap() {
-    const result = MapLoader.createMap('canteen-map', this);
+    const result = MapLoader.createMap('restroom-map', this);
 
     this.map = result.map;
     this.collisionLayer = result.collisionLayer;
   }
 
   private createPlayer() {
-    let playerX = 862;
-    let playerY = 569;
-
-    if (model.previousScene === 'Buffet') {
-      playerX = 584;
-      playerY = 84;
-    } else if (model.previousScene === 'Restroom') {
-      playerX = 165;
-      playerY = 218;
-    }
+    const playerX = 168;
+    const playerY = 845;
 
     this.player = this.physics.add.sprite(playerX, playerY, 'worker', 19);
     this.player.setScale(WORKER_SIZE_SCALE);
@@ -137,13 +121,8 @@ export class Canteen extends BaseScene {
     });
   }
 
-  private startBuffetScene() {
-    this.scene.start('Buffet');
-    model.setScene('Buffet');
-  }
-
-  private startRestroomScene() {
-    this.scene.start('Restroom');
-    model.setScene('Restroom');
+  private startCanteenScene() {
+    this.scene.start('Canteen');
+    model.setScene('Canteen');
   }
 }

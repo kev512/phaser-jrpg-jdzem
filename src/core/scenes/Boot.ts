@@ -1,5 +1,4 @@
 import { Scene } from 'phaser';
-import { TILE_SIZE } from '../consts';
 
 export class Boot extends Scene {
   constructor() {
@@ -9,6 +8,8 @@ export class Boot extends Scene {
   preload() {
     this.load.tilemapTiledJSON('canteen-map', 'assets/canteen.json');
     this.load.tilemapTiledJSON('buffet-map', 'assets/buffet.json');
+    this.load.tilemapTiledJSON('restroom-map', 'assets/restroom.json');
+    this.load.tilemapTiledJSON('smoke-spot-map', 'assets/smoke-spot.json');
 
     this.load.image('background', 'assets/background.png');
 
