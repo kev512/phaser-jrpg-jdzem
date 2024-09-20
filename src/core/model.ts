@@ -46,7 +46,7 @@ export class Model {
 
   get timerObject(): Timer {
     if (!timerObject) {
-      timerObject = new Timer(15);
+      timerObject = new Timer(0.1);
     }
 
     return timerObject;
