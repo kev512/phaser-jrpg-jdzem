@@ -5,11 +5,6 @@ import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
 export class Buffet extends BaseScene {
-  tileset: any;
-  debugGraphics: Phaser.GameObjects.Graphics;
-  showDebug: boolean;
-  helpText: Phaser.GameObjects.Text;
-
   constructor() {
     super('Buffet');
   }
@@ -32,25 +27,10 @@ export class Buffet extends BaseScene {
       MAP_BOUNDARY.height,
     );
 
-    this.debugGraphics = this.add.graphics();
-
     if (isNull(this.input.keyboard)) {
       throw new Error('Keyboard is null');
     }
-
-    this.input.keyboard.on('keydown-C', () => {
-      this.showDebug = !this.showDebug;
-      this.drawDebug();
-    });
-
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    this.helpText = this.add.text(16, 16, this.getHelpMessage(), {
-      fontSize: '18px',
-      stroke: '#ffffff',
-    });
-
-    this.helpText.setScrollFactor(0);
 
     super.createLabels();
   }
@@ -111,51 +91,6 @@ export class Buffet extends BaseScene {
 
   private addCollision() {
     this.physics.add.collider(this.player, this.collisionLayer);
-  }
-
-  private createAnimations() {
-    this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('worker', { start: 12, end: 17 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'right',
-      frames: this.anims.generateFrameNumbers('worker', { start: 0, end: 5 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'up',
-      frames: this.anims.generateFrameNumbers('worker', { start: 6, end: 11 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'down',
-      frames: this.anims.generateFrameNumbers('worker', { start: 18, end: 23 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-  }
-
-  private drawDebug() {
-    this.debugGraphics.clear();
-
-    if (this.showDebug) {
-      this.map.renderDebug(this.debugGraphics, {
-        tileColor: null, // Non-colliding tiles
-        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Colliding tiles
-        faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Colliding face edges
-      });
-    }
-
-    this.helpText.setText(this.getHelpMessage());
-  }
-
-  private getHelpMessage() {
-    return `Arrow keys to move.\nPress "C" to toggle debug visuals: ${this.showDebug ? 'on' : 'off'}`;
   }
 
   private starCanteenScene() {
