@@ -8,7 +8,7 @@ export class Soda extends Event {
     super(
       id,
       'Soda',
-      '',
+      'Więcej cukru niż wody w tej puszce.',
       new Effect({
         thirst: -25,
         urine: 15,
