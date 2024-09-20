@@ -94,4 +94,16 @@ export class Worker {
   getDrunkness(): number {
     return this.fatigue;
   }
+
+  getCash(): number {
+    return this.resources.getCash();
+  }
+
+  getDiapers(): number {
+    return this.resources.getDiapers();
+  }
+
+  getSmokes(): number {
+    return this.resources.getSmokes();
+  }
 }
