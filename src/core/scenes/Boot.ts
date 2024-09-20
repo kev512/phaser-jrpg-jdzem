@@ -16,9 +16,9 @@ export class Boot extends Scene {
     this.load.image('walls-tileset', 'assets/tileset.png');
     this.load.image('interiors-tileset', 'assets/interiors.png');
 
-    this.load.spritesheet('worker', 'assets/worker.png', {
-      frameWidth: TILE_SIZE,
-      frameHeight: TILE_SIZE,
+    this.load.spritesheet('worker', 'assets/Alex_run_16x24.png', {
+      frameWidth: 16,
+      frameHeight: 24,
     });
   }
 
