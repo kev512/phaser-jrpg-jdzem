@@ -1,6 +1,6 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { MAP_BOUNDARY } from '../../consts';
+import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 
 export class Buffet extends Phaser.Scene {
@@ -104,7 +104,8 @@ export class Buffet extends Phaser.Scene {
     const playerX = 579;
     const playerY = 851;
 
-    this.player = this.physics.add.sprite(playerX, playerY, 'worker', 1);
+    this.player = this.physics.add.sprite(playerX, playerY, 'worker', 19);
+    this.player.setScale(WORKER_SIZE_SCALE);
   }
 
   private addCollision() {
@@ -114,25 +115,25 @@ export class Buffet extends Phaser.Scene {
   private createAnimations() {
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('worker', { start: 8, end: 9 }),
+      frames: this.anims.generateFrameNumbers('worker', { start: 12, end: 17 }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('worker', { start: 1, end: 2 }),
+      frames: this.anims.generateFrameNumbers('worker', { start: 0, end: 5 }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('worker', { start: 11, end: 13 }),
+      frames: this.anims.generateFrameNumbers('worker', { start: 6, end: 11 }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('worker', { start: 4, end: 6 }),
+      frames: this.anims.generateFrameNumbers('worker', { start: 18, end: 23 }),
       frameRate: 10,
       repeat: -1,
     });
