@@ -57,12 +57,14 @@ export abstract class BaseScene extends Phaser.Scene {
 
   updateLabels() {
     this.hunger.setText('Głód: ' + model.worker.getHunger() + ' / 100');
-    this.thirst.setText('Pragnienie: ' + model.worker.getThirst()+ ' / 100');
-    this.urine.setText('Pęcherz: ' + model.worker.getUrine()+ ' / 100');
-    this.poop.setText('Dwójeczka: ' + model.worker.getPoop()+ ' / 100');
-    this.stress.setText('Stres: ' + model.worker.getStress()+ ' / 100');
-    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue()+ ' / 100');
-    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness()+ ' / 100');
+    this.thirst.setText('Pragnienie: ' + model.worker.getThirst() + ' / 100');
+    this.urine.setText('Pęcherz: ' + model.worker.getUrine() + ' / 100');
+    this.poop.setText('Dwójeczka: ' + model.worker.getPoop() + ' / 100');
+    this.stress.setText('Stres: ' + model.worker.getStress() + ' / 100');
+    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue() + ' / 100');
+    this.drunkness.setText(
+      'Upojenie: ' + model.worker.getDrunkness() + ' / 100',
+    );
 
     this.cash.setText('Kasa: ' + model.worker.getStress());
     this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
