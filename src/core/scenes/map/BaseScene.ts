@@ -1,3 +1,4 @@
+import { isNull } from 'lodash';
 import { model } from '../../../main';
 import { Timer } from '../Timer';
 
@@ -35,6 +36,24 @@ export abstract class BaseScene extends Phaser.Scene {
   preload() {
     this.input.keyboard?.on('keydown-ESC', () => {
       model.window.visible = false;
+    });
+
+    this.input.keyboard?.on('keydown-ONE', () => {
+      if (model.window.visible && !isNull(model.window.options[0])) {
+        model.emit(model.window.options[0]);
+      }
+    });
+
+    this.input.keyboard?.on('keydown-TWO', () => {
+      if (model.window.visible && !isNull(model.window.options[1])) {
+        model.emit(model.window.options[1]);
+      }
+    });
+
+    this.input.keyboard?.on('keydown-THREE', () => {
+      if (model.window.visible && !isNull(model.window.options[2])) {
+        model.emit(model.window.options[2]);
+      }
     });
   }
 
