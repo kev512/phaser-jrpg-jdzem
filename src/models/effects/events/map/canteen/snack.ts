@@ -8,7 +8,7 @@ export class Snack extends Event {
     super(
       id,
       'Przekąska',
-      'Zjadłeś co nie co.',
+      'Za wiele to to nie było,\nale zawsze to coś.',
       new Effect({
         hunger: -5,
         poop: 5,
