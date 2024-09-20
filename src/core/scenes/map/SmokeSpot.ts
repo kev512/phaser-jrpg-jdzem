@@ -38,6 +38,10 @@ export class SmokeSpot extends BaseScene {
     this.updatePlayer();
 
     this.updateLabels();
+
+    if (this.player.y <= 142) {
+      this.startCanteenScene();
+    }
   }
 
   private createMap() {
