@@ -1,10 +1,15 @@
 import { model } from '../../../main';
+import { Timer } from '../Timer';
 
 export abstract class BaseScene extends Phaser.Scene {
   protected map: Phaser.Tilemaps.Tilemap;
   protected player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   protected cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   protected collisionLayer: Phaser.Tilemaps.TilemapLayer;
+
+  protected timer: Phaser.GameObjects.Text;
+  protected countdown: Phaser.GameObjects.Text;
+  private timerObject: Timer;
 
   protected hunger: Phaser.GameObjects.Text;
   protected thirst: Phaser.GameObjects.Text;
@@ -27,22 +32,42 @@ export abstract class BaseScene extends Phaser.Scene {
     super(name);
   }
 
+  create() {
+    this.timerObject = model.timerObject; 
+  }
+
+  update(time: number, delta: number) {
+    super.update(time, delta);
+    this.timerObject.update(delta);
+
+    this.updateLabels();
+  }
+
+  // TODO: Decrease remaining time after event is done
+  // decreaseTime() {
+  //   this.timerObject.adjustTime(-10);
+  // }
+
   createLabels() {
     const x = 932;
     const y = 32;
 
-    this.hunger = this.createLabel(x, y);
-    this.thirst = this.createLabel(x, y * 2);
-    this.urine = this.createLabel(x, y * 3);
-    this.poop = this.createLabel(x, y * 4);
-    this.stress = this.createLabel(x, y * 5);
-    this.fatigue = this.createLabel(x, y * 6);
-    this.drunkness = this.createLabel(x, y * 7);
+    this.timer = this.createLabel(x, y);
+    this.countdown = this.createLabel(x, y * 2);
+    this.countdown.setScale(2);
 
-    this.cash = this.createLabel(x, y * 9);
-    this.diapers = this.createLabel(x, y * 10);
-    this.beers = this.createLabel(x, y * 11);
-    this.smokes = this.createLabel(x, y * 12);
+    this.hunger = this.createLabel(x, y * 5);
+    this.thirst = this.createLabel(x, y * 6);
+    this.urine = this.createLabel(x, y * 7);
+    this.poop = this.createLabel(x, y * 8);
+    this.stress = this.createLabel(x, y * 9);
+    this.fatigue = this.createLabel(x, y * 10);
+    this.drunkness = this.createLabel(x, y * 11);
+
+    this.cash = this.createLabel(x, y * 13);
+    this.diapers = this.createLabel(x, y * 14);
+    this.beers = this.createLabel(x, y * 15);
+    this.smokes = this.createLabel(x, y * 16);
   }
 
   createWindow() {
@@ -56,10 +81,14 @@ export abstract class BaseScene extends Phaser.Scene {
   }
 
   updateLabels() {
+    this.timer.setText('Koniec przerwy:');
+    this.countdown.setText(this.timerObject.getFormattedTime());
+    console.log('Formatted time:', this.timerObject.getFormattedTime());
+
     this.hunger.setText('Głód: ' + model.worker.getHunger() + ' / 100');
     this.thirst.setText('Pragnienie: ' + model.worker.getThirst()+ ' / 100');
     this.urine.setText('Pęcherz: ' + model.worker.getUrine()+ ' / 100');
-    this.poop.setText('Dwójeczka: ' + model.worker.getPoop()+ ' / 100');
+    this.poop.setText('Dówjeczka: ' + model.worker.getPoop()+ ' / 100');
     this.stress.setText('Stres: ' + model.worker.getStress()+ ' / 100');
     this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue()+ ' / 100');
     this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness()+ ' / 100');

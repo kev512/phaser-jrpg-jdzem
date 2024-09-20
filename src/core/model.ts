@@ -1,9 +1,11 @@
 import { Worker } from '../models/worker/worker';
 import { Event } from '../models/effects/events/event';
+import { Timer } from './scenes/Timer';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
 let currentScene: string | null = null;
+let timerObject: Timer | null = null;
 let window = {
   visible: false,
   title: '',
@@ -40,6 +42,14 @@ export class Model {
 
   get previousScene(): string | null {
     return previousScene;
+  }
+
+  get timerObject(): Timer {
+    if (!timerObject) {
+      timerObject = new Timer(15);
+    }
+
+    return timerObject;
   }
 
   emit(event: Event) {

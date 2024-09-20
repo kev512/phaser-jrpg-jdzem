@@ -10,6 +10,8 @@ export class Canteen extends BaseScene {
   }
 
   create() {
+    super.create(); 
+    
     this.createMap();
 
     this.createPlayer();
@@ -35,7 +37,9 @@ export class Canteen extends BaseScene {
     this.createWindow();
   }
 
-  update() {
+  update(time: number, deltaTime: number) {
+    super.update(time, deltaTime);
+    
     const { worker } = model;
     const speed = worker.getSpeed();
 

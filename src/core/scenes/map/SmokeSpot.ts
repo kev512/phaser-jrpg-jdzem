@@ -10,6 +10,8 @@ export class SmokeSpot extends BaseScene {
   }
 
   create() {
+    super.create();
+    
     this.createMap();
 
     this.createPlayer();
@@ -34,7 +36,9 @@ export class SmokeSpot extends BaseScene {
     super.createLabels();
   }
 
-  update() {
+  update(time: number, deltaTime: number) {
+    super.update(time, deltaTime);
+
     const { worker } = model;
     const speed = worker.getSpeed();
 
