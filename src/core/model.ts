@@ -16,14 +16,7 @@ export class Model {
       window.visible = true;
       window.title = 'Test';
       window.description = 'Hello World';
-      console.log('window', window);
-    }, 1000);
-
-    setTimeout(() => {
-      window.visible = false;
-      window.title = '';
-      window.description = '';
-    }, 10000);
+    }, 1500);
   }
 
   get worker(): Worker {
