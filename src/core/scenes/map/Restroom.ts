@@ -12,8 +12,6 @@ export class Restroom extends BaseScene {
   create() {
     this.createMap();
 
-    this.createAnimations();
-
     this.createPlayer();
 
     this.addCollision();

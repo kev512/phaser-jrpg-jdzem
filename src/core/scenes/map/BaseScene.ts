@@ -69,31 +69,4 @@ export abstract class BaseScene extends Phaser.Scene {
 
     return label;
   }
-
-  protected createAnimations() {
-    this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('worker', { start: 12, end: 17 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'right',
-      frames: this.anims.generateFrameNumbers('worker', { start: 0, end: 5 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'up',
-      frames: this.anims.generateFrameNumbers('worker', { start: 6, end: 11 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'down',
-      frames: this.anims.generateFrameNumbers('worker', { start: 18, end: 23 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-  }
 }

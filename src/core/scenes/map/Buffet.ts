@@ -12,8 +12,6 @@ export class Buffet extends BaseScene {
   create() {
     this.createMap();
 
-    this.createAnimations();
-
     this.createPlayer();
 
     this.addCollision();
