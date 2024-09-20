@@ -10,6 +10,10 @@ export class Canteen extends BaseScene {
   lockerText: Phaser.GameObjects.Text;
   isNearLocker: boolean = false;
 
+  restZonePopup: Phaser.GameObjects.Image;
+  restZoneText: Phaser.GameObjects.Text;
+  isNearRestZone: boolean = false;
+
   constructor() {
     super('Canteen');
   }
@@ -40,6 +44,7 @@ export class Canteen extends BaseScene {
     this.createWindow();
 
     this.createLockerPopup();
+    this.createRestZonePopup();
   }
 
   update() {
@@ -69,6 +74,13 @@ export class Canteen extends BaseScene {
     this.isNearLocker =
       this.player.y === 264 && this.player.x >= 720 && this.player.x <= 800;
     this.updateLockerPopup(this.isNearLocker && !model.window.visible);
+
+    this.isNearRestZone =
+      this.player.y >= 600 &&
+      this.player.y <= 748 &&
+      this.player.x >= 112 &&
+      this.player.x <= 272;
+    this.updateRestZonePopup(this.isNearRestZone && !model.window.visible);
 
     console.log(this.player.x, this.player.y);
   }
@@ -162,5 +174,44 @@ export class Canteen extends BaseScene {
   private updateLockerPopup(visible: boolean) {
     this.lockerPopup.setVisible(visible);
     this.lockerText.setVisible(visible);
+  }
+
+  private createRestZonePopup() {
+    const popupX = TILE_SIZE * 4;
+    const popupY = TILE_SIZE * 10;
+
+    this.restZonePopup = this.add.image(popupX, popupY, 'popup');
+    this.restZonePopup.setScrollFactor(0);
+    this.restZoneText = this.add.text(
+      popupX - 86,
+      popupY - 10,
+      'Wycziluj [E]',
+      {
+        fontFamily: 'Pixelify Sans',
+        fontSize: 20,
+        color: '#000000',
+        stroke: '#dddddd',
+        strokeThickness: 2,
+      },
+    );
+    this.restZoneText.setScrollFactor(0);
+
+    this.restZonePopup.setVisible(false);
+    this.restZoneText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearRestZone) {
+        model.window.visible = true;
+        model.window.title = 'Strefa czilałtu';
+
+        model.window.description =
+          'Za dużo stresu podczas pracy?\nWeź trochę wycziluj.\n\n1. Odpocznij [1]\n2. Wyjście [ESC]';
+      }
+    });
+  }
+
+  private updateRestZonePopup(visible: boolean) {
+    this.restZonePopup.setVisible(visible);
+    this.restZoneText.setVisible(visible);
   }
 }
