@@ -3,6 +3,7 @@ import { model } from '../../../main';
 import { MAP_BOUNDARY, TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
+import { Lunch } from '../../../models/effects/items/lunch';
 
 export class Canteen extends BaseScene {
   lockerPopup: Phaser.GameObjects.Image;
@@ -42,34 +43,7 @@ export class Canteen extends BaseScene {
   }
 
   update() {
-    const { worker } = model;
-    const speed = worker.getSpeed();
-
-    this.player.body.setVelocity(0);
-
-    if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-speed);
-    } else if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(speed);
-    }
-
-    if (this.cursors.up.isDown) {
-      this.player.body.setVelocityY(-speed);
-    } else if (this.cursors.down.isDown) {
-      this.player.body.setVelocityY(speed);
-    }
-
-    if (this.cursors.left.isDown) {
-      this.player.anims.play('left', true);
-    } else if (this.cursors.right.isDown) {
-      this.player.anims.play('right', true);
-    } else if (this.cursors.up.isDown) {
-      this.player.anims.play('up', true);
-    } else if (this.cursors.down.isDown) {
-      this.player.anims.play('down', true);
-    } else {
-      this.player.anims.stop();
-    }
+    this.updatePlayer();
 
     if (this.player.y <= 73) {
       if (this.player.x >= 552 && this.player.x <= 600) {
@@ -169,9 +143,20 @@ export class Canteen extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearLocker) {
-        alert("Test");
+        model.window.visible = true;
+        model.window.title = 'Szafka';
+
+        let description = 'Tutaj trzymasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
+
+        // Tutaj trzymasz swoje rzeczy i obiad który możesz kupić po pracy;
+
+        if (model.worker.hasItem(new Lunch().getId())) {
+          description = 'W środku trzymasz lunchbox.\n\n1. Zjedz kupiony lunch [1]\n2. Wyjście [ESC]';
+        }
+
+        model.window.description = description;
       }
-    })
+    });
   }
 
   private updateLockerPopup(visible: boolean) {

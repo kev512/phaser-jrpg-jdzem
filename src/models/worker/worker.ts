@@ -1,4 +1,6 @@
+import { isUndefined } from 'lodash';
 import { Effect } from '../effects/effects';
+import { Item } from '../effects/items/item';
 import { Resources } from '../resources/resources';
 import {
   INITIAL_SPEED,
@@ -11,6 +13,7 @@ import {
   MAX_THIRST,
   MAX_URINE,
 } from './worker.consts';
+import { Lunch } from '../effects/items/lunch';
 
 export class Worker {
   private hunger: number = 0;
@@ -23,8 +26,12 @@ export class Worker {
   private drunkness: number = 0;
 
   private resources: Resources = new Resources();
+  private items: Item[] = [];
 
-  constructor() {}
+  constructor() {
+    // TODO
+    this.addItem(new Lunch());
+  }
 
   applyEffect(effect: Effect) {
     this.hunger = Math.min(
@@ -61,6 +68,19 @@ export class Worker {
     );
 
     this.resources.applyEffect(effect);
+  }
+
+  addItem(item: Item) {
+    this.items.push(item);
+  }
+
+  removeItem(item: Item) {
+    const index = this.items.findIndex((i) => i.getId() === item.getId());
+    this.items = this.items.filter((_, i) => i === index);
+  }
+
+  hasItem(id: string) {
+    return !isUndefined(this.items.find((item) => item.getId() === id));
   }
 
   getHunger(): number {

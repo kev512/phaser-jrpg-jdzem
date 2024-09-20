@@ -35,38 +35,7 @@ export class SmokeSpot extends BaseScene {
   }
 
   update() {
-    const { worker } = model;
-    const speed = worker.getSpeed();
-
-    this.player.body.setVelocity(0);
-
-    if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-speed);
-    } else if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(speed);
-    }
-
-    if (this.cursors.up.isDown) {
-      this.player.body.setVelocityY(-speed);
-    } else if (this.cursors.down.isDown) {
-      this.player.body.setVelocityY(speed);
-    }
-
-    if (this.cursors.left.isDown) {
-      this.player.anims.play('left', true);
-    } else if (this.cursors.right.isDown) {
-      this.player.anims.play('right', true);
-    } else if (this.cursors.up.isDown) {
-      this.player.anims.play('up', true);
-    } else if (this.cursors.down.isDown) {
-      this.player.anims.play('down', true);
-    } else {
-      this.player.anims.stop();
-    }
-
-    if (this.player.y <= 86) {
-      this.startCanteenScene();
-    }
+    this.updatePlayer();
 
     this.updateLabels();
   }
