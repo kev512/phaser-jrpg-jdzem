@@ -16,7 +16,8 @@ export class MainMenu extends Scene {
     this.background = this.add.image(512, 384, 'background');
     this.background.setScale(0.5);
 
-    this.logo = this.add.image(512, 300, 'logo');
+    this.logo = this.add.image(512, 220, 'logo');
+    this.logo.setScale(0.5);
 
     this.title = this.add
       .text(512, 420, 'Menu', {

@@ -22,7 +22,7 @@ export class Worker {
   private speed: number = INITIAL_SPEED;
   private drunkness: number = 0;
 
-  private resources: Resources;
+  private resources: Resources = new Resources();
 
   constructor() {}
 
