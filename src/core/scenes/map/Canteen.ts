@@ -93,6 +93,10 @@ export class Canteen extends BaseScene {
     this.isNearComputer = this.player.y === 744 && this.player.x >= 736 && this.player.x <= 752;
     this.updateComputerPopup(this.isNearComputer && !model.window.visible);
 
+    if (this.player.x >= 930) {
+      this.finishBreak();
+    }
+
     console.log(this.player.x, this.player.y);
   }
 
@@ -104,6 +108,12 @@ export class Canteen extends BaseScene {
   }
 
   private createPlayer() {
+    this.player = this.physics.add.sprite(0, 0, 'worker', 19);
+    this.player.setScale(WORKER_SIZE_SCALE);
+    this.resetPlayerPosition();
+  }
+
+  private resetPlayerPosition() {
     let playerX = 862;
     let playerY = 569;
 
@@ -118,8 +128,7 @@ export class Canteen extends BaseScene {
       playerY = 865;
     }
 
-    this.player = this.physics.add.sprite(playerX, playerY, 'worker', 19);
-    this.player.setScale(WORKER_SIZE_SCALE);
+    this.player.setPosition(playerX, playerY);
   }
 
   private addCollision() {
@@ -139,6 +148,15 @@ export class Canteen extends BaseScene {
   private startSmokeSpotScene() {
     this.scene.start('SmokeSpot');
     model.setScene('SmokeSpot');
+  }
+
+  private finishBreak() {
+    this.resetPlayerPosition();
+
+    model.finishBreak(() => {
+      this.scene.start('Afternoon');
+      model.setScene('Afternoon');
+    });
   }
 
   private createLockerPopup() {

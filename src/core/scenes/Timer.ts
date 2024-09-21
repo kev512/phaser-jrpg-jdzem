@@ -2,9 +2,11 @@ export class Timer {
   private remainingTime: number;
   private delayTime: number = 0;
   private isPaused: boolean;
+  private initialTime: number;
 
-  constructor(minutes: number) {
-    this.remainingTime = minutes * 60;
+  constructor(initialTime: number) {
+    this.initialTime = initialTime * 60;
+    this.remainingTime = initialTime * 60;
     this.isPaused = false;
   }
 
@@ -40,5 +42,9 @@ export class Timer {
 
   isTimeUp(): boolean {
     return this.remainingTime <= 0;
+  }
+
+  reset() {
+    this.remainingTime = this.initialTime;
   }
 }
