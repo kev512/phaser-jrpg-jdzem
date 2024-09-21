@@ -17,47 +17,46 @@ export class MainMenu extends Scene {
   create() {
     this.cameras.main.setBackgroundColor('#000000');
     this.background = this.add.image(545, 384, 'background');
-    // this.background.setScale(1.2);
 
-    this.logo = this.add.image(512, 215, 'logo');
+    this.logo = this.add.image(590, 215, 'logo');
     this.logo.setScale(0.5);
 
-    const textNewGameBackground = this.add.image(512, 412, 'button-bg');
+    const textNewGameBackground = this.add.image(590, 412, 'button-bg');
     textNewGameBackground.setScale(0.45);
     textNewGameBackground.setOrigin(0.5);
 
-    this.newGameButton = this.createMenuLabel(512, 410, 'Nowa Gra');
+    this.newGameButton = this.createMenuLabel(590, 410, 'Nowa Gra');
 
     this.newGameButton.on('pointerdown', () => {
       this.scene.start('Canteen');
     });
 
-    const textScoreboardBackground = this.add.image(512, 487, 'button-bg');
+    const textScoreboardBackground = this.add.image(590, 487, 'button-bg');
     textScoreboardBackground.setScale(0.45);
     textScoreboardBackground.setOrigin(0.5);
 
-    this.scoreboardButton = this.createMenuLabel(512, 485, 'Wyniki');
+    this.scoreboardButton = this.createMenuLabel(590, 485, 'Wyniki');
 
     this.scoreboardButton.on('pointerdown', () => {
       this.scene.start('Scoreboard');
     });
 
-    const textAuthorsBackground = this.add.image(512, 562, 'button-bg');
+    const textAuthorsBackground = this.add.image(590, 562, 'button-bg');
     textAuthorsBackground.setScale(0.45);
     textAuthorsBackground.setOrigin(0.5);
 
-    this.authorsButton = this.createMenuLabel(512, 560, 'Autorzy');
+    this.authorsButton = this.createMenuLabel(590, 560, 'Autorzy');
 
-    const devByBackground = this.add.image(512, 690, 'dev-by-background');
+    const devByBackground = this.add.image(590, 690, 'dev-by-background');
     devByBackground.setScale(0.5);
-    this.devByLabel = this.createMenuLabel(512, 687, 'Developed by White Seagull Team');
+    this.devByLabel = this.createMenuLabel(590, 687, 'Developed by White Seagull Team');
 
-    const infoButton = this.add.image(972, 100, 'button-bg');
+    const infoButton = this.add.image(1000, 100, 'button-bg');
     infoButton.setScale(0.25);
     infoButton.setOrigin(0.5);
     infoButton.setInteractive();
 
-    this.infoButton = this.createMenuLabel(972, 98, 'Info');
+    this.infoButton = this.createMenuLabel(1000, 98, 'Info');
   }
 
   private createMenuLabel(x: number, y: number, text: string) {
