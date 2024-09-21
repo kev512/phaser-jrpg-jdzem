@@ -53,7 +53,7 @@ export class Buffet extends BaseScene {
     this.updateWindow();
 
     this.isNearChef = this.player.y === 360 && this.player.x >= 480 && this.player.x <= 530;
-    this.updateBuyBuffetLunchPopup(this.isNearChef && !model.window.visible);
+    this.updateBuyBuffetLunchPopup(this.isNearChef && !model.isWindowVisible);
 
     console.log(this.player.x, this.player.y);
   }
@@ -102,12 +102,11 @@ export class Buffet extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearChef) {
-        model.window.visible = true;
-        model.window.title = 'Kup jedzenie';
-        model.descriptionWriter(
+        model.showWindow(
+          'Kup jedzenie',
           'W ten dzień możesz kupić\ndanie dnia!\n\n' + '1. Kup i zjedz danie dnia [1]\n' + '2. Wyjście [ESC]',
+          [new BuffetLunch()],
         );
-        model.window.options = [new BuffetLunch()];
       }
     });
   }

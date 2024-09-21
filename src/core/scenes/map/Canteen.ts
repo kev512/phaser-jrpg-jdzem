@@ -82,16 +82,16 @@ export class Canteen extends BaseScene {
     this.updateWindow();
 
     this.isNearLocker = this.player.y === 264 && this.player.x >= 720 && this.player.x <= 800;
-    this.updateLockerPopup(this.isNearLocker && !model.window.visible);
+    this.updateLockerPopup(this.isNearLocker && !model.isWindowVisible);
 
     this.isNearRestZone = this.player.y >= 600 && this.player.y <= 748 && this.player.x >= 112 && this.player.x <= 272;
-    this.updateRestZonePopup(this.isNearRestZone && !model.window.visible);
+    this.updateRestZonePopup(this.isNearRestZone && !model.isWindowVisible);
 
     this.isNearVendingMachine = this.player.y === 216 && this.player.x >= 343 && this.player.x <= 433;
-    this.updateVendingMachinePopup(this.isNearVendingMachine && !model.window.visible);
+    this.updateVendingMachinePopup(this.isNearVendingMachine && !model.isWindowVisible);
 
     this.isNearComputer = this.player.y === 744 && this.player.x >= 736 && this.player.x <= 752;
-    this.updateComputerPopup(this.isNearComputer && !model.window.visible);
+    this.updateComputerPopup(this.isNearComputer && !model.isWindowVisible);
 
     if (this.player.x >= 930) {
       this.finishBreak();
@@ -179,19 +179,17 @@ export class Canteen extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearLocker) {
-        model.window.visible = true;
-        model.window.title = 'Szafka';
-
         const lunch = new Lunch();
 
         if (model.worker.hasItem(lunch.getId())) {
-          model.descriptionWriter(
+          model.showWindow(
+            'Szafka',
             'W środku trzymasz lunchbox.\n\n' + '1. Zjedz kupiony lunch [1]\n' + '2. Wyjście [ESC]',
+            [lunch.getEatEvent()],
           );
-          model.window.options = [lunch.getEatEvent()];
-          model.worker.removeItem(lunch);
+          model.worker.removeItem(lunch); // TODO po evencie!!!!
         } else {
-          model.descriptionWriter('Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy');
+          model.showWindow('Szafka', 'Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy');
         }
       }
     });
@@ -222,12 +220,11 @@ export class Canteen extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearRestZone) {
-        model.window.visible = true;
-        model.window.title = 'Strefa czilałtu';
-        model.descriptionWriter(
+        model.showWindow(
+          'Strefa czilałtu',
           'Za dużo stresu podczas pracy?\n' + 'Weź trochę wycziluj.\n\n' + '1. Odpocznij [1]\n' + '2. Wyjście [ESC]',
+          [new Rest()],
         );
-        model.window.options = [new Rest()];
       }
     });
   }
@@ -257,15 +254,14 @@ export class Canteen extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearVendingMachine) {
-        model.window.visible = true;
-        model.window.title = 'Automat z przekąskami';
-        model.descriptionWriter(
+        model.showWindow(
+          'Automat z przekąskami',
           'Nie stać cię na prawdziwy obiad?\nKup sobie przekąskę.\n\n' +
             '1. Kup i zjedz batonika [1]\n' +
             '2. Kup i wypij napój [2]\n' +
             '3. Wyjście [ESC]',
+          [new Snack(), new Soda()],
         );
-        model.window.options = [new Snack(), new Soda()];
       }
     });
   }
@@ -295,16 +291,15 @@ export class Canteen extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearComputer) {
-        model.window.visible = true;
-        model.window.title = 'Kantynowy PeCet';
-        model.descriptionWriter(
+        model.showWindow(
+          'Kantynowy PeCet',
           'Dobry moment na granie?\n\n' +
             '1. Szybkie duo w LoLa [1]\n' +
             '2. Klanówka w CSa [2]\n' +
             '3. Rundka w Tekkena [3]\n' +
             '4. Nie graj w nic [ESC]',
+          [new Snack(), new Soda()],
         );
-        model.window.options = [new Snack(), new Soda()]; // TODO
       }
     });
   }
