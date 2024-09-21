@@ -148,7 +148,7 @@ export class Canteen extends BaseScene {
     this.lockerPopup = this.add.image(popupX, popupY, 'popup');
     this.lockerPopup.setScrollFactor(0);
     this.lockerText = this.add.text(popupX - 86, popupY - 10, 'Otwórz szafkę [E]', {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'VT323',
       fontSize: 20,
       color: '#000000',
       stroke: '#dddddd',
@@ -167,12 +167,13 @@ export class Canteen extends BaseScene {
         const lunch = new Lunch();
 
         if (model.worker.hasItem(lunch.getId())) {
-          model.window.description =
-            'W środku trzymasz lunchbox.\n\n' + '1. Zjedz kupiony lunch [1]\n' + '2. Wyjście [ESC]';
+          model.descriptionWriter(
+            'W środku trzymasz lunchbox.\n\n' + '1. Zjedz kupiony lunch [1]\n' + '2. Wyjście [ESC]',
+          );
           model.window.options = [lunch.getEatEvent()];
           model.worker.removeItem(lunch);
         } else {
-          model.window.description = 'Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
+          model.descriptionWriter('Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy');
         }
       }
     });
@@ -190,7 +191,7 @@ export class Canteen extends BaseScene {
     this.restZonePopup = this.add.image(popupX, popupY, 'popup');
     this.restZonePopup.setScrollFactor(0);
     this.restZoneText = this.add.text(popupX - 86, popupY - 10, 'Wycziluj [E]', {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'VT323',
       fontSize: 20,
       color: '#000000',
       stroke: '#dddddd',
@@ -205,8 +206,9 @@ export class Canteen extends BaseScene {
       if (this.isNearRestZone) {
         model.window.visible = true;
         model.window.title = 'Strefa czilałtu';
-        model.window.description =
-          'Za dużo stresu podczas pracy?\n' + 'Weź trochę wycziluj.\n\n' + '1. Odpocznij [1]\n' + '2. Wyjście [ESC]';
+        model.descriptionWriter(
+          'Za dużo stresu podczas pracy?\n' + 'Weź trochę wycziluj.\n\n' + '1. Odpocznij [1]\n' + '2. Wyjście [ESC]',
+        );
         model.window.options = [new Rest()];
       }
     });
@@ -239,11 +241,12 @@ export class Canteen extends BaseScene {
       if (this.isNearVendingMachine) {
         model.window.visible = true;
         model.window.title = 'Automat z przekąskami';
-        model.window.description =
+        model.descriptionWriter(
           'Nie stać cię na prawdziwy obiad?\nKup sobie przekąskę.\n\n' +
-          '1. Kup i zjedz batonika [1]\n' +
-          '2. Kup i wypij napój [2]\n' +
-          '3. Wyjście [ESC]';
+            '1. Kup i zjedz batonika [1]\n' +
+            '2. Kup i wypij napój [2]\n' +
+            '3. Wyjście [ESC]',
+        );
         model.window.options = [new Snack(), new Soda()];
       }
     });
@@ -261,7 +264,7 @@ export class Canteen extends BaseScene {
     this.computerPopup = this.add.image(popupX, popupY, 'popup');
     this.computerPopup.setScrollFactor(0);
     this.computerText = this.add.text(popupX - 86, popupY - 10, 'Zagraj [E]', {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'VT323',
       fontSize: 20,
       color: '#000000',
       stroke: '#dddddd',
@@ -276,12 +279,13 @@ export class Canteen extends BaseScene {
       if (this.isNearComputer) {
         model.window.visible = true;
         model.window.title = 'Kantynowy PeCet';
-        model.window.description =
+        model.descriptionWriter(
           'Dobry moment na granie?\n\n' +
-          '1. Szybkie duo w LoLa [1]\n' +
-          '2. Klanówka w CSa [2]\n' +
-          '3. Rundka w Tekkena [3]\n' +
-          '4. Nie graj w nic [ESC]';
+            '1. Szybkie duo w LoLa [1]\n' +
+            '2. Klanówka w CSa [2]\n' +
+            '3. Rundka w Tekkena [3]\n' +
+            '4. Nie graj w nic [ESC]',
+        );
         model.window.options = [new Snack(), new Soda()]; // TODO
       }
     });

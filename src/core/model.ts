@@ -14,12 +14,15 @@ let window: Window = {
   options: [],
 };
 
+let i = 0;
+let typingSpeed = 50;
+
 export class Model {
   constructor() {
     setTimeout(() => {
       window.visible = true;
       window.title = 'Test';
-      window.description = 'Hello World';
+      this.descriptionWriter('Hello World');
     }, 1500);
   }
 
@@ -59,5 +62,20 @@ export class Model {
   setScene(key: string) {
     previousScene = currentScene;
     currentScene = key;
+  }
+
+  descriptionWriter(text: string) {
+    i = 0;
+    window.description = '';
+
+    function type() {
+      if (i < text.length) {
+        window.description += text.charAt(i);
+        i++;
+        setTimeout(type, typingSpeed);
+      }
+    }
+
+    type();
   }
 }

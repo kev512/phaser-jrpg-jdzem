@@ -104,8 +104,9 @@ export class Buffet extends BaseScene {
       if (this.isNearChef) {
         model.window.visible = true;
         model.window.title = 'Kup jedzenie';
-        model.window.description =
-          'W ten dzień możesz kupić\ndanie dnia!\n\n' + '1. Kup i zjedz danie dnia [1]\n' + '2. Wyjście [ESC]';
+        model.descriptionWriter(
+          'W ten dzień możesz kupić\ndanie dnia!\n\n' + '1. Kup i zjedz danie dnia [1]\n' + '2. Wyjście [ESC]',
+        );
         model.window.options = [new BuffetLunch()];
       }
     });

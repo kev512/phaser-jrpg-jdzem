@@ -10,6 +10,8 @@ export abstract class BaseScene extends Phaser.Scene {
   protected collisionLayer: Phaser.Tilemaps.TilemapLayer;
   protected statsBar: Phaser.GameObjects.Image;
 
+  protected hungerBar: Phaser.GameObjects.Graphics;
+
   private timerObject: Timer;
   protected timer: Phaser.GameObjects.Text;
   protected countdown: Phaser.GameObjects.Text;
@@ -17,6 +19,9 @@ export abstract class BaseScene extends Phaser.Scene {
   private delayText: Phaser.GameObjects.Text;
 
   protected hunger: Phaser.GameObjects.Text;
+  protected hungerStatsUnit: Phaser.GameObjects.Image;
+
+
   protected thirst: Phaser.GameObjects.Text;
   protected urine: Phaser.GameObjects.Text;
   protected poop: Phaser.GameObjects.Text;
@@ -86,7 +91,6 @@ export abstract class BaseScene extends Phaser.Scene {
     const y = 32;
 
     this.statsBar = this.add.image(1053, 450, 'stats-bar');
-
     this.timer = this.createStatLabel(x, y);
     this.countdown = this.createStatLabel(x, y * 2);
     this.countdown.setScale(2.4);
@@ -103,18 +107,23 @@ export abstract class BaseScene extends Phaser.Scene {
     this.delayTime = this.createStatLabel(x + 135, y * 4.4);
     this.delayTime.setVisible(false);
 
+    this.hungerStatsUnit = this.add.image(1057, 310, 'stats-unit');
     this.hunger = this.createStatLabel(x, y * 6);
-    this.thirst = this.createStatLabel(x, y * 7);
-    this.urine = this.createStatLabel(x, y * 8);
-    this.poop = this.createStatLabel(x, y * 9);
-    this.stress = this.createStatLabel(x, y * 10);
-    this.fatigue = this.createStatLabel(x, y * 11);
-    this.drunkness = this.createStatLabel(x, y * 12);
+    this.hunger.setScale(.8);
+    this.hungerBar = this.makeBar(x, y * 9.85, 0x2ecc71);
+    this.setBarValue(this.hungerBar, model.worker.getHunger());
 
-    this.cash = this.createStatLabel(x, y * 14);
-    this.diapers = this.createStatLabel(x, y * 15);
-    this.beers = this.createStatLabel(x, y * 16);
-    this.smokes = this.createStatLabel(x, y * 17);
+    this.thirst = this.createStatLabel(x, y * 10);
+    this.urine = this.createStatLabel(x, y * 11);
+    this.poop = this.createStatLabel(x, y * 12);
+    this.stress = this.createStatLabel(x, y * 13);
+    this.fatigue = this.createStatLabel(x, y * 14);
+    this.drunkness = this.createStatLabel(x, y * 15);
+
+    this.cash = this.createStatLabel(x, y * 17);
+    this.diapers = this.createStatLabel(x, y * 18);
+    this.beers = this.createStatLabel(x, y * 19);
+    this.smokes = this.createStatLabel(x, y * 20);
   }
 
   createWindow() {
@@ -152,7 +161,9 @@ export abstract class BaseScene extends Phaser.Scene {
       this.delayText.setAlpha(1);
     }
 
-    this.hunger.setText('Głód: ' + model.worker.getHunger() + ' / 100');
+    this.hunger.setText('Głód: ' + model.worker.getPoop() + ' / 100');
+    this.setBarValue(this.hungerBar, model.worker.getPoop());
+
     this.thirst.setText('Pragnienie: ' + model.worker.getThirst() + ' / 100');
     this.urine.setText('Pęcherz: ' + model.worker.getUrine() + ' / 100');
     this.poop.setText('Dwójeczka: ' + model.worker.getPoop() + ' / 100');
@@ -238,4 +249,18 @@ export abstract class BaseScene extends Phaser.Scene {
 
     return label;
   }
+
+  makeBar(x: number, y: number, color: number): Phaser.GameObjects.Graphics {
+    let bar = this.add.graphics();
+    bar.fillStyle(color, 1);
+    bar.fillRect(0, 0, 200, 13);
+    bar.x = x;
+    bar.y = y;
+    return bar;
+}
+
+setBarValue(bar: Phaser.GameObjects.Graphics, percentage: number) {
+  bar.scaleX = percentage / 100;
+}
+  
 }
