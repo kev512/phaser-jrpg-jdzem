@@ -96,7 +96,7 @@ export class Model {
     if (this.breakNumber === 3) {
       days++;
       breakNumber = 1;
-      
+
       const afterWork = new AfterWork();
       this.worker.applyEffect(afterWork.getEffect());
 
