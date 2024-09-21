@@ -38,12 +38,12 @@ export class Model {
     return worker;
   }
 
-  get window() {
-    return window;
-  }
-
   get previousScene(): string | null {
     return previousScene;
+  }
+
+  get isWindowVisible(): boolean {
+    return window.visible;
   }
 
   get timerObject(): Timer {
@@ -60,6 +60,32 @@ export class Model {
 
   get breakNumber() {
     return breakNumber;
+  }
+
+  showWindow(title: string, description: string, options: (Event | null)[] = []) {
+    window.visible = true;
+    window.title = title;
+    window.options = options;
+    this.descriptionWriter(description);
+  }
+
+  hideWindow() {
+    window.visible = false;
+    window.title = '';
+    window.description = '';
+    window.options = [];
+  }
+
+  getWindowOption(index: number): Event | null {
+    return index <= window.options.length - 1 ? window.options[index] : null;
+  }
+
+  getWindowTitle(): string {
+    return window.title;
+  }
+
+  getWindowDescription(): string {
+    return window.description;
   }
 
   startGame() {
@@ -86,8 +112,8 @@ export class Model {
   emit(event: Event) {
     window.visible = true;
     window.title = event.getName();
-    window.description = event.getDescription() + '\n\n1. OK [ESC]';
     window.options = [];
+    this.descriptionWriter(event.getDescription() + '\n\n1. OK [ESC]');
 
     this.worker.applyEffect(event.getEffect());
   }

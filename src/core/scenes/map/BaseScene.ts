@@ -21,7 +21,6 @@ export abstract class BaseScene extends Phaser.Scene {
   protected hunger: Phaser.GameObjects.Text;
   protected hungerStatsUnit: Phaser.GameObjects.Image;
 
-
   protected thirst: Phaser.GameObjects.Text;
   protected urine: Phaser.GameObjects.Text;
   protected poop: Phaser.GameObjects.Text;
@@ -44,24 +43,28 @@ export abstract class BaseScene extends Phaser.Scene {
 
   preload() {
     this.input.keyboard?.on('keydown-ESC', () => {
-      model.window.visible = false;
+      model.hideWindow();
     });
 
     this.input.keyboard?.on('keydown-ONE', () => {
-      if (model.window.visible && !isNull(model.window.options[0])) {
-        model.emit(model.window.options[0]);
+      const firstEvent = model.getWindowOption(0);
+
+      if (model.isWindowVisible && !isNull(firstEvent)) {
+        model.emit(firstEvent);
       }
     });
 
     this.input.keyboard?.on('keydown-TWO', () => {
-      if (model.window.visible && !isNull(model.window.options[1])) {
-        model.emit(model.window.options[1]);
+      const secondEvent = model.getWindowOption(1);
+      if (model.isWindowVisible && !isNull(secondEvent)) {
+        model.emit(secondEvent);
       }
     });
 
     this.input.keyboard?.on('keydown-THREE', () => {
-      if (model.window.visible && !isNull(model.window.options[2])) {
-        model.emit(model.window.options[2]);
+      const thirdEvent = model.getWindowOption(2);
+      if (model.isWindowVisible && !isNull(thirdEvent)) {
+        model.emit(thirdEvent);
       }
     });
   }
@@ -109,7 +112,7 @@ export abstract class BaseScene extends Phaser.Scene {
 
     this.hungerStatsUnit = this.add.image(1057, 310, 'stats-unit');
     this.hunger = this.createStatLabel(x, y * 6);
-    this.hunger.setScale(.8);
+    this.hunger.setScale(0.8);
     this.hungerBar = this.makeBar(x, y * 9.85, 0x2ecc71);
     this.setBarValue(this.hungerBar, model.worker.getHunger());
 
@@ -178,14 +181,14 @@ export abstract class BaseScene extends Phaser.Scene {
   }
 
   updateWindow() {
-    if (!model.window.visible) {
+    if (!model.isWindowVisible) {
       this.window.setPosition(-1000, 0, 0, 0);
       this.windowTitle.setText('');
       this.windowDescription.setText('');
     } else {
       this.window.setPosition(432, 345, 400, 238);
-      this.windowTitle.setText(model.window.title);
-      this.windowDescription.setText(model.window.description);
+      this.windowTitle.setText(model.getWindowTitle());
+      this.windowDescription.setText(model.getWindowDescription());
     }
   }
 
@@ -195,7 +198,7 @@ export abstract class BaseScene extends Phaser.Scene {
 
     this.player.body.setVelocity(0);
 
-    if (model.window.visible) {
+    if (model.isWindowVisible) {
       return;
     }
 
@@ -257,10 +260,9 @@ export abstract class BaseScene extends Phaser.Scene {
     bar.x = x;
     bar.y = y;
     return bar;
-}
+  }
 
-setBarValue(bar: Phaser.GameObjects.Graphics, percentage: number) {
-  bar.scaleX = percentage / 100;
-}
-  
+  setBarValue(bar: Phaser.GameObjects.Graphics, percentage: number) {
+    bar.scaleX = percentage / 100;
+  }
 }
