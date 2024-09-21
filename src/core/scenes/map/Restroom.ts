@@ -1,10 +1,19 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { WORKER_SIZE_SCALE } from '../../consts';
+import { Pissoir } from '../../../models/effects/events/map/restroom/pissoir';
+import { Toilet } from '../../../models/effects/events/map/restroom/toilet';
+import { TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
 export class Restroom extends BaseScene {
+  urinalPopup: Phaser.GameObjects.Image;
+  urinalText: Phaser.GameObjects.Text;
+  isNearUrinal: boolean = false;
+  toiletPopup: Phaser.GameObjects.Image;
+  toiletText: Phaser.GameObjects.Text;
+  isNearToilet: boolean = false;
+
   constructor() {
     super('Restroom');
   }
@@ -29,6 +38,10 @@ export class Restroom extends BaseScene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     super.createLabels();
+    this.createWindow();
+
+    this.createUrinalPopup();
+    this.createToiletPopup();
   }
 
   update(time: number, deltaTime: number) {
@@ -43,6 +56,13 @@ export class Restroom extends BaseScene {
     }
 
     this.updateLabels();
+    this.updateWindow();
+
+    this.isNearUrinal = this.player.y >= 504 && this.player.y <= 508 && this.player.x >= 496 && this.player.x <= 656;
+    this.updateUrinalPopup(this.isNearUrinal && !model.window.visible);
+
+    this.isNearToilet = this.player.y >= 504 && this.player.y <= 508 && this.player.x >= 334 && this.player.x <= 393;
+    this.updateToiletPopup(this.isNearToilet && !model.window.visible);
   }
 
   private createMap() {
@@ -67,5 +87,71 @@ export class Restroom extends BaseScene {
   private startCanteenScene() {
     this.scene.start('Canteen');
     model.setScene('Canteen');
+  }
+
+  private createUrinalPopup() {
+    const popupX = TILE_SIZE * 12.5;
+    const popupY = TILE_SIZE * 5;
+
+    this.urinalPopup = this.add.image(popupX, popupY, 'popup');
+    this.urinalPopup.setScrollFactor(0);
+    this.urinalText = this.add.text(popupX - 86, popupY - 10, 'Otwórz szafkę [E]', {
+      fontFamily: 'Pixelify Sans',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
+    this.urinalText.setScrollFactor(0);
+
+    this.urinalPopup.setVisible(false);
+    this.urinalText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearUrinal) {
+        model.window.visible = true;
+        model.window.title = 'Pisuar';
+        model.window.description = 'Stajesz przed pisuarem.\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]';
+        model.window.options = [new Pissoir()];
+      }
+    });
+  }
+
+  private updateUrinalPopup(visible: boolean) {
+    this.urinalPopup.setVisible(visible);
+    this.urinalText.setVisible(visible);
+  }
+
+  private createToiletPopup() {
+    const popupX = TILE_SIZE * 7.5;
+    const popupY = TILE_SIZE * 5;
+
+    this.toiletPopup = this.add.image(popupX, popupY, 'popup');
+    this.toiletPopup.setScrollFactor(0);
+    this.toiletText = this.add.text(popupX - 86, popupY - 10, 'Użyj sedesu [E]', {
+      fontFamily: 'Pixelify Sans',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
+    this.toiletText.setScrollFactor(0);
+
+    this.toiletPopup.setVisible(false);
+    this.urinalText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearToilet) {
+        model.window.visible = true;
+        model.window.title = 'Sedes';
+        model.window.description = 'Siadasz na tronie?\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]';
+        model.window.options = [new Toilet()];
+      }
+    });
+  }
+
+  private updateToiletPopup(visible: boolean) {
+    this.toiletPopup.setVisible(visible);
+    this.toiletText.setVisible(visible);
   }
 }
