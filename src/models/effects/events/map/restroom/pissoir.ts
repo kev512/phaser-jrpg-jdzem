@@ -9,7 +9,7 @@ export class Pissoir extends Event {
     super(
       id,
       'Pisuar',
-      '',
+      'Załatwiłeś potrzebę.',
       new Effect({
         urine: -MAX_URINE,
       }),
