@@ -112,8 +112,8 @@ export class Model {
   emit(event: Event) {
     window.visible = true;
     window.title = event.getName();
-    window.description = event.getDescription() + '\n\n1. OK [ESC]';
     window.options = [];
+    this.descriptionWriter(event.getDescription() + '\n\n1. OK [ESC]');
 
     this.worker.applyEffect(event.getEffect());
   }
