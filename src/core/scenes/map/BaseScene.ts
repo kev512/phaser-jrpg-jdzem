@@ -1,6 +1,7 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
 import { Timer } from '../Timer';
+import { MAP_BOUNDARY } from '../../consts';
 
 export abstract class BaseScene extends Phaser.Scene {
   protected map: Phaser.Tilemaps.Tilemap;
@@ -72,6 +73,15 @@ export abstract class BaseScene extends Phaser.Scene {
   // decreaseTime() {
   //   this.timerObject.adjustTime(-10);
   // }
+
+  setCameraBounds() {
+    this.cameras.main.setBounds(
+      MAP_BOUNDARY.x,
+      MAP_BOUNDARY.y,
+      MAP_BOUNDARY.width,
+      MAP_BOUNDARY.height,
+    );
+  }
 
   createLabels() {
     const x = 932;

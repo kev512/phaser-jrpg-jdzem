@@ -1,6 +1,6 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
+import { WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
@@ -20,12 +20,7 @@ export class Restroom extends BaseScene {
 
     this.add.rectangle(1062, 0, 316, 1800, 0x212121);
 
-    this.cameras.main.setBounds(
-      MAP_BOUNDARY.x,
-      MAP_BOUNDARY.y,
-      MAP_BOUNDARY.width,
-      MAP_BOUNDARY.height,
-    );
+    super.setCameraBounds();
 
     if (isNull(this.input.keyboard)) {
       throw new Error('Keyboard is null');
