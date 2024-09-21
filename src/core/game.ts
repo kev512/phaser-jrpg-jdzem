@@ -8,6 +8,7 @@ import { Restroom } from './scenes/map/Restroom';
 import { SmokeSpot } from './scenes/map/SmokeSpot';
 import { MainMenu } from './scenes/menu/MainMenu';
 import { Scoreboard } from './scenes/menu/Scoreboard';
+import { Afternoon } from './scenes/Afternoon';
 
 export class Game {
   constructor() {
@@ -28,7 +29,7 @@ export class Game {
           gravity: { x: 0, y: 0 },
         },
       },
-      scene: [Boot, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, GameOver, Scoreboard],
+      scene: [Boot, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, Afternoon, GameOver, Scoreboard],
     });
   }
 }
