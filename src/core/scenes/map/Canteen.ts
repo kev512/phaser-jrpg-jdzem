@@ -65,7 +65,7 @@ export class Canteen extends BaseScene {
   update(time: number, deltaTime: number) {
     super.update(time, deltaTime);
 
-    this.updatePlayer();
+    this.updatePlayer(deltaTime);
 
     if (this.player.y <= 73) {
       if (this.player.x >= 552 && this.player.x <= 600) {

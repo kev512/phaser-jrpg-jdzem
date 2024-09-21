@@ -39,7 +39,7 @@ export class SmokeSpot extends BaseScene {
   update(time: number, deltaTime: number) {
     super.update(time, deltaTime);
 
-    this.updatePlayer();
+    this.updatePlayer(deltaTime);
 
     this.updateLabels();
 

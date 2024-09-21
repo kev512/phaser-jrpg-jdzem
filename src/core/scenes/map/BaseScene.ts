@@ -145,9 +145,9 @@ export abstract class BaseScene extends Phaser.Scene {
     }
   }
 
-  updatePlayer() {
+  updatePlayer(deltaTime: number) {
     const { worker } = model;
-    const speed = worker.getSpeed();
+    const speed = worker.getSpeed() * deltaTime;
 
     this.player.body.setVelocity(0);
 
