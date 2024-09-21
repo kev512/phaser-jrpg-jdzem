@@ -9,8 +9,42 @@ export abstract class BaseScene extends Phaser.Scene {
   protected cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   protected collisionLayer: Phaser.Tilemaps.TilemapLayer;
   protected statsBar: Phaser.GameObjects.Image;
+  protected subStatsBar: Phaser.GameObjects.Image;
 
+  protected hungerBarBg: Phaser.GameObjects.Graphics;
   protected hungerBar: Phaser.GameObjects.Graphics;
+  protected hunger: Phaser.GameObjects.Text;
+  protected hungerStatsUnit: Phaser.GameObjects.Image;
+
+  protected thirstBarBg: Phaser.GameObjects.Graphics;
+  protected thirstBar: Phaser.GameObjects.Graphics;
+  protected thirst: Phaser.GameObjects.Text;
+  protected thirstStatsUnit: Phaser.GameObjects.Image;
+
+  protected urineBarBg: Phaser.GameObjects.Graphics;
+  protected urineBar: Phaser.GameObjects.Graphics;
+  protected urine: Phaser.GameObjects.Text;
+  protected urineStatsUnit: Phaser.GameObjects.Image;
+
+  protected poopBarBg: Phaser.GameObjects.Graphics;
+  protected poopBar: Phaser.GameObjects.Graphics;
+  protected poop: Phaser.GameObjects.Text;
+  protected poopStatsUnit: Phaser.GameObjects.Image;
+
+  protected stressBarBg: Phaser.GameObjects.Graphics;
+  protected stressBar: Phaser.GameObjects.Graphics;
+  protected stress: Phaser.GameObjects.Text;
+  protected stressStatsUnit: Phaser.GameObjects.Image;
+
+  protected fatigueBarBg: Phaser.GameObjects.Graphics;
+  protected fatigueBar: Phaser.GameObjects.Graphics;
+  protected fatigue: Phaser.GameObjects.Text;
+  protected fatigueStatsUnit: Phaser.GameObjects.Image;
+
+  protected drunknessBarBg: Phaser.GameObjects.Graphics;
+  protected drunknessBar: Phaser.GameObjects.Graphics;
+  protected drunkness: Phaser.GameObjects.Text;
+  protected drunknessStatsUnit: Phaser.GameObjects.Image;
 
   private timerObject: Timer;
   protected timer: Phaser.GameObjects.Text;
@@ -18,17 +52,7 @@ export abstract class BaseScene extends Phaser.Scene {
   protected delayTime: Phaser.GameObjects.Text;
   private delayText: Phaser.GameObjects.Text;
 
-  protected hunger: Phaser.GameObjects.Text;
-  protected hungerStatsUnit: Phaser.GameObjects.Image;
-
-
-  protected thirst: Phaser.GameObjects.Text;
-  protected urine: Phaser.GameObjects.Text;
-  protected poop: Phaser.GameObjects.Text;
-  protected stress: Phaser.GameObjects.Text;
-  protected fatigue: Phaser.GameObjects.Text;
-  protected drunkness: Phaser.GameObjects.Text;
-
+  protected coins: Phaser.GameObjects.Image;
   protected cash: Phaser.GameObjects.Text;
   protected diapers: Phaser.GameObjects.Text;
   protected beers: Phaser.GameObjects.Text;
@@ -90,13 +114,14 @@ export abstract class BaseScene extends Phaser.Scene {
     const x = 945;
     const y = 32;
 
-    this.statsBar = this.add.image(1053, 450, 'stats-bar');
-    this.timer = this.createStatLabel(x, y);
-    this.countdown = this.createStatLabel(x, y * 2);
+    this.statsBar = this.add.image(1053, 430, 'stats-bar');
+    this.statsBar.setScale(1, 0.945);
+    this.timer = this.createStatLabel(x, y - 20);
+    this.countdown = this.createStatLabel(x, 44);
     this.countdown.setScale(2.4);
 
     this.delayText = this.add
-      .text(x, 235, 'SPÓŹNIENIE: ', {
+      .text(x, 215, 'SPÓŹNIENIE: ', {
         fontFamily: 'VT323',
         fontSize: 28,
         color: '#ff0000',
@@ -104,26 +129,64 @@ export abstract class BaseScene extends Phaser.Scene {
         strokeThickness: 2,
       })
       .setVisible(false);
-    this.delayTime = this.createStatLabel(x + 135, y * 4.4);
+    this.delayTime = this.createStatLabel(x + 135, 120.8);
     this.delayTime.setVisible(false);
 
-    this.hungerStatsUnit = this.add.image(1057, 310, 'stats-unit');
-    this.hunger = this.createStatLabel(x, y * 6);
-    this.hunger.setScale(.8);
-    this.hungerBar = this.makeBar(x, y * 9.85, 0x2ecc71);
+    this.hungerStatsUnit = this.add.image(1057, 290, 'stats-unit');
+    this.hunger = this.createStatLabel(x, 172);
+    this.hunger.setScale(0.8);
+    this.hungerBarBg = this.makeBar(x, 295.2, 0xaeb1c0);
+    this.hungerBar = this.makeBar(x, y * 295.2, 0x568d61);
     this.setBarValue(this.hungerBar, model.worker.getHunger());
 
-    this.thirst = this.createStatLabel(x, y * 10);
-    this.urine = this.createStatLabel(x, y * 11);
-    this.poop = this.createStatLabel(x, y * 12);
-    this.stress = this.createStatLabel(x, y * 13);
-    this.fatigue = this.createStatLabel(x, y * 14);
-    this.drunkness = this.createStatLabel(x, y * 15);
+    this.thirstStatsUnit = this.add.image(1057, 360, 'stats-unit');
+    this.thirst = this.createStatLabel(x, 242.4);
+    this.thirst.setScale(0.8);
+    this.thirstBarBg = this.makeBar(x, 365.6, 0xaeb1c0);
+    this.thirstBar = this.makeBar(x, 365.6, 0x568d61);
+    this.setBarValue(this.thirstBar, model.worker.getThirst());
 
-    this.cash = this.createStatLabel(x, y * 17);
-    this.diapers = this.createStatLabel(x, y * 18);
-    this.beers = this.createStatLabel(x, y * 19);
-    this.smokes = this.createStatLabel(x, y * 20);
+    this.urineStatsUnit = this.add.image(1057, 430, 'stats-unit');
+    this.urine = this.createStatLabel(x, 312.8);
+    this.urineBarBg = this.makeBar(x, 436, 0xaeb1c0);
+    this.urineBar = this.makeBar(x, 436, 0x568d61);
+    this.urine.setScale(0.8);
+
+    this.poopStatsUnit = this.add.image(1057, 500, 'stats-unit');
+    this.poop = this.createStatLabel(x, 383.2);
+    this.poopBarBg = this.makeBar(x, 506.4, 0xaeb1c0);
+    this.poopBar = this.makeBar(x, 506.4, 0x568d61);
+    this.poop.setScale(0.8);
+
+    this.stressStatsUnit = this.add.image(1057, 570, 'stats-unit');
+    this.stress = this.createStatLabel(x, 453.6);
+    this.stressBarBg = this.makeBar(x, 576.8, 0xaeb1c0);
+    this.stressBar = this.makeBar(x, 576.8, 0x568d61);
+    this.stress.setScale(0.8);
+
+    this.fatigueStatsUnit = this.add.image(1057, 640, 'stats-unit');
+    this.fatigue = this.createStatLabel(x, 524);
+    this.fatigueBarBg = this.makeBar(x, 647.2, 0xaeb1c0);
+    this.fatigueBar = this.makeBar(x, 647.2, 0x568d61);
+    this.fatigue.setScale(0.8);
+
+    this.drunknessStatsUnit = this.add.image(1057, 710, 'stats-unit');
+    this.drunkness = this.createStatLabel(x, 594.4);
+    this.drunknessBarBg = this.makeBar(x, 717.6, 0xaeb1c0);
+    this.drunknessBar = this.makeBar(x, 717.6, 0x568d61);
+    this.drunkness.setScale(0.8);
+
+    this.subStatsBar = this.add.image(1055, 810, 'button-bg');
+    this.subStatsBar.setScale(0.47, 0.58);
+
+    this.coins = this.add.image(950, 792, 'coins');
+    this.coins.setScale(0.09);
+    this.cash = this.createStatLabel(970, 684);
+    this.cash.setScale(0.8);
+
+    // this.diapers = this.createStatLabel(x, y * 18);
+    // this.beers = this.createStatLabel(x, y * 19);
+    // this.smokes = this.createStatLabel(x, y * 20);
   }
 
   createWindow() {
@@ -161,20 +224,32 @@ export abstract class BaseScene extends Phaser.Scene {
       this.delayText.setAlpha(1);
     }
 
-    this.hunger.setText('Głód: ' + model.worker.getPoop() + ' / 100');
-    this.setBarValue(this.hungerBar, model.worker.getPoop());
+    this.hunger.setText('Głód: ' + model.worker.getHunger() + ' / 100');
+    this.setBarValue(this.hungerBar, model.worker.getHunger());
 
     this.thirst.setText('Pragnienie: ' + model.worker.getThirst() + ' / 100');
-    this.urine.setText('Pęcherz: ' + model.worker.getUrine() + ' / 100');
-    this.poop.setText('Dwójeczka: ' + model.worker.getPoop() + ' / 100');
-    this.stress.setText('Stres: ' + model.worker.getStress() + ' / 100');
-    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue() + ' / 100');
-    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness() + ' / 100');
+    this.setBarValue(this.thirstBar, model.worker.getThirst());
 
-    this.cash.setText('Kasa: ' + model.worker.getStress());
-    this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
-    this.beers.setText('Bronksy: ' + model.worker.getDrunkness());
-    this.smokes.setText('Fajki: ' + model.worker.getSmokes());
+    this.urine.setText('Pęcherz: ' + model.worker.getUrine() + ' / 100');
+    this.setBarValue(this.urineBar, model.worker.getUrine());
+
+    this.poop.setText('Dwójeczka: ' + model.worker.getPoop() + ' / 100');
+    this.setBarValue(this.poopBar, model.worker.getPoop());
+
+    this.stress.setText('Stres: ' + model.worker.getStress() + ' / 100');
+    this.setBarValue(this.stressBar, model.worker.getStress());
+
+    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue() + ' / 100');
+    this.setBarValue(this.fatigueBar, model.worker.getFatigue());
+
+    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness() + ' / 100');
+    this.setBarValue(this.drunknessBar, model.worker.getFatigue());
+
+    this.cash.setText(`${model.worker.getCash()}`);
+
+    // this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
+    // this.beers.setText('Bronksy: ' + model.worker.getDrunkness());
+    // this.smokes.setText('Fajki: ' + model.worker.getSmokes());
   }
 
   updateWindow() {
@@ -253,14 +328,28 @@ export abstract class BaseScene extends Phaser.Scene {
   makeBar(x: number, y: number, color: number): Phaser.GameObjects.Graphics {
     let bar = this.add.graphics();
     bar.fillStyle(color, 1);
-    bar.fillRect(0, 0, 200, 13);
+    bar.fillRect(0, 0, 225, 13);
     bar.x = x;
     bar.y = y;
     return bar;
-}
+  }
 
-setBarValue(bar: Phaser.GameObjects.Graphics, percentage: number) {
-  bar.scaleX = percentage / 100;
-}
-  
+  setBarValue(bar: Phaser.GameObjects.Graphics, percentage: number) {
+    let color = 0x568d61;
+
+    if (percentage > 75) {
+      color = 0xec5555;
+    } else if (percentage > 50) {
+      color = 0xcc9741;
+    } else if (percentage > 25) {
+      color = 0xdfc950;
+    }
+
+    bar.clear();
+
+    bar.fillStyle(color, 1);
+    bar.fillRect(0, 0, 225, 13);
+
+    bar.scaleX = percentage / 100;
+  }
 }
