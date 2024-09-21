@@ -9,9 +9,11 @@ export abstract class BaseScene extends Phaser.Scene {
   protected cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   protected collisionLayer: Phaser.Tilemaps.TilemapLayer;
 
+  private timerObject: Timer;
   protected timer: Phaser.GameObjects.Text;
   protected countdown: Phaser.GameObjects.Text;
-  private timerObject: Timer;
+  protected delayTime: Phaser.GameObjects.Text;
+  private delayText: Phaser.GameObjects.Text;
 
   protected hunger: Phaser.GameObjects.Text;
   protected thirst: Phaser.GameObjects.Text;
@@ -84,25 +86,35 @@ export abstract class BaseScene extends Phaser.Scene {
   }
 
   createLabels() {
-    const x = 932;
+    const x = 945;
     const y = 32;
 
-    this.timer = this.createLabel(x, y);
-    this.countdown = this.createLabel(x, y * 2);
-    this.countdown.setScale(2);
+    this.timer = this.createStatLabel(x, y);
+    this.countdown = this.createStatLabel(x, y * 2);
+    this.countdown.setScale(2.4);
 
-    this.hunger = this.createLabel(x, y * 5);
-    this.thirst = this.createLabel(x, y * 6);
-    this.urine = this.createLabel(x, y * 7);
-    this.poop = this.createLabel(x, y * 8);
-    this.stress = this.createLabel(x, y * 9);
-    this.fatigue = this.createLabel(x, y * 10);
-    this.drunkness = this.createLabel(x, y * 11);
+    this.delayText = this.add.text(x, 235, 'SPÓŹNIENIE: ', {
+      fontFamily: 'VT323',
+      fontSize: 28,
+      color: '#ff0000',
+      stroke: '#3A3A50',
+      strokeThickness: 2,
+    }).setVisible(false);
+    this.delayTime = this.createStatLabel(x + 135, y * 4.4);
+    this.delayTime.setVisible(false);
 
-    this.cash = this.createLabel(x, y * 13);
-    this.diapers = this.createLabel(x, y * 14);
-    this.beers = this.createLabel(x, y * 15);
-    this.smokes = this.createLabel(x, y * 16);
+    this.hunger = this.createStatLabel(x, y * 6);
+    this.thirst = this.createStatLabel(x, y * 7);
+    this.urine = this.createStatLabel(x, y * 8);
+    this.poop = this.createStatLabel(x, y * 9);
+    this.stress = this.createStatLabel(x, y * 10);
+    this.fatigue = this.createStatLabel(x, y * 11);
+    this.drunkness = this.createStatLabel(x, y * 12);
+
+    this.cash = this.createStatLabel(x, y * 14);
+    this.diapers = this.createStatLabel(x, y * 15);
+    this.beers = this.createStatLabel(x, y * 16);
+    this.smokes = this.createStatLabel(x, y * 17);
   }
 
   createWindow() {
@@ -124,18 +136,30 @@ export abstract class BaseScene extends Phaser.Scene {
 
   updateLabels() {
     this.timer.setText('Koniec przerwy:');
+    this.timer.setScale(1.2);
     this.countdown.setText(this.timerObject.getFormattedTime());
-    console.log('Formatted time:', this.timerObject.getFormattedTime());
+
+    if (this.timerObject.isTimeUp()) {
+      const delay = this.timerObject.getDelayFormattedTime();
+      this.delayTime.setText(delay);
+      this.delayTime.setVisible(true);
+      this.delayText.setVisible(true);
+
+      this.delayText.setAlpha(Math.abs(Math.sin(this.time.now / 500)));
+
+    } else {
+      this.delayTime.setVisible(false);
+      this.delayText.setVisible(false);
+      this.delayText.setAlpha(1);
+    }
 
     this.hunger.setText('Głód: ' + model.worker.getHunger() + ' / 100');
-    this.thirst.setText('Pragnienie: ' + model.worker.getThirst() + ' / 100');
-    this.urine.setText('Pęcherz: ' + model.worker.getUrine() + ' / 100');
-    this.poop.setText('Dówjeczka: ' + model.worker.getPoop() + ' / 100');
-    this.stress.setText('Stres: ' + model.worker.getStress() + ' / 100');
-    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue() + ' / 100');
-    this.drunkness.setText(
-      'Upojenie: ' + model.worker.getDrunkness() + ' / 100',
-    );
+    this.thirst.setText('Pragnienie: ' + model.worker.getThirst()+ ' / 100');
+    this.urine.setText('Pęcherz: ' + model.worker.getUrine()+ ' / 100');
+    this.poop.setText('Dwójeczka: ' + model.worker.getPoop()+ ' / 100');
+    this.stress.setText('Stres: ' + model.worker.getStress()+ ' / 100');
+    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue()+ ' / 100');
+    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness()+ ' / 100');
 
     this.cash.setText('Kasa: ' + model.worker.getStress());
     this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
@@ -192,11 +216,23 @@ export abstract class BaseScene extends Phaser.Scene {
 
   private createLabel(x: number, y: number) {
     const label = this.add.text(x, y, '', {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'VT323',
       fontSize: 28,
       color: '#ffffff',
       stroke: '#333333',
-      strokeThickness: 2,
+      strokeThickness: 2
+    });
+
+    label.setScrollFactor(0);
+
+    return label;
+  }
+
+  private createStatLabel(x: number, y: number) {
+    const label = this.add.text(x, y, '', {
+      fontFamily: 'VT323',
+      fontSize: 28,
+      color: '#3A3A50'
     });
 
     label.setScrollFactor(0);

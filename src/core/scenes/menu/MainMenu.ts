@@ -7,7 +7,8 @@ export class MainMenu extends Scene {
   newGameButton: GameObjects.Text;
   scoreboardButton: GameObjects.Text;
   authorsButton: GameObjects.Text;
-  infoButton: GameObjects.Image;
+  infoButton: GameObjects.Text;
+  devByLabel: GameObjects.Text;
 
   constructor() {
     super('MainMenu');
@@ -15,8 +16,8 @@ export class MainMenu extends Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#000000');
-    this.background = this.add.image(512, 384, 'background');
-    this.background.setScale(0.5);
+    this.background = this.add.image(545, 384, 'background');
+    // this.background.setScale(1.2);
 
     this.logo = this.add.image(512, 215, 'logo');
     this.logo.setScale(0.5);
@@ -25,31 +26,17 @@ export class MainMenu extends Scene {
     textNewGameBackground.setScale(0.45);
     textNewGameBackground.setOrigin(0.5);
 
-    this.newGameButton = this.add
-      .text(512, 410, 'Nowa Gra', {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 28,
-        color: '#000000',
-      })
-      .setOrigin(0.5)
-      .setInteractive();
-
-    const textScoreboardBackground = this.add.image(512, 487, 'button-bg');
-    textScoreboardBackground.setScale(0.45);
-    textScoreboardBackground.setOrigin(0.5);
+    this.newGameButton = this.createMenuLabel(512, 410, 'Nowa Gra');
 
     this.newGameButton.on('pointerdown', () => {
       this.scene.start('Canteen');
     });
 
-    this.scoreboardButton = this.add
-      .text(512, 485, 'Wyniki', {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 28,
-        color: '#000000',
-      })
-      .setOrigin(0.5)
-      .setInteractive();
+    const textScoreboardBackground = this.add.image(512, 487, 'button-bg');
+    textScoreboardBackground.setScale(0.45);
+    textScoreboardBackground.setOrigin(0.5);
+
+    this.scoreboardButton = this.createMenuLabel(512, 485, 'Wyniki');
 
     this.scoreboardButton.on('pointerdown', () => {
       this.scene.start('Scoreboard');
@@ -59,19 +46,32 @@ export class MainMenu extends Scene {
     textAuthorsBackground.setScale(0.45);
     textAuthorsBackground.setOrigin(0.5);
 
-    this.authorsButton = this.add
-      .text(512, 560, 'Autorzy', {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 28,
-        color: '#000000',
-      })
-      .setOrigin(0.5)
-      .setInteractive();
+    this.authorsButton = this.createMenuLabel(512, 560, 'Autorzy');
 
-    this.infoButton = this.add
-      .image(972, 100, 'info')
-      .setScale(0.5)
-      .setOrigin(0.5)
-      .setInteractive();
+    const devByBackground = this.add.image(512, 690, 'dev-by-background');
+    devByBackground.setScale(0.50);
+    this.devByLabel = this.createMenuLabel(512, 687, 'Developed by White Seagull Team');
+
+    const infoButton = this.add.image(972, 100, 'button-bg');
+    infoButton.setScale(0.25);
+    infoButton.setOrigin(0.5);
+    infoButton.setInteractive();
+
+    this.infoButton = this.createMenuLabel(972, 98, 'Info');
   }
+
+  private createMenuLabel(x: number, y: number, text: string) {
+    const label = this.add.text(x, y, text, {
+      fontFamily: 'VT323',
+      fontSize: 28,
+      color: '#3A3A50'
+    });
+
+    label.setScrollFactor(0);
+    label.setOrigin(.5);
+    label.setInteractive();
+
+    return label;
+  }
+
 }
