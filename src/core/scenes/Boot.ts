@@ -24,6 +24,7 @@ export class Boot extends Scene {
     this.load.tilemapTiledJSON('smoke-spot-map', 'assets/smoke-spot.json');
 
     this.load.image('background', 'assets/background.png');
+    this.load.image('shop-background', 'assets/shop-background.png');
     this.load.image('dev-by-background', 'assets/bottom-bar-background.png');
     this.load.image('window', 'assets/window.png');
     this.load.image('popup', 'assets/popup.png');
@@ -35,6 +36,7 @@ export class Boot extends Scene {
     this.load.image('logo', 'assets/logo.png');
     this.load.image('button-bg', 'assets/button-bg.png');
     this.load.image('button-large-bg', 'assets/button-large-bg.png');
+    this.load.image('button-xl-bg', 'assets/button-xl-bg.png');
     this.load.image('info', 'assets/info.png');
     this.load.image('stats-unit', 'assets/stats-unit.png');
 
