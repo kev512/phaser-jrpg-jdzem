@@ -9,7 +9,7 @@ import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
 export class Canteen extends BaseScene {
-  statsBar: Phaser.GameObjects.Image
+  statsBar: Phaser.GameObjects.Image;
 
   lockerPopup: Phaser.GameObjects.Image;
   lockerText: Phaser.GameObjects.Text;
@@ -85,25 +85,16 @@ export class Canteen extends BaseScene {
     this.updateLabels();
     this.updateWindow();
 
-    this.isNearLocker =
-      this.player.y === 264 && this.player.x >= 720 && this.player.x <= 800;
+    this.isNearLocker = this.player.y === 264 && this.player.x >= 720 && this.player.x <= 800;
     this.updateLockerPopup(this.isNearLocker && !model.window.visible);
 
-    this.isNearRestZone =
-      this.player.y >= 600 &&
-      this.player.y <= 748 &&
-      this.player.x >= 112 &&
-      this.player.x <= 272;
+    this.isNearRestZone = this.player.y >= 600 && this.player.y <= 748 && this.player.x >= 112 && this.player.x <= 272;
     this.updateRestZonePopup(this.isNearRestZone && !model.window.visible);
 
-    this.isNearVendingMachine =
-      this.player.y === 216 && this.player.x >= 343 && this.player.x <= 433;
-    this.updateVendingMachinePopup(
-      this.isNearVendingMachine && !model.window.visible,
-    );
+    this.isNearVendingMachine = this.player.y === 216 && this.player.x >= 343 && this.player.x <= 433;
+    this.updateVendingMachinePopup(this.isNearVendingMachine && !model.window.visible);
 
-    this.isNearComputer =
-      this.player.y === 744 && this.player.x >= 736 && this.player.x <= 752;
+    this.isNearComputer = this.player.y === 744 && this.player.x >= 736 && this.player.x <= 752;
     this.updateComputerPopup(this.isNearComputer && !model.window.visible);
 
     console.log(this.player.x, this.player.y);
@@ -160,18 +151,13 @@ export class Canteen extends BaseScene {
 
     this.lockerPopup = this.add.image(popupX, popupY, 'popup');
     this.lockerPopup.setScrollFactor(0);
-    this.lockerText = this.add.text(
-      popupX - 86,
-      popupY - 10,
-      'Otwórz szafkę [E]',
-      {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 20,
-        color: '#000000',
-        stroke: '#dddddd',
-        strokeThickness: 2,
-      },
-    );
+    this.lockerText = this.add.text(popupX - 86, popupY - 10, 'Otwórz szafkę [E]', {
+      fontFamily: 'Pixelify Sans',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
     this.lockerText.setScrollFactor(0);
 
     this.lockerPopup.setVisible(false);
@@ -186,14 +172,11 @@ export class Canteen extends BaseScene {
 
         if (model.worker.hasItem(lunch.getId())) {
           model.window.description =
-            'W środku trzymasz lunchbox.\n\n' +
-            '1. Zjedz kupiony lunch [1]\n' +
-            '2. Wyjście [ESC]';
+            'W środku trzymasz lunchbox.\n\n' + '1. Zjedz kupiony lunch [1]\n' + '2. Wyjście [ESC]';
           model.window.options = [lunch.getEatEvent()];
           model.worker.removeItem(lunch);
         } else {
-          model.window.description =
-            'Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
+          model.window.description = 'Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy';
         }
       }
     });
@@ -210,18 +193,13 @@ export class Canteen extends BaseScene {
 
     this.restZonePopup = this.add.image(popupX, popupY, 'popup');
     this.restZonePopup.setScrollFactor(0);
-    this.restZoneText = this.add.text(
-      popupX - 86,
-      popupY - 10,
-      'Wycziluj [E]',
-      {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 20,
-        color: '#000000',
-        stroke: '#dddddd',
-        strokeThickness: 2,
-      },
-    );
+    this.restZoneText = this.add.text(popupX - 86, popupY - 10, 'Wycziluj [E]', {
+      fontFamily: 'Pixelify Sans',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
     this.restZoneText.setScrollFactor(0);
 
     this.restZonePopup.setVisible(false);
@@ -232,10 +210,7 @@ export class Canteen extends BaseScene {
         model.window.visible = true;
         model.window.title = 'Strefa czilałtu';
         model.window.description =
-          'Za dużo stresu podczas pracy?\n' +
-          'Weź trochę wycziluj.\n\n' +
-          '1. Odpocznij [1]\n' +
-          '2. Wyjście [ESC]';
+          'Za dużo stresu podczas pracy?\n' + 'Weź trochę wycziluj.\n\n' + '1. Odpocznij [1]\n' + '2. Wyjście [ESC]';
         model.window.options = [new Rest()];
       }
     });
@@ -252,18 +227,13 @@ export class Canteen extends BaseScene {
 
     this.vendingMachinePopup = this.add.image(popupX, popupY, 'popup');
     this.vendingMachinePopup.setScrollFactor(0);
-    this.vendingMachineText = this.add.text(
-      popupX - 86,
-      popupY - 10,
-      'Kup przekąskę [E]',
-      {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 20,
-        color: '#000000',
-        stroke: '#dddddd',
-        strokeThickness: 2,
-      },
-    );
+    this.vendingMachineText = this.add.text(popupX - 86, popupY - 10, 'Kup przekąskę [E]', {
+      fontFamily: 'Pixelify Sans',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
     this.vendingMachineText.setScrollFactor(0);
 
     this.vendingMachinePopup.setVisible(false);

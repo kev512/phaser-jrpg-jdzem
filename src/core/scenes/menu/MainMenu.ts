@@ -49,7 +49,7 @@ export class MainMenu extends Scene {
     this.authorsButton = this.createMenuLabel(512, 560, 'Autorzy');
 
     const devByBackground = this.add.image(512, 690, 'dev-by-background');
-    devByBackground.setScale(0.50);
+    devByBackground.setScale(0.5);
     this.devByLabel = this.createMenuLabel(512, 687, 'Developed by White Seagull Team');
 
     const infoButton = this.add.image(972, 100, 'button-bg');
@@ -64,14 +64,13 @@ export class MainMenu extends Scene {
     const label = this.add.text(x, y, text, {
       fontFamily: 'VT323',
       fontSize: 28,
-      color: '#3A3A50'
+      color: '#3A3A50',
     });
 
     label.setScrollFactor(0);
-    label.setOrigin(.5);
+    label.setOrigin(0.5);
     label.setInteractive();
 
     return label;
   }
-
 }

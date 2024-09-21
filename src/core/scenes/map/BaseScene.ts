@@ -77,12 +77,7 @@ export abstract class BaseScene extends Phaser.Scene {
   // }
 
   setCameraBounds() {
-    this.cameras.main.setBounds(
-      MAP_BOUNDARY.x,
-      MAP_BOUNDARY.y,
-      MAP_BOUNDARY.width,
-      MAP_BOUNDARY.height,
-    );
+    this.cameras.main.setBounds(MAP_BOUNDARY.x, MAP_BOUNDARY.y, MAP_BOUNDARY.width, MAP_BOUNDARY.height);
   }
 
   createLabels() {
@@ -93,13 +88,15 @@ export abstract class BaseScene extends Phaser.Scene {
     this.countdown = this.createStatLabel(x, y * 2);
     this.countdown.setScale(2.4);
 
-    this.delayText = this.add.text(x, 235, 'SPÓŹNIENIE: ', {
-      fontFamily: 'VT323',
-      fontSize: 28,
-      color: '#ff0000',
-      stroke: '#3A3A50',
-      strokeThickness: 2,
-    }).setVisible(false);
+    this.delayText = this.add
+      .text(x, 235, 'SPÓŹNIENIE: ', {
+        fontFamily: 'VT323',
+        fontSize: 28,
+        color: '#ff0000',
+        stroke: '#3A3A50',
+        strokeThickness: 2,
+      })
+      .setVisible(false);
     this.delayTime = this.createStatLabel(x + 135, y * 4.4);
     this.delayTime.setVisible(false);
 
@@ -146,7 +143,6 @@ export abstract class BaseScene extends Phaser.Scene {
       this.delayText.setVisible(true);
 
       this.delayText.setAlpha(Math.abs(Math.sin(this.time.now / 500)));
-
     } else {
       this.delayTime.setVisible(false);
       this.delayText.setVisible(false);
@@ -154,12 +150,12 @@ export abstract class BaseScene extends Phaser.Scene {
     }
 
     this.hunger.setText('Głód: ' + model.worker.getHunger() + ' / 100');
-    this.thirst.setText('Pragnienie: ' + model.worker.getThirst()+ ' / 100');
-    this.urine.setText('Pęcherz: ' + model.worker.getUrine()+ ' / 100');
-    this.poop.setText('Dwójeczka: ' + model.worker.getPoop()+ ' / 100');
-    this.stress.setText('Stres: ' + model.worker.getStress()+ ' / 100');
-    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue()+ ' / 100');
-    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness()+ ' / 100');
+    this.thirst.setText('Pragnienie: ' + model.worker.getThirst() + ' / 100');
+    this.urine.setText('Pęcherz: ' + model.worker.getUrine() + ' / 100');
+    this.poop.setText('Dwójeczka: ' + model.worker.getPoop() + ' / 100');
+    this.stress.setText('Stres: ' + model.worker.getStress() + ' / 100');
+    this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue() + ' / 100');
+    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness() + ' / 100');
 
     this.cash.setText('Kasa: ' + model.worker.getStress());
     this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
@@ -220,7 +216,7 @@ export abstract class BaseScene extends Phaser.Scene {
       fontSize: 28,
       color: '#ffffff',
       stroke: '#333333',
-      strokeThickness: 2
+      strokeThickness: 2,
     });
 
     label.setScrollFactor(0);
@@ -232,7 +228,7 @@ export abstract class BaseScene extends Phaser.Scene {
     const label = this.add.text(x, y, '', {
       fontFamily: 'VT323',
       fontSize: 28,
-      color: '#3A3A50'
+      color: '#3A3A50',
     });
 
     label.setScrollFactor(0);

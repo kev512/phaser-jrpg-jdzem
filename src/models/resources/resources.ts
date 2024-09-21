@@ -30,10 +30,7 @@ export class Resources {
 
   applyEffect(effect: Effect) {
     this.cash += effect.getCash();
-    this.reputation = Math.max(
-      0,
-      Math.min(MAX_REPUTATION, this.reputation + effect.getReputation()),
-    );
+    this.reputation = Math.max(0, Math.min(MAX_REPUTATION, this.reputation + effect.getReputation()));
     this.diapers += effect.getDiapers();
     this.beers += effect.getBeers();
     this.smokes += effect.getSmokes();

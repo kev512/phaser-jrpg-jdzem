@@ -29,17 +29,7 @@ export class Game {
           gravity: { x: 0, y: 0 },
         },
       },
-      scene: [
-        Boot,
-        Preloader,
-        MainMenu,
-        Canteen,
-        Buffet,
-        Restroom,
-        SmokeSpot,
-        GameOver,
-        Scoreboard,
-      ],
+      scene: [Boot, Preloader, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, GameOver, Scoreboard],
     });
   }
 }
