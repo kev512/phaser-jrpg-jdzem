@@ -1,12 +1,12 @@
 import { AfterShift } from '../models/effects/events/after-shift';
+import { AfterWork } from '../models/effects/events/after-work';
+import { Test } from '../models/effects/events/common/test';
 import { Event } from '../models/effects/events/event';
 import { StartGame } from '../models/effects/events/start-game';
 import { Worker } from '../models/worker/worker';
+import { INITIAL_TIMER_MINUTES } from './consts';
 import { Timer } from './scenes/Timer';
 import { Window } from './types/window';
-import { AfterWork } from '../models/effects/events/after-work';
-import { Test } from '../models/effects/events/common/test';
-import { INITIAL_TIMER_MINUTES } from './consts';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
@@ -73,7 +73,7 @@ export class Model {
       breakNumber++;
       this.worker.applyEffect(new AfterShift().getEffect());
       const randomCommonEvent = commonEvents[Math.floor(Math.random() * commonEvents.length)];
-      
+
       this.emit(randomCommonEvent);
     }
 
