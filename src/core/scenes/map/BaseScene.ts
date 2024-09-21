@@ -8,6 +8,7 @@ export abstract class BaseScene extends Phaser.Scene {
   protected player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   protected cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   protected collisionLayer: Phaser.Tilemaps.TilemapLayer;
+  protected statsBar: Phaser.GameObjects.Image;
 
   private timerObject: Timer;
   protected timer: Phaser.GameObjects.Text;
@@ -83,6 +84,8 @@ export abstract class BaseScene extends Phaser.Scene {
   createLabels() {
     const x = 945;
     const y = 32;
+
+    this.statsBar = this.add.image(1053, 450, 'stats-bar');
 
     this.timer = this.createStatLabel(x, y);
     this.countdown = this.createStatLabel(x, y * 2);
