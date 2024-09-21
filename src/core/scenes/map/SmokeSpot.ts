@@ -1,6 +1,6 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { MAP_BOUNDARY, WORKER_SIZE_SCALE } from '../../consts';
+import { WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
