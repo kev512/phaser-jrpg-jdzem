@@ -65,7 +65,7 @@ export abstract class BaseScene extends Phaser.Scene {
       stroke: '#3A3A50',
       strokeThickness: 2,
     }).setVisible(false);
-    this.delayTime = this.createStatLabel(x + 140, y * 4.4);
+    this.delayTime = this.createStatLabel(x + 135, y * 4.4);
     this.delayTime.setVisible(false);
 
     this.hunger = this.createStatLabel(x, y * 6);
