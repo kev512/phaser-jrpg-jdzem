@@ -16,8 +16,8 @@ export class MainMenu extends Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#000000');
-    this.background = this.add.image(512, 384, 'background');
-    // this.background.setScale(0.5);
+    this.background = this.add.image(545, 384, 'background');
+    // this.background.setScale(1.2);
 
     this.logo = this.add.image(512, 215, 'logo');
     this.logo.setScale(0.5);
@@ -27,6 +27,7 @@ export class MainMenu extends Scene {
     textNewGameBackground.setOrigin(0.5);
 
     this.newGameButton = this.createMenuLabel(512, 410, 'Nowa Gra');
+
     this.newGameButton.on('pointerdown', () => {
       this.scene.start('Canteen');
     });
@@ -36,6 +37,7 @@ export class MainMenu extends Scene {
     textScoreboardBackground.setOrigin(0.5);
 
     this.scoreboardButton = this.createMenuLabel(512, 485, 'Wyniki');
+
     this.scoreboardButton.on('pointerdown', () => {
       this.scene.start('Scoreboard');
     });
@@ -53,11 +55,9 @@ export class MainMenu extends Scene {
     const infoButton = this.add.image(972, 100, 'button-bg');
     infoButton.setScale(0.25);
     infoButton.setOrigin(0.5);
-    infoButton.setInteractive(0.5);
+    infoButton.setInteractive();
 
     this.infoButton = this.createMenuLabel(972, 98, 'Info');
-
-  
   }
 
   private createMenuLabel(x: number, y: number, text: string) {
