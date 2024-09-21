@@ -7,7 +7,8 @@ export class MainMenu extends Scene {
   newGameButton: GameObjects.Text;
   scoreboardButton: GameObjects.Text;
   authorsButton: GameObjects.Text;
-  infoButton: GameObjects.Image;
+  infoButton: GameObjects.Text;
+  devByLabel: GameObjects.Text;
 
   constructor() {
     super('MainMenu');
@@ -16,7 +17,7 @@ export class MainMenu extends Scene {
   create() {
     this.cameras.main.setBackgroundColor('#000000');
     this.background = this.add.image(512, 384, 'background');
-    this.background.setScale(0.5);
+    // this.background.setScale(0.5);
 
     this.logo = this.add.image(512, 215, 'logo');
     this.logo.setScale(0.5);
@@ -45,11 +46,18 @@ export class MainMenu extends Scene {
 
     this.authorsButton = this.createMenuLabel(512, 560, 'Autorzy');
 
-    this.infoButton = this.add
-      .image(972, 100, 'info')
-      .setScale(0.5)
-      .setOrigin(0.5)
-      .setInteractive();
+    const devByBackground = this.add.image(512, 690, 'dev-by-background');
+    devByBackground.setScale(0.50);
+    this.devByLabel = this.createMenuLabel(512, 687, 'Developed by White Seagull Team');
+
+    const infoButton = this.add.image(972, 100, 'button-bg');
+    infoButton.setScale(0.25);
+    infoButton.setOrigin(0.5);
+    infoButton.setInteractive(0.5);
+
+    this.infoButton = this.createMenuLabel(972, 98, 'Info');
+
+  
   }
 
   private createMenuLabel(x: number, y: number, text: string) {

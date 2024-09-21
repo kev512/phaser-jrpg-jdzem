@@ -12,6 +12,7 @@ export class Boot extends Scene {
     this.load.tilemapTiledJSON('smoke-spot-map', 'assets/smoke-spot.json');
 
     this.load.image('background', 'assets/background.png');
+    this.load.image('dev-by-background', 'assets/bottom-bar-background.png');
     this.load.image('window', 'assets/window.png');
     this.load.image('popup', 'assets/popup.png');
 
