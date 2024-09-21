@@ -6,6 +6,8 @@ import { BaseScene } from './BaseScene';
 import { Lunch } from '../../../models/effects/items/lunch';
 
 export class Canteen extends BaseScene {
+  statsBar: Phaser.GameObjects.Image
+
   lockerPopup: Phaser.GameObjects.Image;
   lockerText: Phaser.GameObjects.Text;
   isNearLocker: boolean = false;
@@ -27,7 +29,7 @@ export class Canteen extends BaseScene {
 
     this.addCollision();
 
-    this.add.rectangle(1062, 0, 316, 1800, 0x212121);
+    this.statsBar = this.add.image(1053, 450, 'stats-bar');
 
     this.cameras.main.setBounds(
       MAP_BOUNDARY.x,
