@@ -15,37 +15,40 @@ export class Afternoon extends Scene {
     this.background = this.add.image(545, 384, 'background');
     this.background.setScrollFactor(0);
 
-    const homeButtonBackground = this.add.image(590, 412, 'button-large-bg');
+    const x = 590;
+
+    const homeButtonBackground = this.add.image(x, 412, 'button-large-bg');
     homeButtonBackground.setScale(0.45);
     homeButtonBackground.setOrigin(0.5);
 
-    this.homeButton = this.createButtonLabel(590, 410, 'Wróć do domu');
+    this.homeButton = this.createButtonLabel(x, 410, 'Wróć do domu');
 
     this.homeButton.on('pointerdown', () => {
       model.timerObject.reset();
       this.scene.start('Canteen');
     });
 
-    const shopButtonBackground = this.add.image(590, 487, 'button-large-bg');
+    const shopButtonBackground = this.add.image(x, 487, 'button-large-bg');
     shopButtonBackground.setScale(0.45);
     shopButtonBackground.setOrigin(0.5);
 
-    this.shopButton = this.createButtonLabel(590, 485, 'Skocz do sklepu i potem do domu');
+    this.shopButton = this.createButtonLabel(x, 485, 'Skocz do sklepu i potem do domu');
 
     this.shopButton.on('pointerdown', () => {
       this.scene.start('Shop');
     });
 
     const label = this.add.text(
-      590,
-      250,
-      'Ktoś powie, że to tylko praca.\nJa powiem, że to bitwa o przetrwanie,\nale przetrwałem, więc jestem zwycięzcą.',
+      x,
+      200,
+      'Ktoś powie, że to tylko praca.\nJa powiem, że to bitwa o przetrwanie,\nale przetrwałem, więc jestem zwycięzcą.\n\n'
+      + 'Teraz masz wybór! Albo pędzisz prosto do domu,\nwciągasz kapcie i padasz do łoża jak król..\nalbo zaglądasz do sklepu u Stasi po zaopatrzenie\nna kolejny pełen wrażeń dzień.\nNo to jak, co wybierasz kolego?',
       {
         fontFamily: 'VT323',
-        fontSize: 40,
+        fontSize: 24,
         color: '#eeeeee',
         stroke: '#000000',
-        strokeThickness: 8,
+        strokeThickness: 4,
       },
     );
     label.setScrollFactor(0);
