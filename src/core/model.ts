@@ -96,17 +96,26 @@ export class Model {
     if (this.breakNumber === 3) {
       days++;
       breakNumber = 1;
-      this.emit(new AfterWork());
+      
+      const afterWork = new AfterWork();
+      this.worker.applyEffect(afterWork.getEffect());
+
+      const afterShift = new AfterShift();
+      this.worker.applyEffect(afterShift.getEffect());
+
       goToAfternoonScene();
     } else {
       breakNumber++;
-      this.worker.applyEffect(new AfterShift().getEffect());
+
+      const afterShift = new AfterShift();
+      this.worker.applyEffect(afterShift.getEffect());
+
       const randomCommonEvent = commonEvents[Math.floor(Math.random() * commonEvents.length)];
 
       this.emit(randomCommonEvent);
     }
 
-    this.timerObject.reset();
+    console.log('Days: ', days, 'Break: ', breakNumber);
   }
 
   emit(event: Event) {
