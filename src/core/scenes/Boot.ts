@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import { model } from '../../main';
 
 export class Boot extends Scene {
   constructor() {
@@ -44,7 +45,9 @@ export class Boot extends Scene {
   create() {
     this.createAnimations();
 
-    this.scene.start('Preloader');
+    model.startGame();
+
+    this.scene.start('MainMenu');
   }
 
   private createAnimations() {
