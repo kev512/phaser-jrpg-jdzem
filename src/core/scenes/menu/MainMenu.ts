@@ -25,32 +25,16 @@ export class MainMenu extends Scene {
     textNewGameBackground.setScale(0.45);
     textNewGameBackground.setOrigin(0.5);
 
-    this.newGameButton = this.add
-      .text(512, 410, 'Nowa Gra', {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 28,
-        color: '#000000',
-      })
-      .setOrigin(0.5)
-      .setInteractive();
+    this.newGameButton = this.createMenuLabel(512, 410, 'Nowa Gra');
+    this.newGameButton.on('pointerdown', () => {
+      this.scene.start('Canteen');
+    });
 
     const textScoreboardBackground = this.add.image(512, 487, 'button-bg');
     textScoreboardBackground.setScale(0.45);
     textScoreboardBackground.setOrigin(0.5);
 
-    this.newGameButton.on('pointerdown', () => {
-      this.scene.start('Canteen');
-    });
-
-    this.scoreboardButton = this.add
-      .text(512, 485, 'Wyniki', {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 28,
-        color: '#000000',
-      })
-      .setOrigin(0.5)
-      .setInteractive();
-
+    this.scoreboardButton = this.createMenuLabel(512, 485, 'Wyniki');
     this.scoreboardButton.on('pointerdown', () => {
       this.scene.start('Scoreboard');
     });
@@ -59,14 +43,7 @@ export class MainMenu extends Scene {
     textAuthorsBackground.setScale(0.45);
     textAuthorsBackground.setOrigin(0.5);
 
-    this.authorsButton = this.add
-      .text(512, 560, 'Autorzy', {
-        fontFamily: 'Pixelify Sans',
-        fontSize: 28,
-        color: '#000000',
-      })
-      .setOrigin(0.5)
-      .setInteractive();
+    this.authorsButton = this.createMenuLabel(512, 560, 'Autorzy');
 
     this.infoButton = this.add
       .image(972, 100, 'info')
@@ -74,4 +51,19 @@ export class MainMenu extends Scene {
       .setOrigin(0.5)
       .setInteractive();
   }
+
+  private createMenuLabel(x: number, y: number, text: string) {
+    const label = this.add.text(x, y, text, {
+      fontFamily: 'VT323',
+      fontSize: 28,
+      color: '#3A3A50'
+    });
+
+    label.setScrollFactor(0);
+    label.setOrigin(.5);
+    label.setInteractive();
+
+    return label;
+  }
+
 }

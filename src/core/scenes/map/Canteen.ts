@@ -5,6 +5,8 @@ import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
 
 export class Canteen extends BaseScene {
+  statsBar: Phaser.GameObjects.Image
+
   constructor() {
     super('Canteen');
   }
@@ -18,7 +20,7 @@ export class Canteen extends BaseScene {
 
     this.addCollision();
 
-    this.add.rectangle(1062, 0, 316, 1800, 0x212121);
+    this.statsBar = this.add.image(1053, 450, 'stats-bar');
 
     this.cameras.main.setBounds(
       MAP_BOUNDARY.x,
