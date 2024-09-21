@@ -59,10 +59,10 @@ export class Restroom extends BaseScene {
     this.updateWindow();
 
     this.isNearUrinal = this.player.y >= 504 && this.player.y <= 508 && this.player.x >= 496 && this.player.x <= 656;
-    this.updateUrinalPopup(this.isNearUrinal && !model.window.visible);
+    this.updateUrinalPopup(this.isNearUrinal && !model.isWindowVisible);
 
     this.isNearToilet = this.player.y >= 504 && this.player.y <= 508 && this.player.x >= 334 && this.player.x <= 393;
-    this.updateToiletPopup(this.isNearToilet && !model.window.visible);
+    this.updateToiletPopup(this.isNearToilet && !model.isWindowVisible);
   }
 
   private createMap() {
@@ -109,10 +109,9 @@ export class Restroom extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearUrinal) {
-        model.window.visible = true;
-        model.window.title = 'Pisuar';
-        model.window.description = 'Stajesz przed pisuarem.\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]';
-        model.window.options = [new Pissoir()];
+        model.showWindow('Pisuar', 'Stajesz przed pisuarem.\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]', [
+          new Pissoir(),
+        ]);
       }
     });
   }
@@ -142,10 +141,9 @@ export class Restroom extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearToilet) {
-        model.window.visible = true;
-        model.window.title = 'Sedes';
-        model.window.description = 'Siadasz na tronie?\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]';
-        model.window.options = [new Toilet()];
+        model.showWindow('Sedes', 'Siadasz na tronie?\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]', [
+          new Toilet(),
+        ]);
       }
     });
   }
