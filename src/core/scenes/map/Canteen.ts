@@ -7,6 +7,9 @@ import { Lunch } from '../../../models/effects/items/lunch';
 import { TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
+import { VideoGameLol } from '../../../models/effects/events/map/canteen/video-games/video-game-lol';
+import { VideoGameCS } from '../../../models/effects/events/map/canteen/video-games/video-games-cs';
+import { VideoGameTekken } from '../../../models/effects/events/map/canteen/video-games/video-game-tekken';
 
 export class Canteen extends BaseScene {
   lockerPopup: Phaser.GameObjects.Image;
@@ -299,7 +302,7 @@ export class Canteen extends BaseScene {
             '2. Klanówka w CSa [2]\n' +
             '3. Rundka w Tekkena [3]\n' +
             '4. Nie graj w nic [ESC]',
-          [new Snack(), new Soda()],
+          [new VideoGameLol(), new VideoGameCS(), new VideoGameTekken()],
         );
       }
     });
