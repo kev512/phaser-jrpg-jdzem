@@ -1,5 +1,6 @@
 import { Game as PhaserGame } from 'phaser';
 import { HEIGHT, WIDTH } from './consts';
+import { Afternoon } from './scenes/Afternoon';
 import { Boot } from './scenes/Boot';
 import { GameOver } from './scenes/GameOver';
 import { Buffet } from './scenes/map/Buffet';
@@ -8,6 +9,7 @@ import { Restroom } from './scenes/map/Restroom';
 import { SmokeSpot } from './scenes/map/SmokeSpot';
 import { MainMenu } from './scenes/menu/MainMenu';
 import { Scoreboard } from './scenes/menu/Scoreboard';
+import { Shop } from './scenes/Shop';
 
 export class Game {
   constructor() {
@@ -28,7 +30,7 @@ export class Game {
           gravity: { x: 0, y: 0 },
         },
       },
-      scene: [Boot, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, GameOver, Scoreboard],
+      scene: [Boot, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, Afternoon, Shop, GameOver, Scoreboard],
     });
   }
 }

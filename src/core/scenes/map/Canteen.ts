@@ -151,11 +151,12 @@ export class Canteen extends BaseScene {
   }
 
   private finishBreak() {
+    model.setScene('Canteen');
     this.resetPlayerPosition();
 
     model.finishBreak(() => {
-      this.scene.start('Afternoon');
       model.setScene('Afternoon');
+      this.scene.start('Afternoon');
     });
   }
 

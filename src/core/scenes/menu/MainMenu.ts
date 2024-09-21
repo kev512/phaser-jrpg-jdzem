@@ -3,7 +3,6 @@ import { Scene, GameObjects } from 'phaser';
 export class MainMenu extends Scene {
   background: GameObjects.Image;
   logo: GameObjects.Image;
-  title: GameObjects.Text;
   newGameButton: GameObjects.Text;
   scoreboardButton: GameObjects.Text;
   authorsButton: GameObjects.Text;
