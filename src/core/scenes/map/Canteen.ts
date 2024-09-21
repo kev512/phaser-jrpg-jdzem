@@ -301,7 +301,7 @@ export class Canteen extends BaseScene {
             '2. Klanówka w CSa [2]\n' +
             '3. Rundka w Tekkena [3]\n' +
             '4. Nie graj w nic [ESC]',
-          [new VideoGameLol, new VideoGameCS, new VideoGameTekken],
+          [new VideoGameLol(), new VideoGameCS(), new VideoGameTekken()],
         );
       }
     });
