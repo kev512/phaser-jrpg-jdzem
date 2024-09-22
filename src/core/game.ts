@@ -11,6 +11,7 @@ import { Intro } from './scenes/menu/Intro';
 import { MainMenu } from './scenes/menu/MainMenu';
 import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Shop } from './scenes/Shop';
+import { Intro } from './scenes/Intro';
 
 export class Game {
   constructor() {

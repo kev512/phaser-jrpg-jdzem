@@ -10,3 +10,5 @@ export const MAX_DRUNKNESS = 100;
 export const INITIAL_SPEED = 10;
 
 export const WAGE = 100;
+
+export const INITIAL_TIMER_MINUTES = 15;
