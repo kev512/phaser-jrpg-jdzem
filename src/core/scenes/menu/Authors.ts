@@ -46,7 +46,7 @@ export class Authors extends Scene {
       color: '#FFFFFF'
     }).setOrigin(0.5, 0.5);
 
-    const a3 = this.add.text(this.cameras.main.centerX - 162, this.cameras.main.centerY - 70, 'Stanisław Banaszek - developer', {
+    const a3 = this.add.text(this.cameras.main.centerX - 115, this.cameras.main.centerY - 70, 'Stanisław Letosław Banaszek - developer', {
       fontFamily: 'VT323',
       fontSize: '28px',
       color: '#FFFFFF'
@@ -79,7 +79,7 @@ export class Authors extends Scene {
     infoButton.on('pointerdown', () => {
       this.scene.start('MainMenu');
     });
-    
+
     this.backButton = this.createMenuLabel(1000, 98, 'Powrót');
     this.backButton.on('pointerdown', () => {
       this.scene.start('MainMenu');
