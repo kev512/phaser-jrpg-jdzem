@@ -47,7 +47,7 @@ export class Timer {
   }
 
   isTimeUpExceedingCriticalLevel(): boolean {
-    return this.remainingTime <= CRITICAL_TIME_UP_MINUTES;
+    return this.remainingTime <= CRITICAL_TIME_UP_MINUTES * 60;
   }
 
   reset() {
