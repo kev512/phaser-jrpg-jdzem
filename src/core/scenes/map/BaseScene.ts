@@ -275,7 +275,7 @@ export abstract class BaseScene extends Phaser.Scene {
     this.setBarValue(this.fatigueBar, model.worker.getFatigue());
 
     this.drunkness.setText('Upojenie %%: ' + model.worker.getDrunkness() + ' / 100');
-    this.setBarValue(this.drunknessBar, model.worker.getFatigue());
+    this.setBarValue(this.drunknessBar, model.worker.getDrunkness());
 
     this.cash.setText(`${model.worker.getCash()}`);
     this.smokes.setText(`${model.worker.getSmokes()}`);

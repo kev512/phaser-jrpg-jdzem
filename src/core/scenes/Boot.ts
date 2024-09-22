@@ -23,6 +23,7 @@ export class Boot extends Scene {
     this.load.tilemapTiledJSON('restroom-map', 'assets/restroom.json');
     this.load.tilemapTiledJSON('smoke-spot-map', 'assets/smoke-spot.json');
 
+    this.load.image('seagull', 'assets/seagull-logo.png');
     this.load.image('background', 'assets/background.png');
     this.load.image('shop-background', 'assets/shop-background.png');
     this.load.image('town-background', 'assets/town-background.png');
@@ -47,6 +48,7 @@ export class Boot extends Scene {
     this.load.image('diaper', 'assets/diaper.png');
     this.load.image('calendar', 'assets/calendar.png');
     this.load.image('clock', 'assets/clock.png');
+    this.load.audio('menuMusic', 'assets/menuMusic.ogg');
 
     this.load.spritesheet('worker', 'assets/Alex_run_16x24.png', {
       frameWidth: 16,
@@ -63,12 +65,29 @@ export class Boot extends Scene {
       frameWidth: 16,
       frameHeight: 32,
     });
+
+    this.load.spritesheet('npc3', 'assets/Adam_phone_16x16.png', {
+      frameWidth: 16,
+      frameHeight: 32,
+    });
+
+    this.load.spritesheet('npc4', 'assets/Amelia_sit3_16x16.png', {
+      frameWidth: 16,
+      frameHeight: 32,
+    });
+
+    this.load.spritesheet('npc5', 'assets/Adam_sit3_16x16.png', {
+      frameWidth: 16,
+      frameHeight: 32,
+    });
   }
 
   create() {
     this.createAnimations();
 
-    this.scene.start('MainMenu');
+    model.startGame();
+
+    this.scene.start('Intro');
   }
 
   private createAnimations() {

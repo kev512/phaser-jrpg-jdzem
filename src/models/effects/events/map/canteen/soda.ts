@@ -12,6 +12,8 @@ export class Soda extends Event {
       new Effect({
         thirst: -25,
         urine: 15,
+        minutes: -3,
+        cash: -5,
       }),
     );
   }

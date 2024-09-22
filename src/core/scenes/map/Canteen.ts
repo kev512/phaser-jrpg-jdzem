@@ -10,6 +10,7 @@ import { BaseScene } from './BaseScene';
 import { VideoGameLol } from '../../../models/effects/events/map/canteen/video-games/video-game-lol';
 import { VideoGameCS } from '../../../models/effects/events/map/canteen/video-games/video-games-cs';
 import { VideoGameTekken } from '../../../models/effects/events/map/canteen/video-games/video-game-tekken';
+import { ChatWithBuddies } from '../../../models/effects/events/map/canteen/chat-with-buddies';
 
 export class Canteen extends BaseScene {
   lockerPopup: Phaser.GameObjects.Image;
@@ -27,7 +28,16 @@ export class Canteen extends BaseScene {
   computerPopup: Phaser.GameObjects.Image;
   computerText: Phaser.GameObjects.Text;
   isNearComputer: boolean = false;
+
+  chatWithBuddiesPoupup: Phaser.GameObjects.Image;
+  chatWithBuddiesText: Phaser.GameObjects.Text;
+  isNearchatWithBuddies: boolean = false;
+
+  //static NPCs type declaration
   npc2: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc3: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc4: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc5: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
 
   constructor() {
     super('Canteen');
@@ -57,6 +67,7 @@ export class Canteen extends BaseScene {
     this.createRestZonePopup();
     this.createVendingMachinePopup();
     this.createComputerPopup();
+    this.createChatWithBuddies();
   }
 
   update(time: number, deltaTime: number) {
@@ -97,6 +108,9 @@ export class Canteen extends BaseScene {
     this.isNearComputer = this.player.y === 744 && this.player.x >= 736 && this.player.x <= 752;
     this.updateComputerPopup(this.isNearComputer && !model.isWindowVisible);
 
+    this.isNearchatWithBuddies = (this.player.y >= 320 && this.player.x >= 210) && (this.player.y <= 465 && this.player.x <= 501);
+    this.updateChatWithBuddies(this.isNearchatWithBuddies && !model.isWindowVisible);
+
     if (this.player.x >= 930) {
       if (model.worker.isCriticalState()) {
         model.showWindow('Załatw potrzeby', 'Nie możesz wrócić do pracy\nw takim stanie!\n\n1. Faktycznie [ESC]');
@@ -124,6 +138,36 @@ export class Canteen extends BaseScene {
       repeat: -1,
     });
     this.npc2.play('npc2-anim-buffet');
+
+    this.npc3 = this.physics.add.sprite(217, 335, 'npc3');
+    this.npc3.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc3-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc3'),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.npc3.play('npc3-anim-buffet');
+
+    this.npc4 = this.physics.add.sprite(316, 427, 'npc4');
+    this.npc4.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc4-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc4', {start:0, end:5}),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.npc4.play('npc4-anim-buffet');
+
+    this.npc5 = this.physics.add.sprite(404, 427, 'npc5');
+    this.npc5.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc5-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc5', {start:6, end:11}),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.npc5.play('npc5-anim-buffet');
   }
 
   private createPlayer() {
@@ -252,7 +296,7 @@ export class Canteen extends BaseScene {
       if (this.isNearRestZone) {
         model.showWindow(
           'Strefa czilałtu',
-          'Za dużo stresu podczas pracy?\n' + 'Weź trochę wycziluj.\n\n' + '1. Odpocznij [1]\n' + '2. Wyjście [ESC]',
+          'Za dużo roboty w pracy?\n' + 'Weź trochę wycziluj.\n\n' + '1. Odpocznij [1]\n' + '2. Wyjście [ESC]',
           [new Rest()],
         );
       }
@@ -337,5 +381,39 @@ export class Canteen extends BaseScene {
   private updateComputerPopup(visible: boolean) {
     this.computerPopup.setVisible(visible);
     this.computerText.setVisible(visible);
+  }
+
+  private createChatWithBuddies() {
+    const popupX = 350//TILE_SIZE * 4;
+    const popupY = 250//TILE_SIZE * 10;
+
+    this.chatWithBuddiesPoupup = this.add.image(popupX, popupY, 'popup');
+    this.chatWithBuddiesPoupup.setScrollFactor(0);
+    this.chatWithBuddiesText = this.add.text(popupX - 86, popupY - 10, 'Pogadaj z ziomkamki [E]', {
+      fontFamily: 'VT323',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
+    this.chatWithBuddiesText.setScrollFactor(0);
+
+    this.chatWithBuddiesPoupup.setVisible(false);
+    this.chatWithBuddiesText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-E', () => {
+      if (this.isNearchatWithBuddies) {
+        model.showWindow(
+          'Strefa ziomeczków',
+          'Szef was zadręcza?\nRoboty jest po pachy?\n' + 'Pogadaj z ziomeczkami.\n\n' + '1. Pogadaj [1]\n' + '2. Wyjście [ESC]',
+          [new ChatWithBuddies()],
+        );
+      }
+    });
+  }
+
+  private updateChatWithBuddies(visible: boolean) {
+    this.chatWithBuddiesPoupup.setVisible(visible);
+    this.chatWithBuddiesText.setVisible(visible);
   }
 }

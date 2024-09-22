@@ -8,6 +8,9 @@ export class MainMenu extends Scene {
   authorsButton: GameObjects.Text;
   infoButton: GameObjects.Text;
   devByLabel: GameObjects.Text;
+  backgroundMusic: Phaser.Sound.BaseSound;
+
+  audioContext: AudioContext;
 
   constructor() {
     super('MainMenu');
@@ -20,6 +23,13 @@ export class MainMenu extends Scene {
     this.logo = this.add.image(590, 215, 'logo');
     this.logo.setScale(0.5);
 
+    this.backgroundMusic = this.sound.add('menuMusic', {
+      loop: true,
+      volume: 0.4 
+    });
+
+    this.backgroundMusic.play({ loop: true });
+
     const textNewGameBackground = this.add.image(590, 412, 'button-bg');
     textNewGameBackground.setScale(0.45);
     textNewGameBackground.setOrigin(0.5);
@@ -27,7 +37,8 @@ export class MainMenu extends Scene {
     this.newGameButton = this.createMenuLabel(590, 410, 'Nowa Gra');
 
     this.newGameButton.on('pointerdown', () => {
-      this.scene.start('Intro');
+      this.backgroundMusic.stop();
+      this.scene.start('Canteen');
     });
 
     const textScoreboardBackground = this.add.image(590, 487, 'button-bg');
