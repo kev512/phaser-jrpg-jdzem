@@ -4,9 +4,9 @@ import { INITIAL_CASH, MAX_REPUTATION } from './resources.consts';
 export class Resources {
   private cash: number = INITIAL_CASH;
   private reputation: number = 0;
-  private diapers: number = 0;
-  private beers: number = 0;
-  private smokes: number = 0;
+  private diapers: number = 1;
+  private beers: number = 1;
+  private smokes: number = 1;
 
   getCash(): number {
     return this.cash;
@@ -55,41 +55,5 @@ export class Resources {
     this.smokes += effect.getSmokes();
 
     this.reputation = Math.max(0, Math.min(MAX_REPUTATION, this.reputation + effect.getReputation()));
-  }
-
-  addDiaper() {
-    this.diapers++;
-  }
-
-  addBeer() {
-    this.beers++;
-  }
-
-  addSmokes() {
-    this.smokes++;
-  }
-
-  removeDiaper() {
-    if (this.diapers - 1 < 0) {
-      throw new Error('Not enough diapers');
-    }
-
-    this.diapers--;
-  }
-
-  removeBeer() {
-    if (this.beers - 1 < 0) {
-      throw new Error('Not enough beers');
-    }
-
-    this.beers--;
-  }
-
-  removeSmokes() {
-    if (this.smokes - 1 < 0) {
-      throw new Error('Not enough smokes');
-    }
-
-    this.smokes--;
   }
 }

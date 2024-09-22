@@ -133,26 +133,26 @@ export class Worker {
   }
 
   addDiaper() {
-    this.resources.addDiaper();
+    this.resources.applyEffect(new Effect({ diapers: 1 }));
   }
 
   addBeer() {
-    this.resources.addBeer();
+    this.resources.applyEffect(new Effect({ beers: 1 }));
   }
 
   addSmokes() {
-    this.resources.addSmokes();
+    this.resources.applyEffect(new Effect({ smokes: 1 }));
   }
 
   removeDiaper() {
-    this.resources.removeDiaper();
+    this.resources.applyEffect(new Effect({ diapers: -1 }));
   }
 
   removeBeer() {
-    this.resources.removeBeer();
+    this.resources.applyEffect(new Effect({ beers: -1 }));
   }
 
   removeSmokes() {
-    this.resources.removeSmokes();
+    this.resources.applyEffect(new Effect({ smokes: -1 }));
   }
 }
