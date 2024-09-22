@@ -98,7 +98,12 @@ export class Canteen extends BaseScene {
     this.updateComputerPopup(this.isNearComputer && !model.isWindowVisible);
 
     if (this.player.x >= 930) {
-      this.finishBreak();
+      if (model.worker.isCriticalState()) {
+        model.showWindow('Załatw potrzeby', 'Nie możesz wrócić do pracy\nw takim stanie!\n\n1. Faktycznie [ESC]');
+        this.player.setX(920);
+      } else {
+        this.finishBreak();
+      }
     }
 
     console.log(this.player.x, this.player.y);
