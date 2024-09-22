@@ -13,7 +13,6 @@ import {
   MAX_THIRST,
   MAX_URINE,
 } from './worker.consts';
-import { Lunch } from '../effects/items/lunch';
 
 export class Worker {
   private hunger: number = 0;
@@ -28,10 +27,7 @@ export class Worker {
   private resources: Resources = new Resources();
   private items: Item[] = [];
 
-  constructor() {
-    // TODO
-    this.addItem(new Lunch());
-  }
+  constructor() {}
 
   applyEffect(effect: Effect) {
     this.hunger = Math.min(MAX_HUNGER, Math.max(0, this.hunger + effect.getEffectHunger()));
@@ -88,7 +84,7 @@ export class Worker {
   }
 
   getDrunkness(): number {
-    return this.fatigue;
+    return this.drunkness;
   }
 
   getCash(): number {
@@ -101,5 +97,25 @@ export class Worker {
 
   getSmokes(): number {
     return this.resources.getSmokes();
+  }
+
+  getBeers(): number {
+    return this.resources.getBeers();
+  }
+
+  decreaseCash(amount: number) {
+    this.resources.decreaseCash(amount);
+  }
+
+  addDiaper() {
+    this.resources.addDiaper();
+  }
+
+  addBeer() {
+    this.resources.addBeer();
+  }
+
+  addSmokes() {
+    this.resources.addSmokes();
   }
 }

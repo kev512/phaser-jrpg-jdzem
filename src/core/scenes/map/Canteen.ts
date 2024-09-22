@@ -7,6 +7,9 @@ import { Lunch } from '../../../models/effects/items/lunch';
 import { TILE_SIZE, WORKER_SIZE_SCALE } from '../../consts';
 import { MapLoader } from '../../map-loader';
 import { BaseScene } from './BaseScene';
+import { VideoGameLol } from '../../../models/effects/events/map/canteen/video-games/video-game-lol';
+import { VideoGameCS } from '../../../models/effects/events/map/canteen/video-games/video-games-cs';
+import { VideoGameTekken } from '../../../models/effects/events/map/canteen/video-games/video-game-tekken';
 
 export class Canteen extends BaseScene {
   lockerPopup: Phaser.GameObjects.Image;
@@ -24,6 +27,7 @@ export class Canteen extends BaseScene {
   computerPopup: Phaser.GameObjects.Image;
   computerText: Phaser.GameObjects.Text;
   isNearComputer: boolean = false;
+  npc2: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
 
   constructor() {
     super('Canteen');
@@ -105,6 +109,16 @@ export class Canteen extends BaseScene {
 
     this.map = result.map;
     this.collisionLayer = result.collisionLayer;
+
+    this.npc2 = this.physics.add.sprite(504, 380, 'npc2');
+    this.npc2.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc2-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc2', {start:6, end:11}),
+      frameRate: 5,
+      repeat: -1
+    });
+    this.npc2.play('npc2-anim-buffet');
   }
 
   private createPlayer() {
@@ -151,11 +165,12 @@ export class Canteen extends BaseScene {
   }
 
   private finishBreak() {
+    model.setScene('Canteen');
     this.resetPlayerPosition();
 
     model.finishBreak(() => {
-      this.scene.start('Afternoon');
       model.setScene('Afternoon');
+      this.scene.start('Afternoon');
     });
   }
 
@@ -298,7 +313,7 @@ export class Canteen extends BaseScene {
             '2. Klanówka w CSa [2]\n' +
             '3. Rundka w Tekkena [3]\n' +
             '4. Nie graj w nic [ESC]',
-          [new Snack(), new Soda()],
+          [new VideoGameLol(), new VideoGameCS(), new VideoGameTekken()],
         );
       }
     });

@@ -12,6 +12,10 @@ export class Resources {
     return this.cash;
   }
 
+  decreaseCash(amount: number) {
+    this.cash -= amount;
+  }
+
   getReputation(): number {
     return this.reputation;
   }
@@ -34,5 +38,17 @@ export class Resources {
     this.diapers += effect.getDiapers();
     this.beers += effect.getBeers();
     this.smokes += effect.getSmokes();
+  }
+
+  addDiaper() {
+    this.diapers++;
+  }
+
+  addBeer() {
+    this.beers++;
+  }
+
+  addSmokes() {
+    this.smokes++;
   }
 }
