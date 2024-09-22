@@ -25,7 +25,7 @@ export class MainMenu extends Scene {
 
     this.backgroundMusic = this.sound.add('menuMusic', {
       loop: true,
-      volume: 0.4 
+      volume: 0.4,
     });
 
     this.backgroundMusic.play({ loop: true });
@@ -38,7 +38,7 @@ export class MainMenu extends Scene {
 
     this.newGameButton.on('pointerdown', () => {
       this.backgroundMusic.stop();
-      this.scene.start('Canteen');
+      this.scene.start('NewGameHints');
     });
 
     const textScoreboardBackground = this.add.image(590, 487, 'button-bg');

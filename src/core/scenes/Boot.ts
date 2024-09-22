@@ -26,6 +26,7 @@ export class Boot extends Scene {
     this.load.image('seagull', 'assets/seagull-logo.png');
     this.load.image('background', 'assets/background.png');
     this.load.image('shop-background', 'assets/shop-background.png');
+    this.load.image('town-background', 'assets/town-background.png');
     this.load.image('dev-by-background', 'assets/bottom-bar-background.png');
     this.load.image('window', 'assets/window.png');
     this.load.image('popup', 'assets/popup.png');

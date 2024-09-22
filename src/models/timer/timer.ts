@@ -1,6 +1,9 @@
+import { CRITICAL_TIME_UP_MINUTES } from './timer.consts';
+
 export class Timer {
   private remainingTime: number;
   private delayTime: number = 0;
+  private lateTime: number = 0;
   private isPaused: boolean;
   private initialTime: number;
 
@@ -24,7 +27,16 @@ export class Timer {
   }
 
   adjustTime(seconds: number) {
-    this.remainingTime += seconds;
+    if (this.remainingTime > 0) {
+      this.remainingTime += seconds;
+
+      if (this.remainingTime < 0) {
+          this.delayTime += Math.abs(this.remainingTime);
+          this.remainingTime = 0;
+      }
+    } else {
+      this.delayTime += Math.abs(seconds);
+    }
   }
 
   getFormattedTime(): string {
@@ -42,6 +54,10 @@ export class Timer {
 
   isTimeUp(): boolean {
     return this.remainingTime <= 0;
+  }
+
+  isTimeUpExceedingCriticalLevel(): boolean {
+    return this.remainingTime <= CRITICAL_TIME_UP_MINUTES * 60;
   }
 
   reset() {

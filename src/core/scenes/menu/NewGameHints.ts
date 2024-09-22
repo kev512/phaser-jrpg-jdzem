@@ -1,12 +1,12 @@
-import { model } from '../../main';
+import { model } from '../../../main';
 
-export class Intro extends Phaser.Scene {
+export class NewGameHints extends Phaser.Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
   background: Phaser.GameObjects.Image;
   gameover_text: Phaser.GameObjects.Text;
 
   constructor() {
-    super('Intro');
+    super('NewGameHints');
   }
 
   create() {
@@ -37,6 +37,4 @@ export class Intro extends Phaser.Scene {
       this.scene.start('Canteen');
     });
   }
-
-  update(time: number, delta: number): void {}
 }

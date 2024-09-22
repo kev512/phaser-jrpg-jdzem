@@ -12,6 +12,7 @@ export class VideoGameTekken extends Event {
       new Effect({
         hunger: +5,
         stress: -10,
+        minutes: -3,
       }),
     );
   }

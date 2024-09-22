@@ -11,6 +11,7 @@ export class Rest extends Event {
       'Chwilę poleżałeś na kanapie.',
       new Effect({
         fatigue: -40,
+        minutes: -10,
       }),
     );
   }

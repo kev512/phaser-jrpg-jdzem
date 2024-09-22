@@ -117,6 +117,17 @@ export class Worker {
     return this.resources.getBeers();
   }
 
+  isCriticalState(): boolean {
+    return (
+      this.hunger === MAX_HUNGER ||
+      this.thirst === MAX_THIRST ||
+      this.urine === MAX_URINE ||
+      this.poop === MAX_POOP ||
+      this.fatigue === MAX_FATIGUE ||
+      this.stress === MAX_STRESS
+    );
+  }
+
   decreaseCash(amount: number) {
     this.resources.decreaseCash(amount);
   }
