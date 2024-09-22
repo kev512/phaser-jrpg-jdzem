@@ -11,6 +11,8 @@ import { EvRand0 } from '../models/effects/events/common/ev-rand-0';
 import { EvRand1 } from '../models/effects/events/common/ev-rand-1';
 import { EvRand2 } from '../models/effects/events/common/ev-rand-2';
 import { MAX_FATIGUE, MAX_HUNGER, MAX_POOP, MAX_STRESS, MAX_THIRST, MAX_URINE } from '../models/worker/worker.consts';
+import { EvRand3 } from '../models/effects/events/common/ev-rand-3';
+import { EvRand4 } from '../models/effects/events/common/ev-rand-4';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
@@ -33,6 +35,9 @@ const commonEvents: Event[] = [
                                new EvRand0(), 
                                new EvRand1(),
                                new EvRand2(),
+                               new EvRand3(),
+                               new EvRand4(),
+                               
                               ];
 const criticalEvents: Event[] = [];
 
