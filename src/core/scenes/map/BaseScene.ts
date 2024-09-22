@@ -199,28 +199,28 @@ export abstract class BaseScene extends Phaser.Scene {
 
     this.smokesIcons = this.add.image(1030, 792, 'smokes');
     this.smokesIcons.setScale(0.09);
-    this.smokes = this.createStatLabel(1050, 684)
+    this.smokes = this.createStatLabel(1050, 684);
     this.smokes.setScale(0.8);
 
     this.beerIcons = this.add.image(1090, 792, 'beer');
     this.beerIcons.setScale(0.09);
-    this.beers = this.createStatLabel(1100, 684)
+    this.beers = this.createStatLabel(1100, 684);
     this.beers.setScale(0.8);
 
     this.diaperIcons = this.add.image(1140, 792, 'diaper');
     this.diaperIcons.setScale(0.09);
-    this.diapers = this.createStatLabel(1160, 684)
+    this.diapers = this.createStatLabel(1160, 684);
     this.diapers.setScale(0.8);
 
     this.clockIcons = this.add.image(1000, 826, 'clock');
     this.clockIcons.setScale(0.09);
     this.currentBreak = this.createStatLabel(1020, 718);
-    this.currentBreak.setScale(.8);
+    this.currentBreak.setScale(0.8);
 
     this.calendarIcons = this.add.image(1080, 826, 'calendar');
     this.calendarIcons.setScale(0.09);
     this.daysWorked = this.createStatLabel(1100, 718);
-    this.daysWorked.setScale(.8);
+    this.daysWorked.setScale(0.8);
   }
 
   createWindow() {

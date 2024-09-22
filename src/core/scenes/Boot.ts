@@ -40,7 +40,7 @@ export class Boot extends Scene {
     this.load.image('info', 'assets/info.png');
     this.load.image('stats-unit', 'assets/stats-unit.png');
 
-    this.load.image('coins', 'assets/coins.png')
+    this.load.image('coins', 'assets/coins.png');
     this.load.image('smokes', 'assets/smokes.png');
     this.load.image('beer', 'assets/beer.png');
     this.load.image('diaper', 'assets/diaper.png');
@@ -62,8 +62,6 @@ export class Boot extends Scene {
       frameWidth: 16,
       frameHeight: 32,
     });
-
-    
   }
 
   create() {
