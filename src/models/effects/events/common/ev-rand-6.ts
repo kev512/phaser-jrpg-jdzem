@@ -8,7 +8,7 @@ export class EvRand6 extends Event {
     super(
       id,
       'Mokra sprawa',
-      'Twoi koledzy z magazynu zauważyli, że przyszedłeś do pracy w skarptekach w jednorożce, które dostałeś na święta od mamay. Przez cały czas pracy ogarniał przeszywający wstyd.',
+      'Twoi koledzy z magazynu zauważyli,\nże przyszedłeś do pracy w skarptekach w jednorożce,\nktóre dostałeś na święta od mamy.\nPrzez cały czas pracy ogarniał przeszywający wstyd.',
       new Effect({
         // (-reputacja, +stres, +mocz)
         reputation: -15,

@@ -7,8 +7,8 @@ export class EvRand1 extends Event {
   constructor() {
     super(
       id,
-      'Randomowy event 1',
-      'Ten Kebab z wczoraj to nie był najlepszy pomysł, wnętrzności',
+      'Kebab',
+      'Ten Kebab z wczoraj to nie był najlepszy pomysł',
       new Effect({
         fatigue: 15,
         poop: 25,

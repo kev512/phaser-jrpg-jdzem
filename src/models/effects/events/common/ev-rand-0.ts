@@ -7,7 +7,7 @@ export class EvRand0 extends Event {
   constructor() {
     super(
       id,
-      'Randomowy event 0',
+      'Reprymenda',
       'Dostałeś ochrzan od szefa\nbo zauważył, że nie starałeś się\nw trakcie pracy. Poczułeś jak ze stresu\nkrecik zapukał w taborecik.',
       new Effect({
         stress: 15,
