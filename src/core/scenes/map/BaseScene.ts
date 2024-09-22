@@ -1,6 +1,6 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { Timer } from '../Timer';
+import { Timer } from '../../../models/timer/timer';
 import { MAP_BOUNDARY } from '../../consts';
 
 export abstract class BaseScene extends Phaser.Scene {

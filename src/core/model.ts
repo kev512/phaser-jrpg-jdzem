@@ -5,7 +5,7 @@ import { Event } from '../models/effects/events/event';
 import { StartGame } from '../models/effects/events/start-game';
 import { Worker } from '../models/worker/worker';
 import { INITIAL_TIMER_MINUTES } from './consts';
-import { Timer } from './scenes/Timer';
+import { Timer } from '../models/timer/timer';
 import { Window } from './types/window';
 
 let worker: Worker | null = null;
