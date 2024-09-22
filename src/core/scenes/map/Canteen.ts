@@ -35,6 +35,9 @@ export class Canteen extends BaseScene {
 
   //static NPCs type declaration
   npc2: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc3: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc4: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc5: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
 
   constructor() {
     super('Canteen');
@@ -130,6 +133,36 @@ export class Canteen extends BaseScene {
       repeat: -1,
     });
     this.npc2.play('npc2-anim-buffet');
+
+    this.npc3 = this.physics.add.sprite(217, 335, 'npc3');
+    this.npc3.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc3-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc3'),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.npc3.play('npc3-anim-buffet');
+
+    this.npc4 = this.physics.add.sprite(316, 427, 'npc4');
+    this.npc4.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc4-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc4', {start:0, end:5}),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.npc4.play('npc4-anim-buffet');
+
+    this.npc5 = this.physics.add.sprite(404, 427, 'npc5');
+    this.npc5.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc5-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc5', {start:6, end:11}),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.npc5.play('npc5-anim-buffet');
   }
 
   private createPlayer() {
