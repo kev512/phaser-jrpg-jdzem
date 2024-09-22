@@ -2,6 +2,7 @@ import { Scene, GameObjects } from 'phaser';
 
 export class Intro extends Scene {
   seagull: GameObjects.Image;
+  backgroundMusic: Phaser.Sound.BaseSound;
 
   constructor() {
     super('Intro');
@@ -37,8 +38,14 @@ export class Intro extends Scene {
       repeat: -1,
     });
 
+    this.backgroundMusic = this.sound.add('menuMusic', {
+      loop: true,
+      volume: 0.4,
+    });
+
     startText.setInteractive();
     startText.on('pointerdown', () => {
+      this.backgroundMusic.play({ loop: true });
       this.scene.start('Video');
     });
   }

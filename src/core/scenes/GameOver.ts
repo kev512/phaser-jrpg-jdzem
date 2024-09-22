@@ -32,7 +32,7 @@ export class GameOver extends Scene {
     this.description = this.add.text(
       this.camera.centerX,
       this.camera.centerY + 64,
-      `Za dużo spóźnień. Szef ciebie wywalił.\n\nTwoje punkty: ${model.scores.total}`,
+      `Za dużo spóźnień. Szef wywalił cie na zbity pysk.\n\nTwoje punkty: ${model.scores.total}`,
       {
         fontFamily: 'VT323',
         fontSize: 32,
