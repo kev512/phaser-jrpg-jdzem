@@ -51,4 +51,16 @@ export class Resources {
   addSmokes() {
     this.smokes++;
   }
+
+  removeDiaper() {
+    this.diapers--;
+  }
+
+  removeBeer() {
+    this.beers--;
+  }
+
+  removeSmokes() {
+    this.smokes--;
+  }
 }

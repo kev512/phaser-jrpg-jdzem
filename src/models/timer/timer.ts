@@ -31,8 +31,8 @@ export class Timer {
       this.remainingTime += seconds;
 
       if (this.remainingTime < 0) {
-          this.delayTime += Math.abs(this.remainingTime);
-          this.remainingTime = 0;
+        this.delayTime += Math.abs(this.remainingTime);
+        this.remainingTime = 0;
       }
     } else {
       this.delayTime += Math.abs(seconds);
