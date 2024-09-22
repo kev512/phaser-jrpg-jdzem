@@ -11,6 +11,8 @@ import { EvRand0 } from '../models/effects/events/common/ev-rand-0';
 import { EvRand1 } from '../models/effects/events/common/ev-rand-1';
 import { EvRand2 } from '../models/effects/events/common/ev-rand-2';
 
+import { MAX_FATIGUE, MAX_HUNGER, MAX_POOP, MAX_STRESS, MAX_THIRST, MAX_URINE } from '../models/worker/worker.consts';
+
 let worker: Worker | null = null;
 let previousScene: string | null = null;
 let currentScene: string | null = null;
