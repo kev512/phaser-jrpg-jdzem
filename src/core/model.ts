@@ -21,6 +21,8 @@ import { EvRand9 } from '../models/effects/events/common/ev-rand-9';
 import { EvRand10 } from '../models/effects/events/common/ev-rand-10';
 import { EvRand11 } from '../models/effects/events/common/ev-rand-11';
 import { EvRand12 } from '../models/effects/events/common/ev-rand-12';
+import { EvRand13 } from '../models/effects/events/common/ev-rand-13';
+import { EvRand14 } from '../models/effects/events/common/ev-rand-14';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
@@ -55,6 +57,8 @@ const commonEvents: Event[] = [
   new EvRand10(),
   new EvRand11(),
   new EvRand12(),
+  new EvRand13(),
+  new EvRand14(),
 ];
 const criticalEvents: Event[] = [];
 
