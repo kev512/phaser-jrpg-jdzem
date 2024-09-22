@@ -33,11 +33,28 @@ export class Resources {
   }
 
   applyEffect(effect: Effect) {
+    if (this.cash + effect.getCash() < 0) {
+      throw new Error('Not enough cash');
+    }
+
+    if (this.diapers + effect.getDiapers() < 0) {
+      throw new Error('Not enough diapers');
+    }
+
+    if (this.beers + effect.getBeers() < 0) {
+      throw new Error('Not enough beers');
+    }
+
+    if (this.smokes + effect.getSmokes() < 0) {
+      throw new Error('Not enough smokes');
+    }
+
     this.cash += effect.getCash();
-    this.reputation = Math.max(0, Math.min(MAX_REPUTATION, this.reputation + effect.getReputation()));
     this.diapers += effect.getDiapers();
     this.beers += effect.getBeers();
     this.smokes += effect.getSmokes();
+
+    this.reputation = Math.max(0, Math.min(MAX_REPUTATION, this.reputation + effect.getReputation()));
   }
 
   addDiaper() {
@@ -53,14 +70,26 @@ export class Resources {
   }
 
   removeDiaper() {
+    if (this.diapers - 1 < 0) {
+      throw new Error('Not enough diapers');
+    }
+
     this.diapers--;
   }
 
   removeBeer() {
+    if (this.beers - 1 < 0) {
+      throw new Error('Not enough beers');
+    }
+
     this.beers--;
   }
 
   removeSmokes() {
+    if (this.smokes - 1 < 0) {
+      throw new Error('Not enough smokes');
+    }
+
     this.smokes--;
   }
 }

@@ -9,8 +9,9 @@ export class EvRand2 extends Event {
       id,
       'Pogadanka',
       'Szef znowu się do ciebie przyczepił\nbo nie wykonujesz pracy\nzgodnie z przepisami',
-      new Effect({ //(+stres)
-        stress:15
+      new Effect({
+        //(+stres)
+        stress: 15,
       }),
     );
   }
