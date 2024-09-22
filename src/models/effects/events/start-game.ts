@@ -8,8 +8,8 @@ export class StartGame extends Event {
   constructor() {
     super(
       id,
-      'Witaj',
-      'Najważniejsze to wytrwać i nie wylecieć.\nRobota potrafi być ciężka\nale wytrzymać trzeba, BYLE DO PAUZY!',
+      'Witaj w zakładowej kantynie',
+      'To twoja pierwsza przerwa.\nNajważniejsze to wytrwać i nie wylecieć.\nRobota potrafi być ciężka...\nBYLE DO NASTĘPNEJ PAUZY!',
       new Effect({
         hunger: -MAX_HUNGER,
         thirst: -MAX_THIRST,
