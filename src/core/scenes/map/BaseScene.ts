@@ -1,6 +1,5 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { Timer } from '../../../models/timer/timer';
 import { MAP_BOUNDARY } from '../../consts';
 
 export abstract class BaseScene extends Phaser.Scene {
@@ -84,6 +83,7 @@ export abstract class BaseScene extends Phaser.Scene {
 
       if (model.isWindowVisible && !isNull(firstEvent)) {
         model.emit(firstEvent);
+        model.runWindowCallback(0);
       }
     });
 
@@ -91,6 +91,7 @@ export abstract class BaseScene extends Phaser.Scene {
       const secondEvent = model.getWindowOption(1);
       if (model.isWindowVisible && !isNull(secondEvent)) {
         model.emit(secondEvent);
+        model.runWindowCallback(1);
       }
     });
 
@@ -98,6 +99,7 @@ export abstract class BaseScene extends Phaser.Scene {
       const thirdEvent = model.getWindowOption(2);
       if (model.isWindowVisible && !isNull(thirdEvent)) {
         model.emit(thirdEvent);
+        model.runWindowCallback(3);
       }
     });
   }

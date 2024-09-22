@@ -6,6 +6,7 @@ import { StartGame } from '../models/effects/events/start-game';
 import { Worker } from '../models/worker/worker';
 import { Timer } from '../models/timer/timer';
 import { Window } from './types/window';
+import { isNil } from 'lodash';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
@@ -15,9 +16,11 @@ let window: Window = {
   title: '',
   description: '',
   options: [],
+  callbacks: [],
 };
 let days: number = 1;
 let breakNumber: number = 1;
+let lateCounter: number = 0;
 
 const commonEvents: Event[] = [new Test()];
 const criticalEvents: Event[] = [];
@@ -56,10 +59,11 @@ export class Model {
     return breakNumber;
   }
 
-  showWindow(title: string, description: string, options: (Event | null)[] = []) {
+  showWindow(title: string, description: string, options: (Event | null)[] = [], callbacks: (() => void)[] = []) {
     window.visible = true;
     window.title = title;
     window.options = options;
+    window.callbacks = callbacks;
     this.descriptionWriter(description);
   }
 
@@ -68,6 +72,7 @@ export class Model {
     window.title = '';
     window.description = '';
     window.options = [];
+    window.callbacks = [];
   }
 
   getWindowOption(index: number): Event | null {
@@ -82,11 +87,30 @@ export class Model {
     return window.description;
   }
 
+  runWindowCallback(index: number) {
+    const callback = window.callbacks[index];
+
+    if (!isNil(callback)) {
+      callback();
+    }
+  }
+
   startGame() {
+    lateCounter = 0;
     this.emit(new StartGame());
   }
 
-  finishBreak(goToAfternoonScene: () => void) {
+  finishBreak(goToAfternoonScene: () => void, goToGameOverScene: () => void) {
+    if (this.worker.getTimer().isTimeUp()) {
+      lateCounter++;
+    }
+
+    if (lateCounter >= 3 || this.worker.getTimer().isTimeUpExceedingCriticalLevel()) {
+      goToGameOverScene();
+
+      return;
+    }
+
     if (this.breakNumber === 3) {
       days++;
       breakNumber = 1;
@@ -109,7 +133,7 @@ export class Model {
       this.emit(randomCommonEvent);
     }
 
-    console.log('Days: ', days, 'Break: ', breakNumber);
+    this.worker.getTimer().reset();
   }
 
   emit(event: Event) {
