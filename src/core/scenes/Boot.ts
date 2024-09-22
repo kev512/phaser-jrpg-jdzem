@@ -37,7 +37,12 @@ export class Boot extends Scene {
     this.load.image('info', 'assets/info.png');
     this.load.image('stats-unit', 'assets/stats-unit.png');
 
-    this.load.image('coins', 'assets/coins.png');
+    this.load.image('coins', 'assets/coins.png')
+    this.load.image('smokes', 'assets/smokes.png');
+    this.load.image('beer', 'assets/beer.png');
+    this.load.image('diaper', 'assets/diaper.png');
+    this.load.image('calendar', 'assets/calendar.png');
+    this.load.image('clock', 'assets/clock.png');
 
     this.load.spritesheet('worker', 'assets/Alex_run_16x24.png', {
       frameWidth: 16,
