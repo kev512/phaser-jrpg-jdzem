@@ -7,6 +7,9 @@ import { Worker } from '../models/worker/worker';
 import { Timer } from '../models/timer/timer';
 import { Window } from './types/window';
 import { isNil } from 'lodash';
+import { EvRand0 } from '../models/effects/events/common/ev-rand-0';
+import { EvRand1 } from '../models/effects/events/common/ev-rand-1';
+import { EvRand2 } from '../models/effects/events/common/ev-rand-2';
 import { MAX_FATIGUE, MAX_HUNGER, MAX_POOP, MAX_STRESS, MAX_THIRST, MAX_URINE } from '../models/worker/worker.consts';
 
 let worker: Worker | null = null;
@@ -26,7 +29,11 @@ let dayScore = 0;
 let totalScore = 0;
 let bestScore = 0;
 
-const commonEvents: Event[] = [new Test()];
+const commonEvents: Event[] = [
+                               new EvRand0(), 
+                               new EvRand1(),
+                               new EvRand2(),
+                              ];
 const criticalEvents: Event[] = [];
 
 let i = 0;
