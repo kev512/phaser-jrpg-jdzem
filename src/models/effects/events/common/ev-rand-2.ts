@@ -9,8 +9,9 @@ export class EvRand2 extends Event {
       id,
       'Randomowy event 2',
       'Szef znowu się do ciebie przyczepił bo nie wykonujesz pracy zgodnie z przepisami',
-      new Effect({ //(+stres)
-        stress:15
+      new Effect({
+        //(+stres)
+        stress: 15,
       }),
     );
   }

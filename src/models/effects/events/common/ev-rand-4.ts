@@ -9,9 +9,10 @@ export class EvRand4 extends Event {
       id,
       'Randomowy event 4',
       'W trakcie pracy jeden z pracowników zasnął na wózku widłowym i zrzucił szereg regałów z towarem. Szef kazał Ci pomóc w sprzątaniu',
-      new Effect({ //(+zmęczenie, +stres)
-        stress:15,
-        fatigue:25,
+      new Effect({
+        //(+zmęczenie, +stres)
+        stress: 15,
+        fatigue: 25,
       }),
     );
   }

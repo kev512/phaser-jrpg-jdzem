@@ -109,9 +109,11 @@ export class Restroom extends BaseScene {
 
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearUrinal) {
-        model.showWindow('Pisuar', 'Czy to czas na odcedzenie kartofelków?\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]', [
-          new Pissoir(),
-        ]);
+        model.showWindow(
+          'Pisuar',
+          'Czy to czas na odcedzenie kartofelków?\n\n' + '1. Załatw potrzebę. [1]\n' + '2. Wyjście [ESC]',
+          [new Pissoir()],
+        );
       }
     });
   }

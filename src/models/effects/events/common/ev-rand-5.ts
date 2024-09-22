@@ -9,9 +9,10 @@ export class EvRand5 extends Event {
       id,
       'Wyróżnienie',
       'Szef pochwalił Cię za twoją przykładną uwagę. W nagrodę, na twoje barki spadło więcej obowiązków.',
-      new Effect({ //(+reputacja, +stres)
-        reputation:15,
-        stress:25,
+      new Effect({
+        //(+reputacja, +stres)
+        reputation: 15,
+        stress: 25,
       }),
     );
   }

@@ -35,15 +35,15 @@ let totalScore = 0;
 let bestScore = 0;
 
 const commonEvents: Event[] = [
-                               new EvRand0(), 
-                               new EvRand1(),
-                               new EvRand2(),
-                               new EvRand3(),
-                               new EvRand4(),
-                               new EvRand5(),
-                               new EvRand6(),
-                               new EvRand7(),
-                              ];
+  new EvRand0(),
+  new EvRand1(),
+  new EvRand2(),
+  new EvRand3(),
+  new EvRand4(),
+  new EvRand5(),
+  new EvRand6(),
+  new EvRand7(),
+];
 const criticalEvents: Event[] = [];
 
 let i = 0;

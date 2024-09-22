@@ -137,7 +137,9 @@ export class Buffet extends BaseScene {
       if (this.isNearChef) {
         model.showWindow(
           'Stołówka',
-          'Dzisiaj w bufecie? Zupa z wczoraj,\nkotlet z przedwczoraj, ale przynajmniej\nherbata świeża!"\n\n' + '1. Kup i zjedz danie dnia [1]\n' + '2. Wyjście [ESC]',
+          'Dzisiaj w bufecie? Zupa z wczoraj,\nkotlet z przedwczoraj, ale przynajmniej\nherbata świeża!"\n\n' +
+            '1. Kup i zjedz danie dnia [1]\n' +
+            '2. Wyjście [ESC]',
           [new BuffetLunch()],
         );
       }
