@@ -25,7 +25,7 @@ export class MainMenu extends Scene {
 
     this.backgroundMusic = this.sound.add('menuMusic', {
       loop: true,
-      volume: 0.4 
+      volume: 0.4,
     });
 
     this.backgroundMusic.play({ loop: true });

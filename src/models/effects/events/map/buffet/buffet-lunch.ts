@@ -15,7 +15,7 @@ export class BuffetLunch extends Event {
         poop: 15,
         urine: 15,
         minutes: -10,
-        cash: -15
+        cash: -15,
       }),
     );
   }

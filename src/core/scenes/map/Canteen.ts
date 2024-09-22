@@ -108,7 +108,8 @@ export class Canteen extends BaseScene {
     this.isNearComputer = this.player.y === 744 && this.player.x >= 736 && this.player.x <= 752;
     this.updateComputerPopup(this.isNearComputer && !model.isWindowVisible);
 
-    this.isNearchatWithBuddies = (this.player.y >= 320 && this.player.x >= 210) && (this.player.y <= 465 && this.player.x <= 501);
+    this.isNearchatWithBuddies =
+      this.player.y >= 320 && this.player.x >= 210 && this.player.y <= 465 && this.player.x <= 501;
     this.updateChatWithBuddies(this.isNearchatWithBuddies && !model.isWindowVisible);
 
     if (this.player.x >= 930) {
@@ -153,7 +154,7 @@ export class Canteen extends BaseScene {
     this.npc4.setScale(WORKER_SIZE_SCALE);
     this.anims.create({
       key: 'npc4-anim-buffet',
-      frames: this.anims.generateFrameNumbers('npc4', {start:0, end:5}),
+      frames: this.anims.generateFrameNumbers('npc4', { start: 0, end: 5 }),
       frameRate: 5,
       repeat: -1,
     });
@@ -163,7 +164,7 @@ export class Canteen extends BaseScene {
     this.npc5.setScale(WORKER_SIZE_SCALE);
     this.anims.create({
       key: 'npc5-anim-buffet',
-      frames: this.anims.generateFrameNumbers('npc5', {start:6, end:11}),
+      frames: this.anims.generateFrameNumbers('npc5', { start: 6, end: 11 }),
       frameRate: 5,
       repeat: -1,
     });
@@ -384,8 +385,8 @@ export class Canteen extends BaseScene {
   }
 
   private createChatWithBuddies() {
-    const popupX = 350//TILE_SIZE * 4;
-    const popupY = 250//TILE_SIZE * 10;
+    const popupX = 350; //TILE_SIZE * 4;
+    const popupY = 250; //TILE_SIZE * 10;
 
     this.chatWithBuddiesPoupup = this.add.image(popupX, popupY, 'popup');
     this.chatWithBuddiesPoupup.setScrollFactor(0);
@@ -405,7 +406,10 @@ export class Canteen extends BaseScene {
       if (this.isNearchatWithBuddies) {
         model.showWindow(
           'Strefa ziomeczków',
-          'Szef was zadręcza?\nRoboty jest po pachy?\n' + 'Pogadaj z ziomeczkami.\n\n' + '1. Pogadaj [1]\n' + '2. Wyjście [ESC]',
+          'Szef was zadręcza?\nRoboty jest po pachy?\n' +
+            'Pogadaj z ziomeczkami.\n\n' +
+            '1. Pogadaj [1]\n' +
+            '2. Wyjście [ESC]',
           [new ChatWithBuddies()],
         );
       }
