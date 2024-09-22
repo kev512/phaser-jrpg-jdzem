@@ -284,9 +284,9 @@ export abstract class BaseScene extends Phaser.Scene {
     this.diapers.setText(`${model.worker.getDiapers()}`);
 
     // TODO: add break counter
-    this.currentBreak.setText('1' + '/3');
+    this.currentBreak.setText(model.breakNumber + '/3');
     // TODO: add days worked counter
-    this.daysWorked.setText('0');
+    this.daysWorked.setText(model.days.toString());
   }
 
   updateWindow() {
