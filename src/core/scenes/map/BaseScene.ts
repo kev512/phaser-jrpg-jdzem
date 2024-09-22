@@ -421,25 +421,19 @@ export abstract class BaseScene extends Phaser.Scene {
       if (model.worker.getSmokes() > 0 && model.isInSmokeSpot) {
         actions.push('Zapal');
         options.push(new Smoke());
-        callbacks.push(() => {
-          model.worker.removeSmokes();
-        });
+        callbacks.push(() => {});
       }
 
       if (model.worker.getBeers() > 0 && model.isInSmokeSpot) {
         actions.push('Wypij brona');
         options.push(new Beer());
-        callbacks.push(() => {
-          model.worker.removeBeer();
-        });
+        callbacks.push(() => {});
       }
 
       if (model.worker.getDiapers() > 0) {
         actions.push('Użyj pieluchy');
         options.push(new Diaper());
-        callbacks.push(() => {
-          model.worker.removeDiaper();
-        });
+        callbacks.push(() => {});
       }
 
       actions.push('Wyjście');

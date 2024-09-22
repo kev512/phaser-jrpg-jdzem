@@ -58,8 +58,6 @@ export class Buffet extends BaseScene {
 
     this.isNearChef = this.player.y === 360 && this.player.x >= 480 && this.player.x <= 530;
     this.updateBuyBuffetLunchPopup(this.isNearChef && !model.isWindowVisible);
-
-    console.log(this.player.x, this.player.y);
   }
 
   private createMap() {

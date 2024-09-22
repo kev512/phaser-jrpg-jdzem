@@ -121,8 +121,6 @@ export class Canteen extends BaseScene {
         this.finishBreak();
       }
     }
-
-    console.log(this.player.x, this.player.y);
   }
 
   private createMap() {
