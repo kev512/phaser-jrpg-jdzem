@@ -7,8 +7,8 @@ export class Smoke extends Event {
   constructor() {
     super(
       id,
-      'Palenie',
-      '',
+      'Zapaliłeś papierosa',
+      'Zadymiłeś w kotłowni.\nUzależnienie od nikotyny ssie.',
       new Effect({
         stress: -40,
         poop: 5,

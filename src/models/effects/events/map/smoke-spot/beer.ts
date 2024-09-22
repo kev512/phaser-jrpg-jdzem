@@ -8,7 +8,7 @@ export class Beer extends Event {
     super(
       id,
       'Łojenie browara',
-      'A wypije se bronksa',
+      'Wypiłeś se bronksa (oczywiście 0%).',
       new Effect({
         thirst: -15,
         stress: -30,

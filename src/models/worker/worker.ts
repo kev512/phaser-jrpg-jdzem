@@ -143,16 +143,4 @@ export class Worker {
   addSmokes() {
     this.resources.applyEffect(new Effect({ smokes: 1 }));
   }
-
-  removeDiaper() {
-    this.resources.applyEffect(new Effect({ diapers: -1 }));
-  }
-
-  removeBeer() {
-    this.resources.applyEffect(new Effect({ beers: -1 }));
-  }
-
-  removeSmokes() {
-    this.resources.applyEffect(new Effect({ smokes: -1 }));
-  }
 }
