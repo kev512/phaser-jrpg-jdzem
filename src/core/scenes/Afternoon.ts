@@ -13,7 +13,7 @@ export class Afternoon extends Scene {
   create() {
     this.cameras.main.setBackgroundColor('#000000');
 
-    this.background = this.add.image(545, 384, 'background');
+    this.background = this.add.image(545, 384, 'town-background');
     this.background.setScrollFactor(0);
 
     const x = 590;

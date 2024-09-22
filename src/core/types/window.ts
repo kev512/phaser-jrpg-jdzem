@@ -5,4 +5,5 @@ export type Window = {
   title: string;
   description: string;
   options: (Event | null)[];
+  callbacks: (() => void)[];
 };

@@ -12,6 +12,7 @@ export class Pissoir extends Event {
       'Załatwiłeś potrzebę.',
       new Effect({
         urine: -MAX_URINE,
+        minutes: -3,
       }),
     );
   }
