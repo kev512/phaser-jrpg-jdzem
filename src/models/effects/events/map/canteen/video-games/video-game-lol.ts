@@ -11,7 +11,7 @@ export class VideoGameLol extends Event {
       'Jak zwykle dobrało Ci samych nubów\ndo teamu. Zamisat relasku dopadła Cię\njeszcze większa depresja i wstręt...\ndo siebie. Standardowo ff15.',
       new Effect({
         stress: +100,
-        minutes: -15
+        minutes: -15,
       }),
     );
   }
