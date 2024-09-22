@@ -143,4 +143,16 @@ export class Worker {
   addSmokes() {
     this.resources.addSmokes();
   }
+
+  removeDiaper() {
+    this.resources.removeDiaper();
+  }
+
+  removeBeer() {
+    this.resources.removeBeer();
+  }
+
+  removeSmokes() {
+    this.resources.removeSmokes();
+  }
 }

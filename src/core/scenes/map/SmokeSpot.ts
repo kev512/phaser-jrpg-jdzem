@@ -29,6 +29,7 @@ export class SmokeSpot extends BaseScene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     super.createLabels();
+    super.createActionsPopup();
   }
 
   update(time: number, deltaTime: number) {
