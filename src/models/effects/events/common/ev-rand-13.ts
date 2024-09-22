@@ -8,7 +8,7 @@ export class EvRand13 extends Event {
     super(
       id,
       'Klęska żywiołowa',
-      'Podczas pracy, na zwenątrz rozpętała się wichura, która zerwała kawałek dachu. Przez co woda wdzierała się na magazyn i utradniała poruszanie po hali',
+      'Podczas pracy, na zwenątrz rozpętała się\nwichura, która zerwała kawałek dachu.\nPrzez co woda wdzierała się\nna magazyn i utradniała poruszanie\npo hali.',
       new Effect({
         //(+zmęczenia, +głodu)
         fatigue: 15,
