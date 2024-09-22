@@ -8,7 +8,7 @@ export class EvRand11 extends Event {
     super(
       id,
       'Nowy kolega z magazynu',
-      'Okazało się, że też jest fanem klubu WKS Śląsk. Prawilna mordka podzieliła się z tobą swoim batonem proteinowym, ktróy po kryjomu zjedliście za regałem. Poczuliście bardzo romantyczną atmosferę.',
+      'Okazało się, że też jest fanem klubu WKS Śląsk.\nPrawilna mordka podzieliła się\nz tobą swoim batonem proteinowym,\nktóry po kryjomu zjedliście za regałem.\nPoczuliście braterską więź.',
       new Effect({
         //(-głodu, +stes)
         hunger: -15,

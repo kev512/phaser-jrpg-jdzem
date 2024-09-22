@@ -8,7 +8,7 @@ export class EvRand10 extends Event {
     super(
       id,
       'Nagroda',
-      'Szef pochwalił Cię za twoją przykładną uwagę. W nagrodę szef dał Ci piątaka na przerwe.',
+      'Szef pochwalił Cię za twoją przykładną uwagę.\nW nagrodę szef dał Ci piątaka na przerwe.',
       new Effect({
         //(+zmęczenie, +pieniądze)
         fatigue: -20,

@@ -8,7 +8,7 @@ export class EvRand12 extends Event {
     super(
       id,
       'Odrzywki',
-      'Przed pracą sprubowałeś nowych supli. Niestety okazało się mieć działanie przeczyszczające.',
+      'Przed pracą sprubowałeś nowych supli.\nNiestety okazało się mieć działanie przeczyszczające.',
       new Effect({
         //(+ kloc, +mocz)
         poop: 15,
