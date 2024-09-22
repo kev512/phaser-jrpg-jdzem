@@ -25,7 +25,7 @@ const commonEvents: Event[] = [new Test()];
 const criticalEvents: Event[] = [];
 
 let i = 0;
-let typingSpeed = 50;
+let typingSpeed = 10;
 
 export class Model {
   constructor() {}

@@ -73,7 +73,7 @@ export class Buffet extends BaseScene {
       key: 'npc1-anim',
       frames: this.anims.generateFrameNumbers('npc1'),
       frameRate: 5,
-      repeat: -1
+      repeat: -1,
     });
     this.npc1.play('npc1-anim');
 
@@ -81,9 +81,9 @@ export class Buffet extends BaseScene {
     this.npc2.setScale(WORKER_SIZE_SCALE);
     this.anims.create({
       key: 'npc2-anim',
-      frames: this.anims.generateFrameNumbers('npc2', {start:1, end:4}),
+      frames: this.anims.generateFrameNumbers('npc2', { start: 1, end: 4 }),
       frameRate: 5,
-      repeat: -1
+      repeat: -1,
     });
     this.npc2.play('npc2-anim');
 
@@ -91,12 +91,11 @@ export class Buffet extends BaseScene {
     this.npc3.setScale(WORKER_SIZE_SCALE);
     this.anims.create({
       key: 'npc3-anim',
-      frames: this.anims.generateFrameNumbers('npc2', {start:6, end:11}),
+      frames: this.anims.generateFrameNumbers('npc2', { start: 6, end: 11 }),
       frameRate: 5,
-      repeat: -1
+      repeat: -1,
     });
     this.npc3.play('npc3-anim');
-
   }
 
   private createPlayer() {

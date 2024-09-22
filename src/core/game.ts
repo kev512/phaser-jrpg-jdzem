@@ -7,6 +7,7 @@ import { Buffet } from './scenes/map/Buffet';
 import { Canteen } from './scenes/map/Canteen';
 import { Restroom } from './scenes/map/Restroom';
 import { SmokeSpot } from './scenes/map/SmokeSpot';
+import { Intro } from './scenes/menu/Intro';
 import { MainMenu } from './scenes/menu/MainMenu';
 import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Shop } from './scenes/Shop';
@@ -30,7 +31,7 @@ export class Game {
           gravity: { x: 0, y: 0 },
         },
       },
-      scene: [Boot, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, Afternoon, Shop, GameOver, Scoreboard],
+      scene: [Boot, Intro, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, Afternoon, Shop, GameOver, Scoreboard],
     });
   }
 }
