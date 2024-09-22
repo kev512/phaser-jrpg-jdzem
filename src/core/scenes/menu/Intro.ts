@@ -39,7 +39,7 @@ export class Intro extends Scene {
 
     startText.setInteractive();
     startText.on('pointerdown', () => {
-      this.scene.start('MainMenu');
+      this.scene.start('Video');
     });
   }
 }
