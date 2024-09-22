@@ -10,12 +10,13 @@ export class BuffetLunch extends Event {
       'Danie dnia',
       'Średnie, za to jak drogo...\n.. Czekaj co?',
       new Effect({
-        hunger: -40,
-        thirst: -40,
+        hunger: -50,
+        thirst: -50,
+        fatigue: -20,
         poop: 15,
         urine: 15,
-        minutes: -10,
-        cash: -15,
+        minutes: -9,
+        cash: -50,
       }),
     );
   }

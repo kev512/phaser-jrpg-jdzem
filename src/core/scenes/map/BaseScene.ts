@@ -1,6 +1,9 @@
 import { isNull } from 'lodash';
 import { model } from '../../../main';
-import { MAP_BOUNDARY } from '../../consts';
+import { MAP_BOUNDARY, TILE_SIZE } from '../../consts';
+import { Smoke } from '../../../models/effects/events/map/smoke-spot/smoke';
+import { Beer } from '../../../models/effects/events/map/smoke-spot/beer';
+import { Diaper } from '../../../models/effects/events/diaper';
 
 export abstract class BaseScene extends Phaser.Scene {
   protected map: Phaser.Tilemaps.Tilemap;
@@ -68,6 +71,8 @@ export abstract class BaseScene extends Phaser.Scene {
   protected window: Phaser.GameObjects.Image;
   protected windowTitle: Phaser.GameObjects.Text;
   protected windowDescription: Phaser.GameObjects.Text;
+  actionsPopup: Phaser.GameObjects.Image;
+  actionsText: Phaser.GameObjects.Text;
 
   constructor(name: string) {
     super(name);
@@ -284,9 +289,9 @@ export abstract class BaseScene extends Phaser.Scene {
     this.diapers.setText(`${model.worker.getDiapers()}`);
 
     // TODO: add break counter
-    this.currentBreak.setText('1' + '/3');
+    this.currentBreak.setText(model.breakNumber + '/3');
     // TODO: add days worked counter
-    this.daysWorked.setText('0');
+    this.daysWorked.setText(model.days.toString());
   }
 
   updateWindow() {
@@ -388,5 +393,70 @@ export abstract class BaseScene extends Phaser.Scene {
     bar.fillRect(0, 0, 225, 13);
 
     bar.scaleX = percentage / 100;
+  }
+
+  createActionsPopup() {
+    const popupX = TILE_SIZE * 3;
+    const popupY = TILE_SIZE * 15;
+
+    this.actionsPopup = this.add.image(popupX, popupY, 'popup');
+    this.actionsPopup.setScrollFactor(0);
+    this.actionsText = this.add.text(popupX - 86, popupY - 10, 'Użyj przedmiotu [F]', {
+      fontFamily: 'VT323',
+      fontSize: 20,
+      color: '#000000',
+      stroke: '#dddddd',
+      strokeThickness: 2,
+    });
+    this.actionsText.setScrollFactor(0);
+
+    this.actionsPopup.setVisible(false);
+    this.actionsText.setVisible(false);
+
+    this.input.keyboard?.on('keydown-F', () => {
+      const actions = [];
+      const options = [];
+      const callbacks = [];
+
+      if (model.worker.getSmokes() > 0 && model.isInSmokeSpot) {
+        actions.push('Zapal');
+        options.push(new Smoke());
+        callbacks.push(() => {});
+      }
+
+      if (model.worker.getBeers() > 0 && model.isInSmokeSpot) {
+        actions.push('Wypij brona');
+        options.push(new Beer());
+        callbacks.push(() => {});
+      }
+
+      if (model.worker.getDiapers() > 0) {
+        actions.push('Użyj pieluchy');
+        options.push(new Diaper());
+        callbacks.push(() => {});
+      }
+
+      actions.push('Wyjście');
+
+      const texts = actions
+        .map((text, index) => {
+          if (text !== 'Wyjście') {
+            return `${index + 1}. ${text} [${index + 1}]`;
+          } else {
+            return `${index + 1}. ${text} [ESC]`;
+          }
+        })
+        .join('\n');
+
+      model.showWindow(
+        'Użyj przedmiotu',
+        'Pamiętaj, że możesz zapalić\ni napić sie brona tylko w kotłowni.\n\n' + texts,
+        options,
+        callbacks,
+      );
+    });
+
+    this.actionsPopup.setVisible(true);
+    this.actionsText.setVisible(true);
   }
 }

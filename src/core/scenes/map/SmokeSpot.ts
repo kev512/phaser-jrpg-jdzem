@@ -29,6 +29,8 @@ export class SmokeSpot extends BaseScene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     super.createLabels();
+    super.createWindow();
+    super.createActionsPopup();
   }
 
   update(time: number, deltaTime: number) {
@@ -41,6 +43,8 @@ export class SmokeSpot extends BaseScene {
     if (this.player.y <= 142) {
       this.startCanteenScene();
     }
+
+    super.updateWindow();
   }
 
   private createMap() {

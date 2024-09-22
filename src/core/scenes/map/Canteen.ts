@@ -62,6 +62,7 @@ export class Canteen extends BaseScene {
 
     this.createLabels();
     this.createWindow();
+    super.createActionsPopup();
 
     this.createLockerPopup();
     this.createRestZonePopup();
@@ -120,8 +121,6 @@ export class Canteen extends BaseScene {
         this.finishBreak();
       }
     }
-
-    console.log(this.player.x, this.player.y);
   }
 
   private createMap() {
@@ -297,7 +296,9 @@ export class Canteen extends BaseScene {
       if (this.isNearRestZone) {
         model.showWindow(
           'Strefa czilałtu',
-          'Praca na magazynie potrafi wykończyć\nczłowieka. Ta kanapa to chyba jedyna\nrzecz, która mnie tu jeszcze trzyma....\nno, może jeszcze poza umową o pracę.\n\n' + '1. Odpocznij [1]\n' + '2. Wyjście [ESC]',
+          'Praca na magazynie potrafi wykończyć\nczłowieka. Ta kanapa to chyba jedyna\nrzecz, która mnie tu jeszcze trzyma....\nno, może jeszcze poza umową o pracę.\n\n' +
+            '1. Odpocznij [1]\n' +
+            '2. Wyjście [ESC]',
           [new Rest()],
         );
       }

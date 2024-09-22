@@ -10,8 +10,8 @@ export class VideoGameTekken extends Event {
       'Gierka',
       'Po losowym uderzaniu w klawisze\ndostrzegłeś, że przeciwnik\nnie ma z tobą szans.\nGrałeś w trybie samouczka.',
       new Effect({
-        hunger: +5,
-        stress: -10,
+        hunger: +10,
+        stress: -15,
         minutes: -3,
       }),
     );

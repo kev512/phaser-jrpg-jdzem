@@ -12,7 +12,6 @@ export class Boot extends Scene {
     const bar = this.add.rectangle(512 - 230, 384, 4, 28, 0xffffff);
 
     this.load.on('progress', (progress: number) => {
-      console.log('progress', progress);
       bar.width = 4 + 460 * progress;
     });
   }

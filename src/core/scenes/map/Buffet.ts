@@ -37,6 +37,7 @@ export class Buffet extends BaseScene {
 
     super.createLabels();
     super.createWindow();
+    super.createActionsPopup();
 
     this.createBuyBuffetLunchPopup();
   }
@@ -57,8 +58,6 @@ export class Buffet extends BaseScene {
 
     this.isNearChef = this.player.y === 360 && this.player.x >= 480 && this.player.x <= 530;
     this.updateBuyBuffetLunchPopup(this.isNearChef && !model.isWindowVisible);
-
-    console.log(this.player.x, this.player.y);
   }
 
   private createMap() {
@@ -137,7 +136,9 @@ export class Buffet extends BaseScene {
       if (this.isNearChef) {
         model.showWindow(
           'Stołówka',
-          'Dzisiaj w bufecie? Zupa z wczoraj,\nkotlet z przedwczoraj, ale przynajmniej\nherbata świeża!"\n\n' + '1. Kup i zjedz danie dnia [1]\n' + '2. Wyjście [ESC]',
+          'Dzisiaj w bufecie? Zupa z wczoraj,\nkotlet z przedwczoraj, ale przynajmniej\nherbata świeża!"\n\n' +
+            '1. Kup i zjedz danie dnia [1]\n' +
+            '2. Wyjście [ESC]',
           [new BuffetLunch()],
         );
       }
