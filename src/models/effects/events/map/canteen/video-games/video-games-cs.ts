@@ -11,6 +11,7 @@ export class VideoGameCS extends Event {
       'Nic nie relaksuje tak\njak rundka w CSa.',
       new Effect({
         stress: -20,
+        minutes: -5,
       }),
     );
   }

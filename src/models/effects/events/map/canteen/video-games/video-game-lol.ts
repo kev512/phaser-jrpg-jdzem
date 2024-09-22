@@ -8,9 +8,10 @@ export class VideoGameLol extends Event {
     super(
       id,
       'Gierka',
-      'Jak zwykle dobrało Ci samych nubów\n do teamu. Zamisat relasku dopadła Cię\n jeszcze większa depresja i wstręt...\n do siebie.',
+      'Jak zwykle dobrało Ci samych nubów\ndo teamu. Zamisat relasku dopadła Cię\njeszcze większa depresja i wstręt...\ndo siebie. Standardowo ff15.',
       new Effect({
         stress: +100,
+        minutes: -15
       }),
     );
   }
