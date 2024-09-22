@@ -212,10 +212,16 @@ export class Canteen extends BaseScene {
     model.setScene('Canteen');
     this.resetPlayerPosition();
 
-    model.finishBreak(() => {
-      model.setScene('Afternoon');
-      this.scene.start('Afternoon');
-    });
+    model.finishBreak(
+      () => {
+        model.setScene('Afternoon');
+        this.scene.start('Afternoon');
+      },
+      () => {
+        model.setScene('GameOver');
+        this.scene.start('GameOver');
+      },
+    );
   }
 
   private createLockerPopup() {
@@ -245,10 +251,14 @@ export class Canteen extends BaseScene {
             'Szafka',
             'W środku trzymasz lunchbox.\n\n' + '1. Zjedz kupiony lunch [1]\n' + '2. Wyjście [ESC]',
             [lunch.getEatEvent()],
+            [
+              () => {
+                model.worker.removeItem(new Lunch());
+              },
+            ],
           );
-          model.worker.removeItem(lunch); // TODO po evencie!!!!
         } else {
-          model.showWindow('Szafka', 'Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy');
+          model.showWindow('Szafka', 'Tutaj zostawiasz swoje rzeczy\ni obiad który możesz kupić\npo pracy', [], []);
         }
       }
     });
