@@ -46,7 +46,7 @@ export class Intro extends Scene {
     startText.setInteractive();
     startText.on('pointerdown', () => {
       this.backgroundMusic.play({ loop: true });
-      this.scene.start('MainMenu');
+      this.scene.start('Video');
     });
   }
 }

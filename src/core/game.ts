@@ -14,6 +14,7 @@ import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Shop } from './scenes/Shop';
 import { Authors } from './scenes/menu/Authors';
 import { Info } from './scenes/menu/Info';
+import { Video } from './scenes/menu/Video';
 
 export class Game {
   constructor() {
@@ -48,7 +49,8 @@ export class Game {
         GameOver,
         Scoreboard,
         Authors,
-        Info
+        Info,
+        Video,
       ],
     });
   }
