@@ -8,9 +8,6 @@ export class MainMenu extends Scene {
   authorsButton: GameObjects.Text;
   infoButton: GameObjects.Text;
   devByLabel: GameObjects.Text;
-  backgroundMusic: Phaser.Sound.BaseSound;
-
-  audioContext: AudioContext;
 
   constructor() {
     super('MainMenu');
@@ -23,27 +20,26 @@ export class MainMenu extends Scene {
     this.logo = this.add.image(590, 215, 'logo');
     this.logo.setScale(0.5);
 
-    this.backgroundMusic = this.sound.add('menuMusic', {
-      loop: true,
-      volume: 0.4,
-    });
-
-    this.backgroundMusic.play({ loop: true });
-
     const textNewGameBackground = this.add.image(590, 412, 'button-bg');
     textNewGameBackground.setScale(0.45);
     textNewGameBackground.setOrigin(0.5);
+    textNewGameBackground.setInteractive();
+    textNewGameBackground.on('pointerdown', () => {
+      this.scene.start('NewGameHints');
+    });
 
     this.newGameButton = this.createMenuLabel(590, 410, 'Nowa Gra');
-
     this.newGameButton.on('pointerdown', () => {
-      this.backgroundMusic.stop();
       this.scene.start('NewGameHints');
     });
 
     const textScoreboardBackground = this.add.image(590, 487, 'button-bg');
     textScoreboardBackground.setScale(0.45);
     textScoreboardBackground.setOrigin(0.5);
+    textScoreboardBackground.setInteractive();
+    textScoreboardBackground.on('pointerdown', () => {
+      this.scene.start('Scoreboard');
+    });
 
     this.scoreboardButton = this.createMenuLabel(590, 485, 'Wyniki');
 
@@ -54,8 +50,15 @@ export class MainMenu extends Scene {
     const textAuthorsBackground = this.add.image(590, 562, 'button-bg');
     textAuthorsBackground.setScale(0.45);
     textAuthorsBackground.setOrigin(0.5);
+    textAuthorsBackground.setInteractive();
+    textAuthorsBackground.on('pointerdown', () => {
+      this.scene.start('Authors');
+    });
 
     this.authorsButton = this.createMenuLabel(590, 560, 'Autorzy');
+    this.authorsButton.on('pointerdown', () => {
+      this.scene.start('Authors');
+    });
 
     const devByBackground = this.add.image(590, 690, 'dev-by-background');
     devByBackground.setScale(0.5);
@@ -65,8 +68,14 @@ export class MainMenu extends Scene {
     infoButton.setScale(0.25);
     infoButton.setOrigin(0.5);
     infoButton.setInteractive();
-
+    infoButton.on('pointerdown', () => {
+      this.scene.start('Info');
+    });
+    
     this.infoButton = this.createMenuLabel(1000, 98, 'Info');
+    this.infoButton.on('pointerdown', () => {
+      this.scene.start('Info');
+    });
   }
 
   private createMenuLabel(x: number, y: number, text: string) {

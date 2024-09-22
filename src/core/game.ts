@@ -12,6 +12,8 @@ import { MainMenu } from './scenes/menu/MainMenu';
 import { NewGameHints } from './scenes/menu/NewGameHints';
 import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Shop } from './scenes/Shop';
+import { Authors } from './scenes/menu/Authors';
+import { Info } from './scenes/menu/Info';
 
 export class Game {
   constructor() {
@@ -45,6 +47,8 @@ export class Game {
         Shop,
         GameOver,
         Scoreboard,
+        Authors,
+        Info
       ],
     });
   }
