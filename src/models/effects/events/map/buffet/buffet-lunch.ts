@@ -12,6 +12,7 @@ export class BuffetLunch extends Event {
       new Effect({
         hunger: -50,
         thirst: -50,
+        fatigue: -20,
         poop: 15,
         urine: 15,
         minutes: -9,
