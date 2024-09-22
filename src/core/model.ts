@@ -96,7 +96,20 @@ export class Model {
   }
 
   startGame() {
+    worker = null;
+    previousScene = null;
+    currentScene = null;
+    window = {
+      visible: false,
+      title: '',
+      description: '',
+      options: [],
+      callbacks: [],
+    };
+    days = 1;
+    breakNumber = 1;
     lateCounter = 0;
+
     this.emit(new StartGame());
   }
 
