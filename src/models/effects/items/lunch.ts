@@ -10,12 +10,12 @@ export class Lunch extends FoodItem {
       'Lunch',
       'Zjadłeś lunchboxa',
       new Effect({
-        hunger: -25,
-        thirst: -20,
-        poop: 25,
+        hunger: -50,
+        thirst: -50,
+        poop: 20,
         urine: 15,
       }),
-      100,
+      40,
     );
   }
 }
