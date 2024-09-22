@@ -13,6 +13,7 @@ export class Soda extends Event {
         thirst: -25,
         urine: 15,
         minutes: -3,
+        cash: -5,
       }),
     );
   }

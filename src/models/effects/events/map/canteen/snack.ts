@@ -13,6 +13,7 @@ export class Snack extends Event {
         hunger: -20,
         poop: 10,
         minutes: -5,
+        cash: -5
       }),
     );
   }
