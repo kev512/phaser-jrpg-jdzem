@@ -19,7 +19,7 @@ export class GameOver extends Scene {
     this.background.setAlpha(0.5);
     this.background.setScrollFactor(0);
 
-    this.gameOverText = this.add.text(this.camera.centerX, this.camera.centerY, 'Przegrałeś', {
+    this.gameOverText = this.add.text(this.camera.centerX, this.camera.centerY - 64, 'Przegrałeś', {
       fontFamily: 'VT323',
       fontSize: 64,
       color: '#000000',
@@ -32,7 +32,7 @@ export class GameOver extends Scene {
     this.description = this.add.text(
       this.camera.centerX,
       this.camera.centerY + 64,
-      'Za dużo spóźnień. Szef ciebie wywalił.',
+      `Za dużo spóźnień. Szef ciebie wywalił.\n\nTwoje punkty: ${model.scores.total}`,
       {
         fontFamily: 'VT323',
         fontSize: 32,

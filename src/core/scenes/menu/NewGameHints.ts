@@ -19,7 +19,7 @@ export class NewGameHints extends Phaser.Scene {
       .text(
         564,
         400,
-        'Nowa praca, szansa na nowy start!\nPytanie tylko jak długo uda ci się wytrwać\nw tym pościgu za pieniądzem.\nUpewnij sie że wszystkie potrzeby są zaspokojone przed\nzakończeniem przerwy i pamiętaj, nie spóźnij się,\ntwój szef tego nie będzie tego tolerować.',
+        'Nowa praca, szansa na nowy start!\nPytanie tylko jak długo uda ci się wytrwać\nw tym pościgu za pieniądzem.\nUpewnij sie że wszystkie potrzeby są zaspokojone przed\nzakończeniem przerwy i pamiętaj, nie spóźnij się,\ntwój szef nie będzie tego tolerował!',
         {
           fontFamily: 'VT323',
           fontSize: 40,
