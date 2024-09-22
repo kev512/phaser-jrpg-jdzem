@@ -39,6 +39,7 @@ export class Restroom extends BaseScene {
 
     super.createLabels();
     this.createWindow();
+    super.createActionsPopup();
 
     this.createUrinalPopup();
     this.createToiletPopup();

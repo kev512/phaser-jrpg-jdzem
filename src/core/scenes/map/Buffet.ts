@@ -37,6 +37,7 @@ export class Buffet extends BaseScene {
 
     super.createLabels();
     super.createWindow();
+    super.createActionsPopup();
 
     this.createBuyBuffetLunchPopup();
   }

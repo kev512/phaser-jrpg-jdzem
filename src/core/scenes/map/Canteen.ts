@@ -62,6 +62,7 @@ export class Canteen extends BaseScene {
 
     this.createLabels();
     this.createWindow();
+    super.createActionsPopup();
 
     this.createLockerPopup();
     this.createRestZonePopup();

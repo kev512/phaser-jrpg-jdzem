@@ -33,6 +33,8 @@ let lateCounter: number = 0;
 let dayScore = 0;
 let totalScore = 0;
 let bestScore = 0;
+let letters: string[] = [];
+let interval: any;
 
 const commonEvents: Event[] = [
   new EvRand0(),
@@ -46,8 +48,7 @@ const commonEvents: Event[] = [
 ];
 const criticalEvents: Event[] = [];
 
-let i = 0;
-let typingSpeed = 10;
+let typingSpeed = 15;
 
 export class Model {
   constructor() {
@@ -92,6 +93,10 @@ export class Model {
       day: dayScore,
       best: bestScore,
     };
+  }
+
+  get isInSmokeSpot() {
+    return currentScene === 'SmokeSpot';
   }
 
   showWindow(title: string, description: string, options: (Event | null)[] = [], callbacks: (() => void)[] = []) {
@@ -209,12 +214,25 @@ export class Model {
   }
 
   emit(event: Event) {
-    window.visible = true;
-    window.title = event.getName();
-    window.options = [];
-    this.descriptionWriter(event.getDescription() + '\n\n1. OK [ESC]');
+    let isError: boolean = false;
 
-    this.worker.applyEffect(event.getEffect());
+    try {
+      this.worker.applyEffect(event.getEffect());
+    } catch (error: unknown) {
+      isError = true;
+    }
+
+    if (isError) {
+      window.visible = true;
+      window.title = 'Kurza twarz';
+      window.options = [];
+      this.descriptionWriter('Nie możesz tego zrobić!' + '\n\n1. OK [ESC]');
+    } else {
+      window.visible = true;
+      window.title = event.getName();
+      window.options = [];
+      this.descriptionWriter(event.getDescription() + '\n\n1. OK [ESC]');
+    }
   }
 
   setScene(key: string) {
@@ -223,17 +241,16 @@ export class Model {
   }
 
   descriptionWriter(text: string) {
-    i = 0;
     window.description = '';
+    letters = text.split('');
 
-    function type() {
-      if (i < text.length) {
-        window.description += text.charAt(i);
-        i++;
-        setTimeout(type, typingSpeed);
-      }
+    if (!interval) {
+      interval = setInterval(() => {
+        if (letters.length > 0) {
+          window.description += letters[0];
+          letters.shift();
+        }
+      }, typingSpeed);
     }
-
-    type();
   }
 }
