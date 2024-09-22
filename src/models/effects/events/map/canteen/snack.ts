@@ -10,9 +10,9 @@ export class Snack extends Event {
       'Przekąska',
       'Za wiele to to nie było,\nale zawsze to coś.',
       new Effect({
-        hunger: -5,
-        poop: 5,
-        minutes: -15,
+        hunger: -20,
+        poop: 10,
+        minutes: -5,
       }),
     );
   }

@@ -8,7 +8,7 @@ export class ChatWithBuddies extends Event {
     super(
       id,
       'Rozmowa z ziomkami',
-      '',
+      'Pośmieszkowane!',
       new Effect({
         stress: -15,
         fatigue: -15,

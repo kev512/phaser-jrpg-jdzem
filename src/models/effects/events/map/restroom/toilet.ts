@@ -13,6 +13,7 @@ export class Toilet extends Event {
       new Effect({
         urine: -MAX_URINE,
         poop: -MAX_POOP,
+        minutes: -5,
       }),
     );
   }
