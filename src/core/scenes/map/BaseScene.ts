@@ -53,10 +53,19 @@ export abstract class BaseScene extends Phaser.Scene {
   private delayText: Phaser.GameObjects.Text;
 
   protected coins: Phaser.GameObjects.Image;
+  protected smokesIcons: Phaser.GameObjects.Image;
+  protected beerIcons: Phaser.GameObjects.Image;
+  protected diaperIcons: Phaser.GameObjects.Image;
+  protected clockIcons: Phaser.GameObjects.Image;
+  protected calendarIcons: Phaser.GameObjects.Image;
+
   protected cash: Phaser.GameObjects.Text;
   protected diapers: Phaser.GameObjects.Text;
   protected beers: Phaser.GameObjects.Text;
   protected smokes: Phaser.GameObjects.Text;
+
+  protected currentBreak: Phaser.GameObjects.Text;
+  protected daysWorked: Phaser.GameObjects.Text;
 
   protected window: Phaser.GameObjects.Image;
   protected windowTitle: Phaser.GameObjects.Text;
@@ -128,9 +137,9 @@ export abstract class BaseScene extends Phaser.Scene {
       .text(x, 215, 'SPÓŹNIENIE: ', {
         fontFamily: 'VT323',
         fontSize: 28,
-        color: '#ff0000',
+        color: '#ec5555',
         stroke: '#3A3A50',
-        strokeThickness: 2,
+        strokeThickness: 1,
       })
       .setVisible(false);
     this.delayTime = this.createStatLabel(x + 135, 120.8);
@@ -140,7 +149,7 @@ export abstract class BaseScene extends Phaser.Scene {
     this.hunger = this.createStatLabel(x, 172);
     this.hunger.setScale(0.8);
     this.hungerBarBg = this.makeBar(x, 295.2, 0xaeb1c0);
-    this.hungerBar = this.makeBar(x, y * 295.2, 0x568d61);
+    this.hungerBar = this.makeBar(x, 295.2, 0x568d61);
     this.setBarValue(this.hungerBar, model.worker.getHunger());
 
     this.thirstStatsUnit = this.add.image(1057, 360, 'stats-unit');
@@ -185,12 +194,33 @@ export abstract class BaseScene extends Phaser.Scene {
 
     this.coins = this.add.image(950, 792, 'coins');
     this.coins.setScale(0.09);
-    this.cash = this.createStatLabel(970, 684);
+    this.cash = this.createStatLabel(965, 684);
     this.cash.setScale(0.8);
 
-    // this.diapers = this.createStatLabel(x, y * 18);
-    // this.beers = this.createStatLabel(x, y * 19);
-    // this.smokes = this.createStatLabel(x, y * 20);
+    this.smokesIcons = this.add.image(1030, 792, 'smokes');
+    this.smokesIcons.setScale(0.09);
+    this.smokes = this.createStatLabel(1050, 684)
+    this.smokes.setScale(0.8);
+
+    this.beerIcons = this.add.image(1090, 792, 'beer');
+    this.beerIcons.setScale(0.09);
+    this.beers = this.createStatLabel(1100, 684)
+    this.beers.setScale(0.8);
+
+    this.diaperIcons = this.add.image(1140, 792, 'diaper');
+    this.diaperIcons.setScale(0.09);
+    this.diapers = this.createStatLabel(1160, 684)
+    this.diapers.setScale(0.8);
+
+    this.clockIcons = this.add.image(1000, 826, 'clock');
+    this.clockIcons.setScale(0.09);
+    this.currentBreak = this.createStatLabel(1020, 718);
+    this.currentBreak.setScale(.8);
+
+    this.calendarIcons = this.add.image(1080, 826, 'calendar');
+    this.calendarIcons.setScale(0.09);
+    this.daysWorked = this.createStatLabel(1100, 718);
+    this.daysWorked.setScale(.8);
   }
 
   createWindow() {
@@ -246,14 +276,19 @@ export abstract class BaseScene extends Phaser.Scene {
     this.fatigue.setText('Zmęczenie: ' + model.worker.getFatigue() + ' / 100');
     this.setBarValue(this.fatigueBar, model.worker.getFatigue());
 
-    this.drunkness.setText('Upojenie: ' + model.worker.getDrunkness() + ' / 100');
+    this.drunkness.setText('Upojenie %%: ' + model.worker.getDrunkness() + ' / 100');
     this.setBarValue(this.drunknessBar, model.worker.getFatigue());
 
     this.cash.setText(`${model.worker.getCash()}`);
+    this.smokes.setText(`${model.worker.getSmokes()}`);
+    // TODO: add beers getter
+    this.beers.setText(`${model.worker.getSmokes()}`);
+    this.diapers.setText(`${model.worker.getDiapers()}`);
 
-    // this.diapers.setText('Pieluchy: ' + model.worker.getFatigue());
-    // this.beers.setText('Bronksy: ' + model.worker.getDrunkness());
-    // this.smokes.setText('Fajki: ' + model.worker.getSmokes());
+    // TODO: add break counter
+    this.currentBreak.setText('1' + '/3');
+    // TODO: add days worked counter
+    this.daysWorked.setText('0');
   }
 
   updateWindow() {

@@ -12,4 +12,4 @@ export const MAP_BOUNDARY = {
   height: HEIGHT,
 };
 
-export const INITIAL_TIMER_MINUTES = 0.1;
+export const INITIAL_TIMER_MINUTES = 15;

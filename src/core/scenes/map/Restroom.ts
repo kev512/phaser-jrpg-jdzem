@@ -95,7 +95,7 @@ export class Restroom extends BaseScene {
 
     this.urinalPopup = this.add.image(popupX, popupY, 'popup');
     this.urinalPopup.setScrollFactor(0);
-    this.urinalText = this.add.text(popupX - 86, popupY - 10, 'Otwórz szafkę [E]', {
+    this.urinalText = this.add.text(popupX - 86, popupY - 10, 'Użyj pisuaru [E]', {
       fontFamily: 'Pixelify Sans',
       fontSize: 20,
       color: '#000000',
