@@ -11,6 +11,11 @@ import { EvRand0 } from '../models/effects/events/common/ev-rand-0';
 import { EvRand1 } from '../models/effects/events/common/ev-rand-1';
 import { EvRand2 } from '../models/effects/events/common/ev-rand-2';
 import { MAX_FATIGUE, MAX_HUNGER, MAX_POOP, MAX_STRESS, MAX_THIRST, MAX_URINE } from '../models/worker/worker.consts';
+import { EvRand3 } from '../models/effects/events/common/ev-rand-3';
+import { EvRand4 } from '../models/effects/events/common/ev-rand-4';
+import { EvRand5 } from '../models/effects/events/common/ev-rand-5';
+import { EvRand6 } from '../models/effects/events/common/ev-rand-6';
+import { EvRand7 } from '../models/effects/events/common/ev-rand-7';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
@@ -31,7 +36,16 @@ let bestScore = 0;
 let letters: string[] = [];
 let interval: any;
 
-const commonEvents: Event[] = [new EvRand0(), new EvRand1(), new EvRand2()];
+const commonEvents: Event[] = [
+  new EvRand0(),
+  new EvRand1(),
+  new EvRand2(),
+  new EvRand3(),
+  new EvRand4(),
+  new EvRand5(),
+  new EvRand6(),
+  new EvRand7(),
+];
 const criticalEvents: Event[] = [];
 
 let typingSpeed = 15;
