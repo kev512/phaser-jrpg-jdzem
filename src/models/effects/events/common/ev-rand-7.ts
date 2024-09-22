@@ -8,7 +8,7 @@ export class EvRand7 extends Event {
     super(
       id,
       'Spańsko',
-      'Uciąłeś sobie drzemkę między regałami, mając nadzieję, że szef Cię nie zauważy.',
+      'Uciąłeś sobie drzemkę między regałami,\nmając nadzieję, że szef Cię nie zauważy.',
       new Effect({
         //(-zmęczenie, +stres, +kloc, +mocz)
         fatigue: -15,

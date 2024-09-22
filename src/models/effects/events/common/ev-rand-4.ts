@@ -8,7 +8,7 @@ export class EvRand4 extends Event {
     super(
       id,
       'Randomowy event 4',
-      'W trakcie pracy jeden z pracowników zasnął na wózku widłowym i zrzucił szereg regałów z towarem. Szef kazał Ci pomóc w sprzątaniu',
+      'W trakcie pracy jeden z pracowników zasnął\nna wózku widłowym i zrzucił\nszereg regałów z towarem.\nSzef kazał Ci pomóc w sprzątaniu',
       new Effect({
         //(+zmęczenie, +stres)
         stress: 15,
