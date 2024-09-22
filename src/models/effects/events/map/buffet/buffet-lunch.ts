@@ -8,7 +8,7 @@ export class BuffetLunch extends Event {
     super(
       id,
       'Danie dnia',
-      'Średnie ale przynajmniej drogo...\n.. Czekaj co?',
+      'Średnie, za to jak drogo...\n.. Czekaj co?',
       new Effect({
         hunger: -25,
         thirst: -20,

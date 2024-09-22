@@ -136,8 +136,8 @@ export class Buffet extends BaseScene {
     this.input.keyboard?.on('keydown-E', () => {
       if (this.isNearChef) {
         model.showWindow(
-          'Kup jedzenie',
-          'W ten dzień możesz kupić\ndanie dnia!\n\n' + '1. Kup i zjedz danie dnia [1]\n' + '2. Wyjście [ESC]',
+          'Stołówka',
+          'Dzisiaj w bufecie? Zupa z wczoraj,\nkotlet z przedwczoraj, ale przynajmniej\nherbata świeża!"\n\n' + '1. Kup i zjedz danie dnia [1]\n' + '2. Wyjście [ESC]',
           [new BuffetLunch()],
         );
       }

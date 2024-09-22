@@ -9,7 +9,7 @@ export class StartGame extends Event {
     super(
       id,
       'Witaj',
-      'Rozpoczynasz grę.',
+      'Najważniejsze to wytrwać i nie wylecieć.\nRobota potrafi być ciężka\nale wytrzymać trzeba, BYLE DO PAUZY!',
       new Effect({
         hunger: -MAX_HUNGER,
         thirst: -MAX_THIRST,
