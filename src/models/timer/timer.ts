@@ -1,3 +1,5 @@
+import { CRITICAL_TIME_UP_MINUTES } from './timer.consts';
+
 export class Timer {
   private remainingTime: number;
   private delayTime: number = 0;
@@ -42,6 +44,10 @@ export class Timer {
 
   isTimeUp(): boolean {
     return this.remainingTime <= 0;
+  }
+
+  isTimeUpExceedingCriticalLevel(): boolean {
+    return this.remainingTime <= CRITICAL_TIME_UP_MINUTES;
   }
 
   reset() {
