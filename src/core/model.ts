@@ -7,6 +7,7 @@ import { Worker } from '../models/worker/worker';
 import { Timer } from '../models/timer/timer';
 import { Window } from './types/window';
 import { isNil } from 'lodash';
+import { MAX_FATIGUE, MAX_HUNGER, MAX_POOP, MAX_STRESS, MAX_THIRST, MAX_URINE } from '../models/worker/worker.consts';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
@@ -21,6 +22,9 @@ let window: Window = {
 let days: number = 1;
 let breakNumber: number = 1;
 let lateCounter: number = 0;
+let dayScore = 0;
+let totalScore = 0;
+let bestScore = 0;
 
 const commonEvents: Event[] = [new Test()];
 const criticalEvents: Event[] = [];
@@ -29,7 +33,13 @@ let i = 0;
 let typingSpeed = 10;
 
 export class Model {
-  constructor() {}
+  constructor() {
+    const value = localStorage.getItem('bestScore');
+
+    if (value && !isNaN(+value)) {
+      bestScore = +value;
+    }
+  }
 
   get worker(): Worker {
     if (!worker) {
@@ -57,6 +67,14 @@ export class Model {
 
   get breakNumber() {
     return breakNumber;
+  }
+
+  get scores() {
+    return {
+      total: totalScore,
+      day: dayScore,
+      best: bestScore,
+    };
   }
 
   showWindow(title: string, description: string, options: (Event | null)[] = [], callbacks: (() => void)[] = []) {
@@ -109,6 +127,8 @@ export class Model {
     days = 1;
     breakNumber = 1;
     lateCounter = 0;
+    dayScore = 0;
+    totalScore = 0;
 
     this.emit(new StartGame());
   }
@@ -124,8 +144,24 @@ export class Model {
       return;
     }
 
+    if (breakNumber === 1) {
+      dayScore = 0;
+    }
+
+    dayScore +=
+      1000 * this.days +
+      (MAX_HUNGER - this.worker.getHunger()) +
+      (MAX_THIRST - this.worker.getThirst()) +
+      (MAX_URINE - this.worker.getUrine()) +
+      (MAX_POOP - this.worker.getPoop()) +
+      (MAX_STRESS - this.worker.getStress()) +
+      (MAX_FATIGUE - this.worker.getFatigue());
+
     if (this.breakNumber === 3) {
+      totalScore += dayScore;
+
       days++;
+
       breakNumber = 1;
 
       const afterWork = new AfterWork();
@@ -147,6 +183,12 @@ export class Model {
     }
 
     this.worker.getTimer().reset();
+
+    if (totalScore > bestScore) {
+      bestScore = totalScore;
+
+      localStorage.setItem('bestScore', `${bestScore}`);
+    }
   }
 
   emit(event: Event) {

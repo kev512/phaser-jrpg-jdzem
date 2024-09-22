@@ -42,7 +42,7 @@ export class Afternoon extends Scene {
     const label = this.add.text(
       x,
       200,
-      'Ktoś powie, że to tylko praca.\nJa powiem, że to bitwa o przetrwanie,\nale przetrwałem, więc jestem zwycięzcą.\n\n' +
+      `Punkty za dzień: ${model.scores.day}. Suma punktów: ${model.scores.total}.\n\nKtoś powie, że to tylko praca.\nJa powiem, że to bitwa o przetrwanie,\nale przetrwałem, więc jestem zwycięzcą.\n\n` +
         'Teraz masz wybór! Albo pędzisz prosto do domu,\nwciągasz kapcie i padasz do łoża jak król..\nalbo zaglądasz do sklepu u Stasi po zaopatrzenie\nna kolejny pełen wrażeń dzień.\nNo to jak, co wybierasz kolego?',
       {
         fontFamily: 'VT323',
