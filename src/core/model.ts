@@ -4,14 +4,12 @@ import { Test } from '../models/effects/events/common/test';
 import { Event } from '../models/effects/events/event';
 import { StartGame } from '../models/effects/events/start-game';
 import { Worker } from '../models/worker/worker';
-import { INITIAL_TIMER_MINUTES } from './consts';
 import { Timer } from '../models/timer/timer';
 import { Window } from './types/window';
 
 let worker: Worker | null = null;
 let previousScene: string | null = null;
 let currentScene: string | null = null;
-let timerObject: Timer | null = null;
 let window: Window = {
   visible: false,
   title: '',
@@ -47,11 +45,7 @@ export class Model {
   }
 
   get timerObject(): Timer {
-    if (!timerObject) {
-      timerObject = new Timer(INITIAL_TIMER_MINUTES);
-    }
-
-    return timerObject;
+    return this.worker.getTimer();
   }
 
   get days() {

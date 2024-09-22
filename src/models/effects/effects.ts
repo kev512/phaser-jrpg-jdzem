@@ -54,4 +54,8 @@ export class Effect {
   getDrunkness(): number {
     return this.input?.drunkness || 0;
   }
+
+  getMinutes(): number {
+    return this.input?.minutes || 0;
+  }
 }

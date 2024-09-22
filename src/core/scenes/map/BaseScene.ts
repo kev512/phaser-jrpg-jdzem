@@ -46,7 +46,6 @@ export abstract class BaseScene extends Phaser.Scene {
   protected drunkness: Phaser.GameObjects.Text;
   protected drunknessStatsUnit: Phaser.GameObjects.Image;
 
-  private timerObject: Timer;
   protected timer: Phaser.GameObjects.Text;
   protected countdown: Phaser.GameObjects.Text;
   protected delayTime: Phaser.GameObjects.Text;
@@ -103,21 +102,15 @@ export abstract class BaseScene extends Phaser.Scene {
     });
   }
 
-  create() {
-    this.timerObject = model.timerObject;
-  }
+  create() {}
 
   update(time: number, delta: number) {
     super.update(time, delta);
-    this.timerObject.update(delta);
+
+    model.worker.getTimer().update(delta);
 
     this.updateLabels();
   }
-
-  // TODO: Decrease remaining time after event is done
-  // decreaseTime() {
-  //   this.timerObject.adjustTime(-10);
-  // }
 
   setCameraBounds() {
     this.cameras.main.setBounds(MAP_BOUNDARY.x, MAP_BOUNDARY.y, MAP_BOUNDARY.width, MAP_BOUNDARY.height);
@@ -243,10 +236,13 @@ export abstract class BaseScene extends Phaser.Scene {
   updateLabels() {
     this.timer.setText('Koniec przerwy:');
     this.timer.setScale(1.2);
-    this.countdown.setText(this.timerObject.getFormattedTime());
 
-    if (this.timerObject.isTimeUp()) {
-      const delay = this.timerObject.getDelayFormattedTime();
+    const timerObject = model.worker.getTimer();
+
+    this.countdown.setText(timerObject.getFormattedTime());
+
+    if (timerObject.isTimeUp()) {
+      const delay = timerObject.getDelayFormattedTime();
       this.delayTime.setText(delay);
       this.delayTime.setVisible(true);
       this.delayText.setVisible(true);

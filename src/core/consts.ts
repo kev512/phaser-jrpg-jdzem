@@ -11,5 +11,3 @@ export const MAP_BOUNDARY = {
   width: WIDTH,
   height: HEIGHT,
 };
-
-export const INITIAL_TIMER_MINUTES = 15;

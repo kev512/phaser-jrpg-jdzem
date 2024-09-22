@@ -4,6 +4,7 @@ import { Item } from '../effects/items/item';
 import { Resources } from '../resources/resources';
 import {
   INITIAL_SPEED,
+  INITIAL_TIMER_MINUTES,
   MAX_DRUNKNESS,
   MAX_FATIGUE,
   MAX_HUNGER,
@@ -13,6 +14,7 @@ import {
   MAX_THIRST,
   MAX_URINE,
 } from './worker.consts';
+import { Timer } from '../timer/timer';
 
 export class Worker {
   private hunger: number = 0;
@@ -27,7 +29,17 @@ export class Worker {
   private resources: Resources = new Resources();
   private items: Item[] = [];
 
+  private timer: Timer;
+
   constructor() {}
+
+  getTimer(): Timer {
+    if (isUndefined(this.timer)) {
+      this.timer = new Timer(INITIAL_TIMER_MINUTES);
+    }
+
+    return this.timer;
+  }
 
   applyEffect(effect: Effect) {
     this.hunger = Math.min(MAX_HUNGER, Math.max(0, this.hunger + effect.getEffectHunger()));
@@ -38,6 +50,8 @@ export class Worker {
     this.fatigue = Math.min(MAX_FATIGUE, Math.max(0, this.fatigue + effect.getEffectFatigue()));
     this.speed = Math.min(MAX_SPEED, Math.max(0, this.speed + effect.getEffectSpeed()));
     this.drunkness = Math.min(MAX_DRUNKNESS, Math.max(0, this.drunkness + effect.getDrunkness()));
+
+    this.getTimer().adjustTime(effect.getMinutes() * 60);
 
     this.resources.applyEffect(effect);
   }

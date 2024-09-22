@@ -12,6 +12,7 @@ export class Snack extends Event {
       new Effect({
         hunger: -5,
         poop: 5,
+        minutes: -15,
       }),
     );
   }

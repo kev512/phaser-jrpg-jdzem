@@ -12,4 +12,5 @@ export type EffectInput = {
   beers?: number;
   smokes?: number;
   drunkness?: number;
+  minutes?: number;
 };
