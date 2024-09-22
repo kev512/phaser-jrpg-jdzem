@@ -9,6 +9,9 @@ export class Buffet extends BaseScene {
   buffetLunchPopup: Phaser.GameObjects.Image;
   buffetLunchText: Phaser.GameObjects.Text;
   isNearChef: boolean = false;
+  npc1: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc2: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  npc3: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
 
   constructor() {
     super('Buffet');
@@ -63,6 +66,37 @@ export class Buffet extends BaseScene {
 
     this.map = result.map;
     this.collisionLayer = result.collisionLayer;
+
+    this.npc1 = this.physics.add.sprite(501, 258, 'npc1');
+    this.npc1.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc1-anim',
+      frames: this.anims.generateFrameNumbers('npc1'),
+      frameRate: 5,
+      repeat: -1
+    });
+    this.npc1.play('npc1-anim');
+
+    this.npc2 = this.physics.add.sprite(121, 475, 'npc2');
+    this.npc2.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc2-anim',
+      frames: this.anims.generateFrameNumbers('npc2', {start:1, end:4}),
+      frameRate: 5,
+      repeat: -1
+    });
+    this.npc2.play('npc2-anim');
+
+    this.npc3 = this.physics.add.sprite(264, 619, 'npc2');
+    this.npc3.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc3-anim',
+      frames: this.anims.generateFrameNumbers('npc2', {start:6, end:11}),
+      frameRate: 5,
+      repeat: -1
+    });
+    this.npc3.play('npc3-anim');
+
   }
 
   private createPlayer() {

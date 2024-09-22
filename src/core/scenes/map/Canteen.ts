@@ -27,6 +27,7 @@ export class Canteen extends BaseScene {
   computerPopup: Phaser.GameObjects.Image;
   computerText: Phaser.GameObjects.Text;
   isNearComputer: boolean = false;
+  npc2: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
 
   constructor() {
     super('Canteen');
@@ -108,6 +109,16 @@ export class Canteen extends BaseScene {
 
     this.map = result.map;
     this.collisionLayer = result.collisionLayer;
+
+    this.npc2 = this.physics.add.sprite(504, 380, 'npc2');
+    this.npc2.setScale(WORKER_SIZE_SCALE);
+    this.anims.create({
+      key: 'npc2-anim-buffet',
+      frames: this.anims.generateFrameNumbers('npc2', {start:6, end:11}),
+      frameRate: 5,
+      repeat: -1
+    });
+    this.npc2.play('npc2-anim-buffet');
   }
 
   private createPlayer() {

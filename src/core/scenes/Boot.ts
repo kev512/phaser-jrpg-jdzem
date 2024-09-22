@@ -46,6 +46,19 @@ export class Boot extends Scene {
       frameWidth: 16,
       frameHeight: 24,
     });
+
+    // static NPCs
+    this.load.spritesheet('npc1', 'assets/Amelia_phone_16x16.png', {
+      frameWidth: 16,
+      frameHeight: 32,
+    });
+
+    this.load.spritesheet('npc2', 'assets/Bob_sit3_16x16.png', {
+      frameWidth: 16,
+      frameHeight: 32,
+    });
+
+    
   }
 
   create() {
