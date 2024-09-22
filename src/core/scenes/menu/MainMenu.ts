@@ -38,7 +38,7 @@ export class MainMenu extends Scene {
 
     this.newGameButton.on('pointerdown', () => {
       this.backgroundMusic.stop();
-      this.scene.start('Intro');
+      this.scene.start('NewGameHints');
     });
 
     const textScoreboardBackground = this.add.image(590, 487, 'button-bg');

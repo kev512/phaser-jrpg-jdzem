@@ -9,6 +9,7 @@ import { Restroom } from './scenes/map/Restroom';
 import { SmokeSpot } from './scenes/map/SmokeSpot';
 import { Intro } from './scenes/menu/Intro';
 import { MainMenu } from './scenes/menu/MainMenu';
+import { NewGameHints } from './scenes/menu/NewGameHints';
 import { Scoreboard } from './scenes/menu/Scoreboard';
 import { Shop } from './scenes/Shop';
 
@@ -31,7 +32,20 @@ export class Game {
           gravity: { x: 0, y: 0 },
         },
       },
-      scene: [Boot, Intro, MainMenu, Canteen, Buffet, Restroom, SmokeSpot, Afternoon, Shop, GameOver, Scoreboard],
+      scene: [
+        Boot,
+        Intro,
+        MainMenu,
+        NewGameHints,
+        Canteen,
+        Buffet,
+        Restroom,
+        SmokeSpot,
+        Afternoon,
+        Shop,
+        GameOver,
+        Scoreboard,
+      ],
     });
   }
 }
