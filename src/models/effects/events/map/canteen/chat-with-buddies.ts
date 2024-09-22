@@ -13,6 +13,7 @@ export class ChatWithBuddies extends Event {
         stress: -15,
         fatigue: -15,
         reputation: 10,
+        minutes: -7
       }),
     );
   }
