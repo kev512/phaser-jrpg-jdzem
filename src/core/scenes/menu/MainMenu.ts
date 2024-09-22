@@ -27,7 +27,7 @@ export class MainMenu extends Scene {
     this.newGameButton = this.createMenuLabel(590, 410, 'Nowa Gra');
 
     this.newGameButton.on('pointerdown', () => {
-      this.scene.start('Canteen');
+      this.scene.start('Intro');
     });
 
     const textScoreboardBackground = this.add.image(590, 487, 'button-bg');

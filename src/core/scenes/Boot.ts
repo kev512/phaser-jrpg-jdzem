@@ -51,8 +51,6 @@ export class Boot extends Scene {
   create() {
     this.createAnimations();
 
-    model.startGame();
-
     this.scene.start('MainMenu');
   }
 
