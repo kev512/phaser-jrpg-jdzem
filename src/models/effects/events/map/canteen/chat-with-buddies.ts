@@ -10,8 +10,8 @@ export class ChatWithBuddies extends Event {
       'Rozmowa z ziomkami',
       '',
       new Effect({
-        stress: -10,
-        fatigue: -25,
+        stress: -15,
+        fatigue: -15,
         reputation: 10,
       }),
     );
