@@ -31,11 +31,7 @@ let bestScore = 0;
 let letters: string[] = [];
 let interval: any;
 
-const commonEvents: Event[] = [
-                               new EvRand0(), 
-                               new EvRand1(),
-                               new EvRand2(),
-                              ];
+const commonEvents: Event[] = [new EvRand0(), new EvRand1(), new EvRand2()];
 const criticalEvents: Event[] = [];
 
 let typingSpeed = 15;
@@ -204,12 +200,25 @@ export class Model {
   }
 
   emit(event: Event) {
-    window.visible = true;
-    window.title = event.getName();
-    window.options = [];
-    this.descriptionWriter(event.getDescription() + '\n\n1. OK [ESC]');
+    let isError: boolean = false;
 
-    this.worker.applyEffect(event.getEffect());
+    try {
+      this.worker.applyEffect(event.getEffect());
+    } catch (error: unknown) {
+      isError = true;
+    }
+
+    if (isError) {
+      window.visible = true;
+      window.title = 'Kurza twarz';
+      window.options = [];
+      this.descriptionWriter('Nie możesz tego zrobić!' + '\n\n1. OK [ESC]');
+    } else {
+      window.visible = true;
+      window.title = event.getName();
+      window.options = [];
+      this.descriptionWriter(event.getDescription() + '\n\n1. OK [ESC]');
+    }
   }
 
   setScene(key: string) {

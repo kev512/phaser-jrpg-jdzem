@@ -42,6 +42,8 @@ export class Worker {
   }
 
   applyEffect(effect: Effect) {
+    this.resources.applyEffect(effect);
+
     this.hunger = Math.min(MAX_HUNGER, Math.max(0, this.hunger + effect.getEffectHunger()));
     this.thirst = Math.min(MAX_THIRST, Math.max(0, this.thirst + effect.getEffectThirst()));
     this.urine = Math.min(MAX_URINE, Math.max(0, this.urine + effect.getEffectUrine()));
@@ -52,8 +54,6 @@ export class Worker {
     this.drunkness = Math.min(MAX_DRUNKNESS, Math.max(0, this.drunkness + effect.getDrunkness()));
 
     this.getTimer().adjustTime(effect.getMinutes() * 60);
-
-    this.resources.applyEffect(effect);
   }
 
   addItem(item: Item) {

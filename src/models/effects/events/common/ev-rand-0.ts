@@ -10,8 +10,8 @@ export class EvRand0 extends Event {
       'Randomowy event 0',
       'Dostałeś ochrzan od szefa\nbo zauważył, że nie starałeś się\nw trakcie pracy. Poczułeś jak ze stresu\nkrecik zapukał w taborecik.',
       new Effect({
-        stress:15,
-        poop:25,
+        stress: 15,
+        poop: 25,
       }),
     );
   }
