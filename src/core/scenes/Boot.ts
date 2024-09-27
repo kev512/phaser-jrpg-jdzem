@@ -29,6 +29,9 @@ export class Boot extends Scene {
     this.load.image('dev-by-background', 'assets/bottom-bar-background.png');
     this.load.image('window', 'assets/window.png');
     this.load.image('popup', 'assets/popup.png');
+    this.load.image('arrows', 'assets/arrows.png');
+    this.load.image('keyboard-e', 'assets/keyboard-e.png');
+    this.load.image('keyboard-f', 'assets/keyboard-f.png');
 
     this.load.image('collision-tileset', 'assets/collision.png');
     this.load.image('walls-tileset', 'assets/tileset.png');
